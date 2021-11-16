@@ -6,8 +6,8 @@
   <title>AJAX Project</title>
   <link rel="icon" href="images/favicon.ico">
   <link rel="stylesheet" href="css/reset.css">
-  <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/layout.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400&family=Playfair+Display&display=swap"
@@ -17,12 +17,12 @@
 <body>
   <header class="header">
     <div class="container">
-      <div class="row">
-        <div class="column-half align-items-center text-align-center">
+      <div class="logo-and-anchors row space-between">
+        <div class="header-logo column-half align-items-center text-align-center">
           <h2 class="header-h2">In The Moment</h2>
           <h4 class="header-h4">Weather Reports</h4>
         </div>
-        <div class="search-and-reports column-half flex justify-content-right align-items-center">
+        <div class="search-and-reports column-half flex space-evenly text-align-right align-items-center">
           <p data-view="search">Search</p>
           <p data-view="reports">Reports</p>
         </div>
@@ -34,7 +34,7 @@
       <div class="row text-align-center">
         <div class="column-full">
           <h1 class="what-city">What City Are You In Today?</h1>
-          <form>
+          <form class="search-form">
             <div class="search-bar position-relative flex justify-content-right align-items-center">
               <input type="text" class="search-input">
             </div>

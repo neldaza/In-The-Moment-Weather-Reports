@@ -69,6 +69,10 @@
   height: 75vh;
 }
 
+.space-evenly {
+  justify-content: space-evenly;
+}
+
 @media only screen and (min-width: 768px) {
   .container {
     max-width: 900px;
@@ -91,5 +95,25 @@
 
   .list-img {
     padding-bottom: 2rem;
+  }
+
+  .header-logo > h2 {
+    position: relative;
+    left: -4rem;
+  }
+
+  .header-logo > h4 {
+    position: relative;
+    left: -4rem;
+  }
+
+  .search-and-reports {
+    position: relative;
+    left: 4rem;
+  }
+
+  .fa {
+    left: 35rem;
+    bottom: 11.5rem;
   }
 }
