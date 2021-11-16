@@ -12,6 +12,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400&family=Playfair+Display&display=swap"
     rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
   <header class="header">
@@ -29,11 +30,16 @@
     </div>
   </header>
   <main>
-    <div class="container height-75vh flex align-items-center">
+    <div class="container height-75vh flex justify-content-center align-items-center">
       <div class="row text-align-center">
         <div class="column-full">
-          <h1>What City Are You In Today?</h1>
-          <input type="text">
+          <h1 class="what-city">What City Are You In Today?</h1>
+          <form>
+            <div class="search-bar position-relative flex justify-content-right align-items-center">
+              <input type="text" class="search-input">
+            </div>
+            <i class="fa fa-search position-absolute"></i>
+          </form>
         </div>
       </div>
     </div>

@@ -29,3 +29,35 @@
 body {
   background-color: #e8f0f2;
 }
+
+.what-city {
+  font-family: 'Playfair Display', serif;
+  font-size: 21pt;
+}
+
+.search-bar {
+  height: 3.5rem;
+  width: 100%;
+  background-color: #a2dbfa;
+  border-color: transparent;
+}
+
+.fa {
+  color: white;
+  left: 3rem;
+  bottom: 20rem;
+  font-size: 15pt !important;
+}
+
+.search-input {
+  background-color: inherit;
+  height: 100%;
+  width: 86%;
+}
+
+input[type="text"] {
+  font-size: 15pt;
+  font-family: 'Montserrat', sans-serif;
+  padding-top: 4.5px;
+  border-color: transparent;
+}
