@@ -1,0 +1,31 @@
+.header {
+  background-color: #39a2db;
+  width: 100%;
+  color: white;
+}
+
+.header-h2 {
+  margin-block-end: unset;
+  font-family: 'Playfair Display', serif;
+}
+
+.header-h4 {
+  margin-block-start: unset;
+  font-family: 'Playfair Display', serif;
+}
+
+.search-and-reports {
+  font-family: 'Montserrat', sans-serif;
+  justify-content: space-evenly;
+  font-weight: 100;
+}
+
+.search-and-reports > p {
+  position: relative;
+  left: 1rem;
+  font-size: 14pt;
+}
+
+body {
+  background-color: #e8f0f2;
+}
