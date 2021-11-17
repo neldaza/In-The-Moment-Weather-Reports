@@ -42,7 +42,7 @@ body {
   border-color: transparent;
 }
 
-.fa {
+.fa-search {
   color: white;
   top: 1rem;
   left: 1rem;
@@ -91,4 +91,28 @@ input[type="text"] {
 
 .bottom-td {
   background-color: rgb(226, 245, 255);
+}
+
+.full-weather-report td {
+  font-family: 'Montserrat', sans-serif;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  font-size: 10pt;
+}
+
+.create-new-report {
+  border-radius: 5px;
+  margin-top: 1rem;
+}
+
+.create-new-report > h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 16pt;
+}
+
+.create-new-report > i {
+  font-size: 20px;
+  position: relative;
+  left: 3rem;
+  color: rgb(57, 162, 219);
 }
