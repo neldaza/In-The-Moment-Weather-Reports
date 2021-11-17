@@ -30,7 +30,8 @@
     </div>
   </header>
   <main>
-    <div class="container height-75vh flex justify-content-center align-items-center hidden">
+  <div data-view="search-bar" class="search-bar-body view">
+    <div class="container height-75vh flex justify-content-center align-items-center">
       <div class="row text-align-center">
         <div class="column-full">
           <h1 class="what-city">What City Are You In Today?</h1>
@@ -43,6 +44,8 @@
         </div>
       </div>
     </div>
+  </div>
+  <div data-view="search-bar-result" class="search-bar-result view hidden">
     <div class="full-weather-report container height-85vh align-items-center flex justify-content-center text-align-center">
       <div class="row">
         <div class="column-full">
@@ -69,6 +72,7 @@
         </div>
       </div>
     </div>
+  </div>
   </main>
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>
