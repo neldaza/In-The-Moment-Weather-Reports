@@ -61,3 +61,34 @@ input[type="text"] {
   padding-top: 4.5px;
   border-color: transparent;
 }
+
+.partly-cloudy-pic {
+  height: 36px;
+  width: 36px;
+}
+
+.report-picture {
+  height: 262px;
+}
+
+.full-weather-report h2,
+.full-weather-report h5 {
+  font-family: 'Playfair Display', serif;
+}
+
+.full-weather-report h4,
+.full-weather-report p {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.full-weather-report p {
+  font-size: 9.5pt;
+}
+
+.top-td {
+  background-color: rgb(162, 219, 250);
+}
+
+.bottom-td {
+  background-color: rgb(226, 245, 255);
+}
