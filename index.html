@@ -23,26 +23,63 @@
           <h4 class="header-h4">Weather Reports</h4>
         </div>
         <div class="search-and-reports column-half flex space-evenly text-align-right align-items-center">
-          <p data-view="search">Search</p>
-          <p data-view="reports">Reports</p>
+          <a data-view="search-bar" class="search-anchor">Search</a>
+          <a data-view="reports">Reports</a>
         </div>
       </div>
     </div>
   </header>
   <main>
+  <div data-view="search-bar" class="search-bar-body view">
     <div class="container height-75vh flex justify-content-center align-items-center">
       <div class="row text-align-center">
         <div class="column-full">
           <h1 class="what-city">What City Are You In Today?</h1>
           <form class="search-form position-relative">
             <div class="search-bar flex justify-content-right align-items-center">
-              <input type="text" class="search-input">
+              <input type="text" class="search-input" required>
             </div>
             <i class="fa fa-search position-absolute"></i>
           </form>
         </div>
       </div>
     </div>
+  </div>
+  <div data-view="search-bar-result" class="search-bar-result view hidden">
+    <div class="full-weather-report container height-85vh align-items-center flex justify-content-center text-align-center">
+      <div class="row width-100p justify-content-center">
+        <div class="column-half">
+          <h2 class="margin-block-unset city-name">Anaheim, California</h2>
+          <h4 class="margin-block-unset city-time">8:30am Local Time</h4>
+
+          <h5 class="margin-block-unset">Current Weather</h5>
+          <p class="margin-block-unset weather-status">Partly Cloudy</p>
+          <table class="weather-table width-100p">
+            <tr>
+              <td class="top-td width-50 fahrenheit-td">66&#176; Fahrenheit</td>
+              <td class="top-td feels-like-td">Feels like 58.9&#176; Fahreinheit</td>
+            </tr>
+            <tr>
+              <td class="bottom-td gust-td">5.9mph Gust</td>
+              <td class="bottom-td cloud-cover-td">50% Cloud Coverage</td>
+            </tr>
+            <tr>
+              <td class="top-td visibility-td">9 Miles Visibility</td>
+              <td class="top-td wind-mph-td">4.3mph Wind</td>
+            </tr>
+            <tr>
+            <td class="bottom-td precipitation-td">0in Precipitation</td>
+            <td class="bottom-td top-td humidity-td">59% Humidity</td>
+            </tr>
+          </table>
+          <div class="create-new-report search-bar flex align-items-center text-align-center justify-content-center">
+            <h1>Create New Report</h1>
+            <i class="fa fa-arrow-right"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   </main>
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>

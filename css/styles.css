@@ -20,10 +20,11 @@
   font-weight: 100;
 }
 
-.search-and-reports > p {
+.search-and-reports > a {
   position: relative;
   left: 1rem;
   font-size: 14pt;
+  cursor: pointer;
 }
 
 body {
@@ -42,7 +43,7 @@ body {
   border-color: transparent;
 }
 
-.fa {
+.fa-search {
   color: white;
   top: 1rem;
   left: 1rem;
@@ -60,4 +61,74 @@ input[type="text"] {
   font-family: 'Montserrat', sans-serif;
   padding-top: 4.5px;
   border-color: transparent;
+}
+
+.partly-cloudy-pic {
+  height: 36px;
+  width: 36px;
+}
+
+.report-picture {
+  height: 262px;
+}
+
+.full-weather-report h2,
+.full-weather-report h5 {
+  font-family: 'Playfair Display', serif;
+}
+
+.full-weather-report h4,
+.full-weather-report p {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.full-weather-report h2 {
+  font-size: 25pt;
+}
+
+.full-weather-report h4 {
+  font-size: 15pt;
+}
+
+.full-weather-report h5 {
+  font-size: 15pt;
+}
+
+.full-weather-report p {
+  font-size: 12pt;
+  text-decoration: underline;
+}
+
+.top-td {
+  background-color: rgb(162, 219, 250);
+  height: 4rem;
+}
+
+.bottom-td {
+  background-color: rgb(226, 245, 255);
+  height: 4rem;
+}
+
+.full-weather-report td {
+  font-family: 'Montserrat', sans-serif;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  font-size: 12pt;
+}
+
+.create-new-report {
+  border-radius: 5px;
+  margin-top: 1rem;
+}
+
+.create-new-report > h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 16pt;
+}
+
+.create-new-report > i {
+  font-size: 20px;
+  position: relative;
+  left: 3rem;
+  color: rgb(57, 162, 219);
 }
