@@ -49,17 +49,18 @@ function userSearch(event) {
     $windMphResult.textContent = xhr.response.current.wind_mph + 'mph' + ' Wind';
     $precipitationResult.textContent = xhr.response.current.precip_in + 'in' + ' Precipitation';
     $humidityResult.textContent = xhr.response.current.humidity + '%' + ' Humidity';
-
   });
   xhr.send();
   $searchForm.reset();
   switchView('search-bar-result');
+
 }
 
 $searchForm.addEventListener('submit', userSearch);
 
 /// // VIEW NAVIGATION /////
 var $viewSelectorAll = document.querySelectorAll('.view');
+var $searchNavbar = document.querySelector('.search-anchor');
 
 function switchView(viewName) {
 
@@ -77,3 +78,5 @@ function handleViewNavigation(event) {
   var buttonDataView = event.target.getAttribute('data-view');
   switchView(buttonDataView);
 }
+
+$searchNavbar.addEventListener('click', handleViewNavigation);

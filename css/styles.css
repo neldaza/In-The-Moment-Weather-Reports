@@ -20,10 +20,11 @@
   font-weight: 100;
 }
 
-.search-and-reports > p {
+.search-and-reports > a {
   position: relative;
   left: 1rem;
   font-size: 14pt;
+  cursor: pointer;
 }
 
 body {

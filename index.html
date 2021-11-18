@@ -23,8 +23,8 @@
           <h4 class="header-h4">Weather Reports</h4>
         </div>
         <div class="search-and-reports column-half flex space-evenly text-align-right align-items-center">
-          <p data-view="search">Search</p>
-          <p data-view="reports">Reports</p>
+          <a data-view="search-bar" class="search-anchor">Search</a>
+          <a data-view="reports">Reports</a>
         </div>
       </div>
     </div>
@@ -37,7 +37,7 @@
           <h1 class="what-city">What City Are You In Today?</h1>
           <form class="search-form position-relative">
             <div class="search-bar flex justify-content-right align-items-center">
-              <input type="text" class="search-input">
+              <input type="text" class="search-input" required>
             </div>
             <i class="fa fa-search position-absolute"></i>
           </form>
@@ -47,8 +47,8 @@
   </div>
   <div data-view="search-bar-result" class="search-bar-result view hidden">
     <div class="full-weather-report container height-85vh align-items-center flex justify-content-center text-align-center">
-      <div class="row width-100p">
-        <div class="column-full">
+      <div class="row width-100p justify-content-center">
+        <div class="column-half">
           <h2 class="margin-block-unset city-name">Anaheim, California</h2>
           <h4 class="margin-block-unset city-time">8:30am Local Time</h4>
 
