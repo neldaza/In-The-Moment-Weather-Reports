@@ -81,23 +81,38 @@ input[type="text"] {
   font-family: 'Montserrat', sans-serif;
 }
 
+.full-weather-report h2 {
+  font-size: 25pt;
+}
+
+.full-weather-report h4 {
+  font-size: 15pt;
+}
+
+.full-weather-report h5 {
+  font-size: 15pt;
+}
+
 .full-weather-report p {
-  font-size: 9.5pt;
+  font-size: 12pt;
+  text-decoration: underline;
 }
 
 .top-td {
   background-color: rgb(162, 219, 250);
+  height: 4rem;
 }
 
 .bottom-td {
   background-color: rgb(226, 245, 255);
+  height: 4rem;
 }
 
 .full-weather-report td {
   font-family: 'Montserrat', sans-serif;
   padding-top: 5px;
   padding-bottom: 5px;
-  font-size: 10pt;
+  font-size: 12pt;
 }
 
 .create-new-report {

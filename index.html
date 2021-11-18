@@ -47,22 +47,29 @@
   </div>
   <div data-view="search-bar-result" class="search-bar-result view hidden">
     <div class="full-weather-report container height-85vh align-items-center flex justify-content-center text-align-center">
-      <div class="row">
+      <div class="row width-100p">
         <div class="column-full">
-          <h2 class="margin-block-unset">Anaheim, California</h2>
-          <h4 class="margin-block-unset">8:30am Local Time</h4>
-          <img src="images/anaheim.jpeg" alt="anaheim" class="report-picture">
+          <h2 class="margin-block-unset city-name">Anaheim, California</h2>
+          <h4 class="margin-block-unset city-time">8:30am Local Time</h4>
+
           <h5 class="margin-block-unset">Current Weather</h5>
-          <img src="images/partlycloudy.png" alt="partly-cloudy" class="partly-cloudy-pic">
-          <p class="margin-block-unset">Partly Cloudy</p>
+          <p class="margin-block-unset weather-status">Partly Cloudy</p>
           <table class="weather-table width-100p">
             <tr>
-              <td class="top-td width-50">66 Fahrenheit</td>
-              <td class="top-td">59% Humidity</td>
+              <td class="top-td width-50 fahrenheit-td">66&#176; Fahrenheit</td>
+              <td class="top-td feels-like-td">Feels like 58.9&#176; Fahreinheit</td>
             </tr>
             <tr>
-              <td class="bottom-td">5.9mph Wind Gust</td>
-              <td class="bottom-td">50% Cloud Coverage</td>
+              <td class="bottom-td gust-td">5.9mph Gust</td>
+              <td class="bottom-td cloud-cover-td">50% Cloud Coverage</td>
+            </tr>
+            <tr>
+              <td class="top-td visibility-td">9 Miles Visibility</td>
+              <td class="top-td wind-mph-td">4.3mph Wind</td>
+            </tr>
+            <tr>
+            <td class="bottom-td precipitation-td">0in Precipitation</td>
+            <td class="bottom-td top-td humidity-td">59% Humidity</td>
             </tr>
           </table>
           <div class="create-new-report search-bar flex align-items-center text-align-center justify-content-center">
