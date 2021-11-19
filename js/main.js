@@ -61,6 +61,8 @@ $searchForm.addEventListener('submit', userSearch);
 /// // VIEW NAVIGATION /////
 var $viewSelectorAll = document.querySelectorAll('.view');
 var $searchNavbar = document.querySelector('.search-anchor');
+var $createNewReportButton = document.querySelector('.create-new-report-button');
+var $goBackButton = document.querySelector('.go-back-button-event');
 
 function switchView(viewName) {
 
@@ -80,3 +82,5 @@ function handleViewNavigation(event) {
 }
 
 $searchNavbar.addEventListener('click', handleViewNavigation);
+$createNewReportButton.addEventListener('click', handleViewNavigation);
+$goBackButton.addEventListener('click', handleViewNavigation);

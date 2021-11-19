@@ -54,13 +54,17 @@ body {
   background-color: inherit;
   height: 100%;
   width: 86%;
+  border-color: transparent;
+}
+
+.search-bar-body {
+  padding-top: 4.5px;
 }
 
 input[type="text"] {
   font-size: 15pt;
   font-family: 'Montserrat', sans-serif;
   padding-top: 4.5px;
-  border-color: transparent;
 }
 
 .partly-cloudy-pic {
@@ -119,9 +123,6 @@ input[type="text"] {
 .create-new-report {
   border-radius: 5px;
   margin-top: 1rem;
-}
-
-.create-new-report > h1 {
   font-family: 'Playfair Display', serif;
   font-size: 16pt;
 }
@@ -133,29 +134,39 @@ input[type="text"] {
   color: rgb(57, 162, 219);
 }
 
-.word-hug {
-  padding-top: 2rem;
-  padding-bottom: 2rem;
-}
-
 .placeholder-img {
-  width: 65%;
+  width: 50%;
   object-fit: cover;
   border-radius: 50%;
 }
 
-.titles {
+.titles-80p {
+  padding-top: 1rem;
   position: relative;
-  top: 0.75rem;
+  left: 2.3rem;
+  bottom: 1px;
+}
+
+.titles {
+  font-family: 'Playfair Display', serif;
+  font-size: 7pt;
 }
 
 .text {
-  width: 100%;
+  width: 80%;
   height: 2rem;
+  border-color: #dbe1e6;
+  border-style: solid;
+  padding-left: 0.5rem;
 }
 
 .comments {
-  height: 9rem;
+  height: 8rem;
+  width: 100%;
+  border-style: solid;
+  border-color: #dbe1e6;
+  resize: none;
+  padding-left: 1rem;
 }
 
 .button {
@@ -163,10 +174,56 @@ input[type="text"] {
   border-radius: 5px;
   border-color: transparent;
   margin-top: 0.5rem;
-  flex-basis: 8%;
+  flex-basis: 16%;
   padding-top: 2px;
   padding-bottom: 2px;
-  height: 2rem;
+  height: 2.2rem;
   color: white;
   font-family: 'Playfair Display', serif;
+  font-size: 11pt;
+}
+
+.was-report-accurate {
+  font-size: 12.5pt;
+}
+
+.go-back-button {
+  border-radius: 5px;
+  margin-bottom: 1rem;
+}
+
+.whole-entry-form {
+  transform: scale(0.95);
+}
+
+.go-back-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 17.5pt;
+  position: relative;
+  left: -0.5rem;
+}
+
+.left-arrow {
+  position: relative;
+  left: -6rem;
+  font-size: 20px;
+  color: rgb(57, 162, 219);
+}
+
+.title-and-image-inputs {
+  bottom: 0.5rem;
+}
+
+.no,
+.kind-of,
+.yes {
+  position: relative;
+  left: 0.25rem;
+}
+
+.whole-entry-form > input[type="text"],
+textarea[type="text"] {
+  font-size: 10pt;
+  font-family: 'Montserrat', sans-serif;
+  padding-top: 4.5px;
 }
