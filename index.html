@@ -30,7 +30,7 @@
     </div>
   </header>
   <main>
-  <div data-view="search-bar" class="search-bar-body view">
+  <div data-view="search-bar" class="search-bar-body view hidden">
     <div class="container height-75vh flex justify-content-center align-items-center">
       <div class="row text-align-center">
         <div class="column-full">
@@ -77,6 +77,46 @@
             <i class="fa fa-arrow-right"></i>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+  <div data-view="entry-form" class="word-hug">
+    <div class="container">
+      <div class="row">
+        <form class= "column-full">
+          <div class="row wrap">
+            <div class="column-half text-align-center">
+              <img src="images/placeholder-image-square.jpg" alt="placeholder-image" class="placeholder-img">
+              <h3 class="titles">Title</h3>
+              <input type="text" class="text photo-title" name="photoTitle" id="photoTitle">
+              <h3 class="titles">Photo URL</h3>
+              <input type="text" class="text photo-url" name="photoUrl" id="photoUrl">
+            </div>
+            <div class="column-half">
+              <div class="radios row space-evenly align-items-center">
+                <div class="column-third flex align-items-center">
+                  <input type="radio" name="yes">
+                  <p>Yes</p>
+                </div>
+                <div class="column-third flex align-items-center justify-content-center">
+                  <input type="radio" name="kind-of">
+                  <p>Kind Of</p>
+                </div>
+                <div class="column-third flex align-items-center justify-content-right">
+                  <input type="radio" name="no">
+                  <p>No</p>
+                </div>
+              </div>
+              <h3 class="titles">Notes</h3>
+              <textarea class="text comments" name="comments" id="comments"></textarea>
+            </div>
+          </div>
+          <div class="row">
+            <div class="column-full justify-content-right flex">
+              <input class="button" type="submit" value="SAVE">
+          </div>
+        </div>
+      </form>
       </div>
     </div>
   </div>
