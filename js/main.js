@@ -99,6 +99,7 @@ function switchView(viewName) {
 }
 
 function handleViewNavigation(event) {
+  $form.reset();
   $searchForm.reset();
   var buttonDataView = event.target.getAttribute('data-view');
   switchView(buttonDataView);

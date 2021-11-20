@@ -69,6 +69,10 @@
   height: 75vh;
 }
 
+.height-100vh {
+  height: 100vh;
+}
+
 .space-evenly {
   justify-content: space-evenly;
 }
@@ -150,5 +154,25 @@
 
   .full-weather-report {
     height: 75vh;
+  }
+
+  .go-back-button {
+    width: 50%;
+  }
+
+  .whole-entry-form {
+    height: 75vh;
+    align-items: center;
+    display: flex;
+  }
+
+  .radios-and-comments {
+    align-self: flex-end;
+    position: relative;
+    top: 0.3rem;
+  }
+
+  .save-button {
+    flex-basis: 10%;
   }
 }
