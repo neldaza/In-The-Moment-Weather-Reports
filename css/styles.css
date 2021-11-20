@@ -134,10 +134,8 @@ input[type="text"] {
   color: rgb(57, 162, 219);
 }
 
-.placeholder-img {
+.placeholder-img-before {
   width: 50%;
-  object-fit: cover;
-  border-radius: 50%;
 }
 
 .titles-80p {

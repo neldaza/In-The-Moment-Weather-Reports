@@ -83,34 +83,32 @@
   <div data-view="entry-form" class="view hidden">
     <div class="container whole-entry-form">
       <div class="row">
-        <form class= "column-full">
+        <form class= "column-full entry-form-submit">
           <div class="row wrap">
             <button class="go-back-button-event go-back-button search-bar flex align-items-center text-align-center justify-content-center" data-view="search-bar-result">
               <i class="fa fa-arrow-left left-arrow go-back-button-event" data-view="search-bar-result"></i>
               <h1 class="go-back-text go-back-button-event" data-view="search-bar-result">Go Back</h1>
             </button>
             <div class="column-half text-align-center">
-              <img src="images/placeholder-image-square.jpg" alt="placeholder-image" class="placeholder-img">
-              <div class="title-and-image-inputs position-relative">
-                <h3 class="titles margin-block-unset text-align-left titles-80p">Report Title</h3>
-                <input type="text" class="text photo-title" name="photoTitle" id="photoTitle" required>
-                <h3 class="titles margin-block-unset text-align-left titles-80p">Your Weather Image</h3>
-                <input type="text" class="text photo-url" name="photoUrl" id="photoUrl" required>
-              </div>
+              <img src="images/placeholder-image-square.jpg" alt="placeholder-image" class="placeholder-img-before">
+              <h3 class="titles margin-block-unset text-align-left titles-80p">Report Title</h3>
+              <input type="text" class="text photo-title" name="photoTitle" id="photoTitle" required>
+              <h3 class="titles margin-block-unset text-align-left titles-80p">Your Weather Image</h3>
+              <input type="text" class="text photo-url" name="photoUrl" id="photoUrl" required>
             </div>
             <div class="column-half text-align-center margin-top-1-rem">
               <h2 class="was-report-accurate margin-block-unset">Was the official weather report accurate?</h2>
               <div class="radios row space-evenly align-items-center">
                 <div class="column-third flex align-items-center justify-content-center">
-                  <input type="radio" name="yes" required>
+                  <input type="radio" name="choice" value="Yes" required>
                   <p class="yes">Yes</p>
                 </div>
                 <div class="column-third flex align-items-center justify-content-center">
-                  <input type="radio" name="kind-of" required>
+                  <input type="radio" name="choice" value="Kind Of" required>
                   <p class="kind-of">Kind Of</p>
                 </div>
                 <div class="column-third flex align-items-center justify-content-center">
-                  <input type="radio" name="no" required>
+                  <input type="radio" name="choice" value="No" required>
                   <p class="no">No</p>
                 </div>
               </div>
