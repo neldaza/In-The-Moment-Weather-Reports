@@ -72,11 +72,58 @@
             <td class="bottom-td top-td humidity-td">59% Humidity</td>
             </tr>
           </table>
-          <div class="create-new-report search-bar flex align-items-center text-align-center justify-content-center">
-            <h1>Create New Report</h1>
-            <i class="fa fa-arrow-right"></i>
+          <button data-view="entry-form" class="create-new-report-button create-new-report search-bar flex align-items-center text-align-center justify-content-center">
+            Create New Report
+            <i class="fa fa-arrow-right create-new-report-button" data-view="entry-form"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div data-view="entry-form" class="view hidden">
+    <div class="container whole-entry-form">
+      <div class="row">
+        <form class= "column-full entry-form-submit">
+          <div class="flex justify-content-center">
+            <a class="go-back-button-event go-back-button search-bar flex align-items-center text-align-center justify-content-center" data-view="search-bar-result">
+              <i class="fa fa-arrow-left left-arrow go-back-button-event" data-view="search-bar-result"></i>
+              <h1 class="go-back-text go-back-button-event" data-view="search-bar-result">Go Back</h1>
+            </a>
+          </div>
+          <div class="row wrap">
+            <div class="column-half text-align-center">
+              <img src="images/placeholder-image-square.jpg" alt="placeholder-image" class="placeholder-img-before">
+              <h3 class="titles margin-block-unset text-align-left titles-80p">Report Title</h3>
+              <input type="text" class="text photo-title" name="photoTitle" id="photoTitle" required>
+              <h3 class="titles margin-block-unset text-align-left titles-80p">Your Weather Image</h3>
+              <input type="text" class="text photo-url" name="photoUrl" id="photoUrl" required>
+            </div>
+            <div class="radios-and-comments column-half text-align-center margin-top-1-rem">
+              <h2 class="was-report-accurate margin-block-unset">Was the official weather report accurate?</h2>
+              <div class="radios row space-evenly align-items-center">
+                <div class="column-third flex align-items-center justify-content-center">
+                  <input type="radio" name="choice" value="Yes" required>
+                  <p class="yes">Yes</p>
+                </div>
+                <div class="column-third flex align-items-center justify-content-center">
+                  <input type="radio" name="choice" value="Kind Of" required>
+                  <p class="kind-of">Kind Of</p>
+                </div>
+                <div class="column-third flex align-items-center justify-content-center">
+                  <input type="radio" name="choice" value="No" required>
+                  <p class="no">No</p>
+                </div>
+              </div>
+              <h3 class="titles margin-block-unset text-align-left">Your Personal Weather Report</h3>
+              <textarea class="comments" name="comments" id="comments" type="text" required></textarea>
+            </div>
+          </div>
+          <div class="row">
+            <div class="column-full justify-content-right flex">
+              <input class="save-button button" type="submit" value="SAVE">
           </div>
         </div>
+      </form>
       </div>
     </div>
   </div>

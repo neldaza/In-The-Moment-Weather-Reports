@@ -69,6 +69,10 @@
   height: 75vh;
 }
 
+.height-100vh {
+  height: 100vh;
+}
+
 .space-evenly {
   justify-content: space-evenly;
 }
@@ -85,6 +89,31 @@
   height: 85vh;
 }
 
+.wrap {
+  flex-wrap: wrap;
+}
+
+.column-third {
+  flex-basis: calc(100% / 3);
+}
+
+.display-table-cell-bottom {
+  display: table-cell;
+  vertical-align: bottom;
+}
+
+.text-align-left {
+  text-align: left;
+}
+
+.margin-top-1-rem {
+  margin-top: 1rem;
+}
+
+.margin-bottom-1-rem {
+  margin-bottom: 1rem;
+}
+
 @media only screen and (min-width: 768px) {
   .container {
     max-width: 900px;
@@ -97,12 +126,6 @@
 
   .column-half {
     width: 50%;
-  }
-
-  .word-hug {
-    padding-top: 0;
-    position: relative;
-    bottom: 2rem;
   }
 
   .list-img {
@@ -131,5 +154,25 @@
 
   .full-weather-report {
     height: 75vh;
+  }
+
+  .go-back-button {
+    width: 50%;
+  }
+
+  .whole-entry-form {
+    height: 75vh;
+    align-items: center;
+    display: flex;
+  }
+
+  .radios-and-comments {
+    align-self: flex-end;
+    position: relative;
+    top: 0.3rem;
+  }
+
+  .save-button {
+    flex-basis: 10%;
   }
 }

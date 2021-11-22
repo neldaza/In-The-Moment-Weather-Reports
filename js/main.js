@@ -12,6 +12,9 @@ var $feelsLikeResult = document.querySelector('.feels-like-td');
 var $windMphResult = document.querySelector('.wind-mph-td');
 var $precipitationResult = document.querySelector('.precipitation-td');
 var $visibilityResult = document.querySelector('.visibility-td');
+var $form = document.querySelector('.entry-form-submit');
+var $formPlaceholderImg = document.querySelector('.placeholder-img-before');
+var $photoUrl = document.querySelector('.photo-url');
 
 function userSearch(event) {
   event.preventDefault();
@@ -56,11 +59,33 @@ function userSearch(event) {
 
 }
 
+function srcUpdate(event) {
+  $formPlaceholderImg.setAttribute('src', $photoUrl.value);
+
+}
+
+function submitFunction(event) {
+  var photoTitleValue = $form.elements.photoTitle.value;
+  var commentsValue = $form.elements.comments.value;
+  var photoUrlValue = $form.elements.photoUrl.value;
+  var radioChecked = $form.elements.choice.value;
+  var submissionObject = { photoTitleValue, photoUrlValue, commentsValue, radioChecked };
+  submissionObject.entryId = data.nextEntryId;
+  data.nextEntryId++;
+  data.entries.unshift(submissionObject);
+  $form.reset();
+  switchView('search-bar');
+}
+
+$photoUrl.addEventListener('input', srcUpdate);
+$form.addEventListener('submit', submitFunction);
 $searchForm.addEventListener('submit', userSearch);
 
 /// // VIEW NAVIGATION /////
 var $viewSelectorAll = document.querySelectorAll('.view');
 var $searchNavbar = document.querySelector('.search-anchor');
+var $createNewReportButton = document.querySelector('.create-new-report-button');
+var $goBackButton = document.querySelector('.go-back-button-event');
 
 function switchView(viewName) {
 
@@ -74,9 +99,12 @@ function switchView(viewName) {
 }
 
 function handleViewNavigation(event) {
+  $form.reset();
   $searchForm.reset();
   var buttonDataView = event.target.getAttribute('data-view');
   switchView(buttonDataView);
 }
 
 $searchNavbar.addEventListener('click', handleViewNavigation);
+$createNewReportButton.addEventListener('click', handleViewNavigation);
+$goBackButton.addEventListener('click', handleViewNavigation);
