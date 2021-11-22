@@ -225,3 +225,22 @@ textarea[type="text"] {
   font-family: 'Montserrat', sans-serif;
   padding-top: 4.5px;
 }
+
+ul {
+  list-style: none;
+  margin-block-start: unset;
+  margin-block-end: unset;
+  padding-inline-start: unset;
+}
+
+.reports-city-name-holder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 5.5rem;
+  width: 100%;
+  background-color: #39a2db;
+  margin-top: 2rem;
+  color: white;
+  font-family: 'Montserrat', sans-serif;
+}
