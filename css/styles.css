@@ -285,3 +285,14 @@ ul {
   font-size: 10.5pt;
   padding-top: 5px;
 }
+
+.was-weather-h4 {
+  font-size: 7pt;
+  text-align: left;
+  margin-block: unset;
+}
+
+.was-weather-p {
+  font-family: 'Montserrat', sans-serif;
+  margin-block: unset;
+}
