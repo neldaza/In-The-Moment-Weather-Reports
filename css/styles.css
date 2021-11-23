@@ -244,3 +244,8 @@ ul {
   color: white;
   font-family: 'Montserrat', sans-serif;
 }
+
+.reports-title {
+  font-family: 'Playfair Display', serif;
+  margin-top: 3.25rem;
+}
