@@ -295,4 +295,24 @@ ul {
 .was-weather-p {
   font-family: 'Montserrat', sans-serif;
   margin-block: unset;
+  font-size: 8pt;
+}
+
+.border-bottom-white {
+  border-style: solid;
+  border-top-color: transparent;
+  border-left-color: transparent;
+  border-right-color: transparent;
+  border-bottom-color: white;
+  padding-bottom: 1px;
+  margin-bottom: 1rem;
+}
+
+.list-heading {
+  font-family: 'Playfair Display', serif;
+  margin-block: unset;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  font-size: 20pt;
+  color: #2b555f;
 }
