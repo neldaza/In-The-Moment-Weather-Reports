@@ -278,3 +278,10 @@ ul {
   border-bottom-color: #f6f9f9;
   padding-bottom: 0.5rem;
 }
+
+.list-description {
+  font-family: 'Montserrat', sans-serif;
+  text-align: left;
+  font-size: 10.5pt;
+  padding-top: 5px;
+}
