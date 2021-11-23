@@ -249,3 +249,32 @@ ul {
   font-family: 'Playfair Display', serif;
   margin-top: 3.25rem;
 }
+
+.list-img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.list-title {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  font-size: 9pt;
+  font-family: 'Playfair Display', serif;
+}
+
+.list-time-and-date {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 8.5pt;
+}
+
+.list-time-date-and-title {
+  padding-top: 0.5rem;
+  border-style: solid;
+  border-top-color: transparent;
+  border-left-color: transparent;
+  border-right-color: transparent;
+  border-bottom-color: #f6f9f9;
+  padding-bottom: 0.5rem;
+}
