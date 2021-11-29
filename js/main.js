@@ -15,6 +15,7 @@ var $visibilityResult = document.querySelector('.visibility-td');
 var $form = document.querySelector('.entry-form-submit');
 var $formPlaceholderImg = document.querySelector('.placeholder-img-before');
 var $photoUrl = document.querySelector('.photo-url');
+var $citiesReportsListUl = document.querySelector('.cities-report-list');
 
 function userSearch(event) {
   event.preventDefault();
@@ -65,16 +66,56 @@ function srcUpdate(event) {
 }
 
 function submitFunction(event) {
+  event.preventDefault();
+  var cityName = $cityResultName.textContent;
   var photoTitleValue = $form.elements.photoTitle.value;
   var commentsValue = $form.elements.comments.value;
   var photoUrlValue = $form.elements.photoUrl.value;
   var radioChecked = $form.elements.choice.value;
-  var submissionObject = { photoTitleValue, photoUrlValue, commentsValue, radioChecked };
+  var submissionObject = { cityName, photoTitleValue, photoUrlValue, commentsValue, radioChecked };
+  if (data.entries.length === 0) {
+    $citiesReportsListUl.appendChild(reportsPageRender());
+    submissionObject.entryId = data.nextEntryId;
+    data.nextEntryId++;
+    data.entries.unshift(submissionObject);
+    $form.reset();
+    switchView('search-bar');
+    return;
+  }
+  for (var i = 0; i < data.entries.length; i++) {
+    if (data.entries[i].cityName !== submissionObject.cityName) {
+      $citiesReportsListUl.appendChild(reportsPageRender());
+      submissionObject.entryId = data.nextEntryId;
+      data.nextEntryId++;
+      data.entries.unshift(submissionObject);
+      $form.reset();
+      switchView('search-bar');
+      return;
+    }
+  }
   submissionObject.entryId = data.nextEntryId;
   data.nextEntryId++;
   data.entries.unshift(submissionObject);
   $form.reset();
   switchView('search-bar');
+}
+
+/// // BOTH DOM TREE FUNCTIONS /////
+
+function reportsPageRender() {
+  var li = document.createElement('li');
+  var h2 = document.createElement('h2');
+
+  li.setAttribute('data-view', $cityResultName.textContent);
+  li.setAttribute('class', 'reports-city-name-holder');
+  h2.setAttribute('class', 'reports-city-name');
+  h2.setAttribute('data-view', $cityResultName.textContent);
+  var h2TextContent = document.createTextNode($cityResultName.textContent);
+
+  h2.appendChild(h2TextContent);
+  li.append(h2);
+
+  return li;
 }
 
 function initialDOMNewSubmissionRender(entry) {
@@ -91,6 +132,8 @@ function initialDOMNewSubmissionRender(entry) {
   rowDiv.setAttribute('class', 'row');
   columnFullDiv.setAttribute('class', 'column-full text-align-center');
 }
+
+/// /////
 
 $photoUrl.addEventListener('input', srcUpdate);
 $form.addEventListener('submit', submitFunction);
@@ -115,6 +158,7 @@ function switchView(viewName) {
 }
 
 function handleViewNavigation(event) {
+  $formPlaceholderImg.setAttribute('src', 'images/placeholder-image-square.jpg');
   $form.reset();
   $searchForm.reset();
   var buttonDataView = event.target.getAttribute('data-view');
