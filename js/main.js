@@ -84,9 +84,7 @@ function submitFunction(event) {
     return;
   }
   for (var i = 0; i < data.cities.length; i++) {
-    if (data.cities[i] !== submissionObject.cityName) {
-      data.cities.push(submissionObject.cityName);
-      $citiesReportsListUl.appendChild(reportsPageRender());
+    if (data.cities[i] === submissionObject.cityName) {
       submissionObject.entryId = data.nextEntryId;
       data.nextEntryId++;
       data.entries.unshift(submissionObject);
@@ -95,6 +93,8 @@ function submitFunction(event) {
       return;
     }
   }
+  data.cities.push(submissionObject.cityName);
+  $citiesReportsListUl.appendChild(reportsPageRender());
   submissionObject.entryId = data.nextEntryId;
   data.nextEntryId++;
   data.entries.unshift(submissionObject);
