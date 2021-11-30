@@ -74,6 +74,7 @@ function submitFunction(event) {
   var radioChecked = $form.elements.choice.value;
   var submissionObject = { cityName, photoTitleValue, photoUrlValue, commentsValue, radioChecked };
   if (data.entries.length === 0) {
+    data.cities.push(submissionObject.cityName);
     $citiesReportsListUl.appendChild(reportsPageRender());
     submissionObject.entryId = data.nextEntryId;
     data.nextEntryId++;
@@ -82,8 +83,10 @@ function submitFunction(event) {
     switchView('search-bar');
     return;
   }
-  for (var i = 0; i < data.entries.length; i++) {
-    if (data.entries[i].cityName !== submissionObject.cityName) {
+  var $reportsCityNameSelectorAll = document.querySelectorAll('.reports-city-name');
+  for (var i = 0; i < $reportsCityNameSelectorAll.length; i++) {
+    if ($reportsCityNameSelectorAll[i].getAttribute('data-view') !== submissionObject.cityName) {
+      data.cities.push(submissionObject.cityName);
       $citiesReportsListUl.appendChild(reportsPageRender());
       submissionObject.entryId = data.nextEntryId;
       data.nextEntryId++;
