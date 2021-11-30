@@ -168,6 +168,7 @@ var $searchNavbar = document.querySelector('.search-anchor');
 var $createNewReportButton = document.querySelector('.create-new-report-button');
 var $goBackButton = document.querySelector('.go-back-button-event');
 var $reportsNavbar = document.querySelector('.reports-anchor');
+var $reportsCityNameSelectorAll = document.querySelectorAll('.reports-city-name');
 
 function switchView(viewName) {
 
@@ -188,6 +189,9 @@ function handleViewNavigation(event) {
   switchView(buttonDataView);
 }
 
+for (var b = 0; b < $reportsCityNameSelectorAll.length; b++) {
+  $reportsCityNameSelectorAll[b].addEventListener('click', handleViewNavigation);
+}
 $reportsNavbar.addEventListener('click', handleViewNavigation);
 $searchNavbar.addEventListener('click', handleViewNavigation);
 $createNewReportButton.addEventListener('click', handleViewNavigation);
