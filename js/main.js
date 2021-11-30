@@ -83,9 +83,8 @@ function submitFunction(event) {
     switchView('search-bar');
     return;
   }
-  var $reportsCityNameSelectorAll = document.querySelectorAll('.reports-city-name');
-  for (var i = 0; i < $reportsCityNameSelectorAll.length; i++) {
-    if ($reportsCityNameSelectorAll[i].getAttribute('data-view') !== submissionObject.cityName) {
+  for (var i = 0; i < data.cities.length; i++) {
+    if (data.cities[i] !== submissionObject.cityName) {
       data.cities.push(submissionObject.cityName);
       $citiesReportsListUl.appendChild(reportsPageRender());
       submissionObject.entryId = data.nextEntryId;
@@ -121,6 +120,22 @@ function reportsPageRender() {
   return li;
 }
 
+function reportsPageRenderForLoop(cityName) {
+  var li = document.createElement('li');
+  var h2 = document.createElement('h2');
+
+  li.setAttribute('data-view', cityName);
+  li.setAttribute('class', 'reports-city-name-holder');
+  h2.setAttribute('class', 'reports-city-name');
+  h2.setAttribute('data-view', cityName);
+  var h2TextContent = cityName;
+
+  h2.append(h2TextContent);
+  li.append(h2);
+
+  return li;
+}
+
 function initialDOMNewSubmissionRender(entry) {
   var dataViewDiv = document.createElement('div');
   var containerDiv = document.createElement('div');
@@ -134,6 +149,11 @@ function initialDOMNewSubmissionRender(entry) {
   containerDiv.setAttribute('class', 'container');
   rowDiv.setAttribute('class', 'row');
   columnFullDiv.setAttribute('class', 'column-full text-align-center');
+}
+
+for (var a = 0; a < data.cities.length; a++) {
+  var city = data.cities[a];
+  $citiesReportsListUl.append(reportsPageRenderForLoop(city));
 }
 
 /// /////
