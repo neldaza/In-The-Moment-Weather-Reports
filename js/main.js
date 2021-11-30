@@ -136,19 +136,59 @@ function reportsPageRenderForLoop(cityName) {
   return li;
 }
 
-function initialDOMNewSubmissionRender(entry) {
+function mainHTMLDOMNewDataViewSubmissionRender(entry) {
   var dataViewDiv = document.createElement('div');
   var containerDiv = document.createElement('div');
   var rowDiv = document.createElement('div');
   var columnFullDiv = document.createElement('div');
   var h1ListHeading = document.createElement('h1');
-  var ul = document.createElement('ul');
+  var cityNameUl = document.createElement('ul');
 
-  dataViewDiv.setAttribute('data-view', '' + $cityResultName.textContent + '');
+  dataViewDiv.setAttribute('data-view', $cityResultName.textContent);
   dataViewDiv.setAttribute('class', 'view hidden');
   containerDiv.setAttribute('class', 'container');
   rowDiv.setAttribute('class', 'row');
   columnFullDiv.setAttribute('class', 'column-full text-align-center');
+  h1ListHeading.textContent = $cityResultName.textContent;
+  cityNameUl.setAttribute('class', $cityResultName.textContent);
+
+}
+
+function mainHTMLDOMNewListSubmissionRender(entry) {
+  var cityName = $cityResultName.textContent;
+  var photoTitleValue = $form.elements.photoTitle.value;
+  var commentsValue = $form.elements.comments.value;
+  var photoUrlValue = $form.elements.photoUrl.value;
+  var radioChecked = $form.elements.choice.value;
+
+  var containerLi = document.createElement('li');
+  var rowDiv = document.createElement('div');
+  var columnFullDiv = document.createElement('div');
+  var submittedImg = document.createElement('img');
+  var timeDateTitleDiv = document.createElement('div');
+  var listTitleDiv = document.createElement('div');
+  var titleH2 = document.createElement('h2');
+  var listTimeDateDiv = document.createElement('div');
+  var dateH3 = document.createElement('h3');
+  var timeH3 = document.createElement('h3');
+  var descriptionRowDiv = document.createElement('div');
+  var listDescriptionP = document.createElement('p');
+  var bottomWhiteRowDiv = document.createElement('div');
+  var wasWeatherDiv = document.createElement('div');
+  var wasWeatherH4 = document.createElement('h4');
+  var wasWeatherPDiv = document.createElement('div');
+  var wasWeatherP = document.createElement('p');
+
+  containerLi.setAttribute('class', 'container');
+  rowDiv.setAttribute('class', 'row');
+  columnFullDiv.setAttribute('class', 'column-full');
+  submittedImg.setAttribute('src', photoUrlValue);
+  submittedImg.setAttribute('alt', 'user-submitted-img');
+  submittedImg.setAttribute('class', 'list-img');
+  timeDateTitleDiv.setAttribute('class', 'list-time-date-and-title row align-items-center');
+  listTitleDiv.setAttribute('class', 'list-title column-75');
+  titleH2.setAttribute('class', 'margin-block-unset');
+
 }
 
 for (var a = 0; a < data.cities.length; a++) {
