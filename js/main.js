@@ -180,6 +180,12 @@ function mainHTMLDOMNewListSubmissionRender(entry) {
   var wasWeatherH4 = document.createElement('h4');
   var wasWeatherPDiv = document.createElement('div');
   var wasWeatherP = document.createElement('p');
+  var titleH2TextContent = document.createTextNode(photoTitleValue);
+  var dateH3TextContent = document.createTextNode(XHRDate);
+  var timeh3TextContent = document.createTextNode($cityResultTime.textContent);
+  var listDescriptionPTextContent = document.createTextNode(commentsValue);
+  var wasWeatherH4TextContent = document.createTextNode('Was the official weather report accurate for this day?');
+  var wasWeatherPTextContent = document.createTextNode(radioChecked);
 
   containerLi.setAttribute('class', 'container');
   rowDiv.setAttribute('class', 'row');
@@ -190,12 +196,39 @@ function mainHTMLDOMNewListSubmissionRender(entry) {
   timeDateTitleDiv.setAttribute('class', 'list-time-date-and-title row align-items-center');
   listTitleDiv.setAttribute('class', 'list-title column-75');
   titleH2.setAttribute('class', 'margin-block-unset');
-  titleH2.textContent = photoTitleValue;
+  titleH2.appendChild(titleH2TextContent);
   listTimeDateDiv.setAttribute('class', 'list-time-and-date column-25');
   dateH3.setAttribute('class', 'margin-block-unset');
-  dateH3.textContent = XHRDate;
+  dateH3.appendChild(dateH3TextContent);
   timeH3.setAttribute('class', 'margin-block-unset');
-  timeH3.textContent = $cityResultTime.textContent;
+  timeH3.appendChild(timeh3TextContent);
+  descriptionRowDiv.setAttribute('class', 'row');
+  listDescriptionP.setAttribute('class', 'list-description column-full margin-block-unset');
+  listDescriptionP.appendChild(listDescriptionPTextContent);
+  bottomWhiteRowDiv.setAttribute('class', 'row border-bottom-white');
+  wasWeatherDiv.setAttribute('class', 'column-75 flex align-items-center');
+  wasWeatherH4.setAttribute('class', 'was-weather-h4');
+  wasWeatherH4.appendChild(wasWeatherH4TextContent);
+  wasWeatherPDiv.setAttribute('class', 'column-25 flex align-items-center');
+  wasWeatherP.setAttribute('class', 'was-weather-p');
+  wasWeatherP.appendChild(wasWeatherPTextContent);
+
+  columnFullDiv.append(submittedImg);
+  rowDiv.append(columnFullDiv);
+
+  listTitleDiv.append(titleH2);
+  listTimeDateDiv.append(timeH3, dateH3);
+  timeDateTitleDiv.append(listTitleDiv, listTimeDateDiv);
+
+  descriptionRowDiv.append(listDescriptionP);
+
+  wasWeatherDiv.append(wasWeatherH4);
+  wasWeatherPDiv.append(wasWeatherP);
+  bottomWhiteRowDiv.append(wasWeatherDiv, wasWeatherPDiv);
+
+  containerLi.append(rowDiv, timeDateTitleDiv, descriptionRowDiv, bottomWhiteRowDiv);
+
+  return containerLi;
 }
 
 for (var a = 0; a < data.cities.length; a++) {
