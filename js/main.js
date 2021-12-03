@@ -16,6 +16,7 @@ var $form = document.querySelector('.entry-form-submit');
 var $formPlaceholderImg = document.querySelector('.placeholder-img-before');
 var $photoUrl = document.querySelector('.photo-url');
 var $citiesReportsListUl = document.querySelector('.cities-report-list');
+let XHRDate = '';
 
 function userSearch(event) {
   event.preventDefault();
@@ -43,7 +44,8 @@ function userSearch(event) {
     var weatherStatus = Object.values(xhr.response.current.condition)[0];
 
     $cityResultName.textContent = xhr.response.location.name + ', ' + xhr.response.location.region;
-    $cityResultTime.textContent = timeAndDateArray[1] + ' UTC Local Time';
+    $cityResultTime.textContent = timeAndDateArray[1] + ' UTC';
+    XHRDate = timeAndDateArray[0];
     $weatherStatusResult.textContent = weatherStatus;
     $fahrenheitResult.textContent = xhr.response.current.temp_f + '\xB0' + ' ' + 'Fahrenheit';
     $feelsLikeResult.textContent = 'Feels like ' + xhr.response.current.feelslike_f + '\xB0' + ' Fahreinheit';
@@ -188,7 +190,12 @@ function mainHTMLDOMNewListSubmissionRender(entry) {
   timeDateTitleDiv.setAttribute('class', 'list-time-date-and-title row align-items-center');
   listTitleDiv.setAttribute('class', 'list-title column-75');
   titleH2.setAttribute('class', 'margin-block-unset');
-
+  titleH2.textContent = photoTitleValue;
+  listTimeDateDiv.setAttribute('class', 'list-time-and-date column-25');
+  dateH3.setAttribute('class', 'margin-block-unset');
+  dateH3.textContent = XHRDate;
+  timeH3.setAttribute('class', 'margin-block-unset');
+  timeH3.textContent = $cityResultTime.textContent;
 }
 
 for (var a = 0; a < data.cities.length; a++) {
