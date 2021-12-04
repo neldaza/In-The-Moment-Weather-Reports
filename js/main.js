@@ -17,6 +17,7 @@ var $formPlaceholderImg = document.querySelector('.placeholder-img-before');
 var $photoUrl = document.querySelector('.photo-url');
 var $citiesReportsListUl = document.querySelector('.cities-report-list');
 let XHRDate = '';
+var mainElement = document.querySelector('.main');
 
 function userSearch(event) {
   event.preventDefault();
@@ -80,6 +81,7 @@ function submitFunction(event) {
     $citiesReportsListUl.appendChild(reportsPageRender());
     submissionObject.entryId = data.nextEntryId;
     data.nextEntryId++;
+    mainElement.append(mainHTMLDOMNewDataViewSubmissionRender(submissionObject));
     data.entries.unshift(submissionObject);
     $form.reset();
     switchView('search-bar');
