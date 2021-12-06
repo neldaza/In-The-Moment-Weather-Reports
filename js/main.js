@@ -76,12 +76,13 @@ function submitFunction(event) {
   var photoUrlValue = $form.elements.photoUrl.value;
   var radioChecked = $form.elements.choice.value;
   var submissionObject = { cityName, photoTitleValue, photoUrlValue, commentsValue, radioChecked };
+
   if (data.entries.length === 0) {
     data.cities.push(submissionObject.cityName);
     $citiesReportsListUl.appendChild(reportsPageRender());
+    mainElement.appendChild(mainHTMLDOMNewDataViewSubmissionRender());
     submissionObject.entryId = data.nextEntryId;
     data.nextEntryId++;
-    mainElement.append(mainHTMLDOMNewDataViewSubmissionRender(submissionObject));
     data.entries.unshift(submissionObject);
     $form.reset();
     switchView('search-bar');
@@ -98,7 +99,8 @@ function submitFunction(event) {
     }
   }
   data.cities.push(submissionObject.cityName);
-  $citiesReportsListUl.appendChild(reportsPageRender());
+  $citiesReportsListUl.append(reportsPageRender());
+  mainElement.appendChild(mainHTMLDOMNewDataViewSubmissionRender());
   submissionObject.entryId = data.nextEntryId;
   data.nextEntryId++;
   data.entries.unshift(submissionObject);
@@ -111,35 +113,22 @@ function submitFunction(event) {
 function reportsPageRender() {
   var li = document.createElement('li');
   var h2 = document.createElement('h2');
+  var h2TextContent = document.createTextNode($cityResultName.textContent);
 
   li.setAttribute('data-view', $cityResultName.textContent);
   li.setAttribute('class', 'reports-city-name-holder');
   h2.setAttribute('class', 'reports-city-name');
   h2.setAttribute('data-view', $cityResultName.textContent);
-  var h2TextContent = document.createTextNode($cityResultName.textContent);
-
   h2.appendChild(h2TextContent);
   li.append(h2);
 
-  return li;
-}
-
-function reportsPageRenderForLoop(cityName) {
-  var li = document.createElement('li');
-  var h2 = document.createElement('h2');
-
-  li.setAttribute('data-view', cityName);
-  li.setAttribute('class', 'reports-city-name-holder');
-  h2.setAttribute('class', 'reports-city-name');
-  h2.setAttribute('data-view', cityName);
-  var h2TextContent = cityName;
-
-  h2.append(h2TextContent);
-  li.append(h2);
+  li.addEventListener('click', handleViewNavigation);
+  h2.addEventListener('click', handleViewNavigation);
 
   return li;
 }
-function DOMDataViewForLoop(entry) {
+
+function mainHTMLDOMNewDataViewSubmissionRender() {
   var dataViewDiv = document.createElement('div');
   var containerDiv = document.createElement('div');
   var rowDiv = document.createElement('div');
@@ -153,6 +142,7 @@ function DOMDataViewForLoop(entry) {
   containerDiv.setAttribute('class', 'container');
   rowDiv.setAttribute('class', 'row');
   columnFullDiv.setAttribute('class', 'column-full text-align-center');
+  h1ListHeading.setAttribute('class', 'list-heading');
   h1ListHeading.appendChild(h1ListHeadingTextContent);
   cityNameUl.setAttribute('class', $cityResultName.textContent);
 
@@ -161,30 +151,7 @@ function DOMDataViewForLoop(entry) {
   containerDiv.append(rowDiv);
   dataViewDiv.append(containerDiv);
 
-  return dataViewDiv;
-}
-
-function mainHTMLDOMNewDataViewSubmissionRender(entry) {
-  var dataViewDiv = document.createElement('div');
-  var containerDiv = document.createElement('div');
-  var rowDiv = document.createElement('div');
-  var columnFullDiv = document.createElement('div');
-  var h1ListHeading = document.createElement('h1');
-  var cityNameUl = document.createElement('ul');
-  var h1ListHeadingTextContent = document.createTextNode($cityResultName.textContent);
-
-  dataViewDiv.setAttribute('data-view', $cityResultName.textContent);
-  dataViewDiv.setAttribute('class', 'view hidden');
-  containerDiv.setAttribute('class', 'container');
-  rowDiv.setAttribute('class', 'row');
-  columnFullDiv.setAttribute('class', 'column-full text-align-center');
-  h1ListHeading.appendChild(h1ListHeadingTextContent);
-  cityNameUl.setAttribute('class', $cityResultName.textContent);
-
-  columnFullDiv.append(h1ListHeading, cityNameUl);
-  rowDiv.append(columnFullDiv);
-  containerDiv.append(rowDiv);
-  dataViewDiv.append(containerDiv);
+  dataViewDiv.addEventListener('click', handleViewNavigation);
 
   return dataViewDiv;
 }
@@ -264,10 +231,54 @@ function mainHTMLDOMNewListSubmissionRender(entry) {
   return containerLi;
 }
 
+/// /  FOR LOOPS FOR LOADING /////
+
+function reportsPageRenderForLoop(cityName) {
+  var li = document.createElement('li');
+  var h2 = document.createElement('h2');
+
+  li.setAttribute('data-view', cityName);
+  li.setAttribute('class', 'reports-city-name-holder');
+  h2.setAttribute('class', 'reports-city-name');
+  h2.setAttribute('data-view', cityName);
+  var h2TextContent = cityName;
+
+  h2.append(h2TextContent);
+  li.append(h2);
+
+  return li;
+}
+
+function DOMDataViewForLoop(cityName) {
+  var dataViewDiv = document.createElement('div');
+  var containerDiv = document.createElement('div');
+  var rowDiv = document.createElement('div');
+  var columnFullDiv = document.createElement('div');
+  var h1ListHeading = document.createElement('h1');
+  var cityNameUl = document.createElement('ul');
+  var h1ListHeadingTextContent = document.createTextNode(cityName);
+
+  dataViewDiv.setAttribute('data-view', cityName);
+  dataViewDiv.setAttribute('class', 'view hidden');
+  containerDiv.setAttribute('class', 'container');
+  rowDiv.setAttribute('class', 'row');
+  columnFullDiv.setAttribute('class', 'column-full text-align-center');
+  h1ListHeading.setAttribute('class', 'list-heading');
+  h1ListHeading.appendChild(h1ListHeadingTextContent);
+  cityNameUl.setAttribute('class', cityName);
+
+  columnFullDiv.append(h1ListHeading, cityNameUl);
+  rowDiv.append(columnFullDiv);
+  containerDiv.append(rowDiv);
+  dataViewDiv.append(containerDiv);
+
+  return dataViewDiv;
+}
+
 for (var a = 0; a < data.cities.length; a++) {
   var city = data.cities[a];
   $citiesReportsListUl.append(reportsPageRenderForLoop(city));
-  mainElement.append();
+  mainElement.append(DOMDataViewForLoop(city));
 }
 
 /// /////
