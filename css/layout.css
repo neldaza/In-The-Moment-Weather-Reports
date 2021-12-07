@@ -191,4 +191,12 @@
   .save-button {
     flex-basis: 10%;
   }
+
+  .first-city-ul {
+    padding-right: 2rem;
+  }
+
+  .second-city-ul {
+    padding-left: 2rem;
+  }
 }

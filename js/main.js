@@ -15,7 +15,8 @@ var $visibilityResult = document.querySelector('.visibility-td');
 var $form = document.querySelector('.entry-form-submit');
 var $formPlaceholderImg = document.querySelector('.placeholder-img-before');
 var $photoUrl = document.querySelector('.photo-url');
-var $citiesReportsListUl = document.querySelector('.cities-report-list');
+var $firstCityUl = document.querySelector('.first-city-ul');
+var $secondCityUl = document.querySelector('.second-city-ul');
 let XHRDate = '';
 var mainElement = document.querySelector('.main');
 
@@ -81,7 +82,7 @@ function submitFunction(event) {
 
   if (data.entries.length === 0) {
     data.cities.push(submissionObject.cityName);
-    $citiesReportsListUl.appendChild(reportsPageRender());
+    $firstCityUl.appendChild(reportsPageRender());
     mainElement.appendChild(mainHTMLDOMNewDataViewSubmissionRender());
     const $ulSelectorAll = document.querySelectorAll('ul');
     for (var c = 0; c < $ulSelectorAll.length; c++) {
@@ -113,9 +114,13 @@ function submitFunction(event) {
     }
   }
   data.cities.push(submissionObject.cityName);
-  $citiesReportsListUl.append(reportsPageRender());
-  mainElement.appendChild(mainHTMLDOMNewDataViewSubmissionRender());
   submissionObject.entryId = data.nextEntryId;
+  if (submissionObject.entryId % 2 === 0) {
+    $secondCityUl.append(reportsPageRender());
+  } else {
+    $firstCityUl.append(reportsPageRender());
+  }
+  mainElement.appendChild(mainHTMLDOMNewDataViewSubmissionRender());
   const $ulSelectorAll = document.querySelectorAll('ul');
   for (var f = 0; f < $ulSelectorAll.length; f++) {
     if ($ulSelectorAll[f].getAttribute('class') === submissionObject.cityName) {
@@ -293,8 +298,15 @@ function DOMDataViewForLoop(cityName) {
 
 for (var a = 0; a < data.cities.length; a++) {
   var city = data.cities[a];
-  $citiesReportsListUl.append(reportsPageRenderForLoop(city));
   mainElement.append(DOMDataViewForLoop(city));
+}
+
+for (var t = 0; t < data.entries.length; t++) {
+  if (data.entries[t].entryId % 2 === 0) {
+    $secondCityUl.append(reportsPageRenderForLoop(data.entries[t].cityName));
+  } else {
+    $firstCityUl.append(reportsPageRenderForLoop(data.entries[t].cityName));
+  }
 }
 
 for (var w = 0; w < data.entries.length; w++) {
