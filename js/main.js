@@ -81,6 +81,12 @@ function submitFunction(event) {
     data.cities.push(submissionObject.cityName);
     $citiesReportsListUl.appendChild(reportsPageRender());
     mainElement.appendChild(mainHTMLDOMNewDataViewSubmissionRender());
+    const $ulSelectorAll = document.querySelectorAll('ul');
+    for (var c = 0; c < $ulSelectorAll.length; c++) {
+      if ($ulSelectorAll[c].getAttribute('class') === submissionObject.cityName) {
+        $ulSelectorAll[c].append(mainHTMLDOMNewListSubmissionRender(submissionObject));
+      }
+    }
     submissionObject.entryId = data.nextEntryId;
     data.nextEntryId++;
     data.entries.unshift(submissionObject);
@@ -288,7 +294,6 @@ $form.addEventListener('submit', submitFunction);
 $searchForm.addEventListener('submit', userSearch);
 
 /// // VIEW NAVIGATION /////
-var $viewSelectorAll = document.querySelectorAll('.view');
 var $searchNavbar = document.querySelector('.search-anchor');
 var $createNewReportButton = document.querySelector('.create-new-report-button');
 var $goBackButton = document.querySelector('.go-back-button-event');
@@ -296,7 +301,7 @@ var $reportsNavbar = document.querySelector('.reports-anchor');
 var $reportsCityNameSelectorAll = document.querySelectorAll('.reports-city-name');
 
 function switchView(viewName) {
-
+  var $viewSelectorAll = document.querySelectorAll('.view');
   for (var i = 0; i < $viewSelectorAll.length; i++) {
     if ($viewSelectorAll[i].getAttribute('data-view') === viewName) {
       $viewSelectorAll[i].className = 'view';
