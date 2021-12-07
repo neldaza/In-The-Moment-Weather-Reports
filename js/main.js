@@ -178,9 +178,9 @@ function mainHTMLDOMNewDataViewSubmissionRender() {
 
 function mainHTMLDOMNewListSubmissionRender(entry) {
 
-  var containerLi = document.createElement('li');
-  var rowDiv = document.createElement('div');
-  var columnFullDiv = document.createElement('div');
+  var mainRowLi = document.createElement('li');
+  var firstColumnHalfDiv = document.createElement('div');
+  var secondColumnHalfDiv = document.createElement('div');
   var submittedImg = document.createElement('img');
   var timeDateTitleDiv = document.createElement('div');
   var listTitleDiv = document.createElement('div');
@@ -202,9 +202,9 @@ function mainHTMLDOMNewListSubmissionRender(entry) {
   var wasWeatherH4TextContent = document.createTextNode('Was the official weather report accurate for this day?');
   var wasWeatherPTextContent = document.createTextNode(entry.radioChecked);
 
-  containerLi.setAttribute('class', 'container');
-  rowDiv.setAttribute('class', 'row');
-  columnFullDiv.setAttribute('class', 'column-full');
+  mainRowLi.setAttribute('class', 'row flex-wrap-wrapped');
+  firstColumnHalfDiv.setAttribute('class', 'column-half');
+  secondColumnHalfDiv.setAttribute('class', 'column-half');
   submittedImg.setAttribute('src', entry.photoUrlValue);
   submittedImg.setAttribute('alt', 'user-submitted-img');
   submittedImg.setAttribute('class', 'list-img');
@@ -228,8 +228,7 @@ function mainHTMLDOMNewListSubmissionRender(entry) {
   wasWeatherP.setAttribute('class', 'was-weather-p');
   wasWeatherP.appendChild(wasWeatherPTextContent);
 
-  columnFullDiv.append(submittedImg);
-  rowDiv.append(columnFullDiv);
+  firstColumnHalfDiv.append(submittedImg);
 
   listTitleDiv.append(titleH2);
   listTimeDateDiv.append(timeH3, dateH3);
@@ -241,9 +240,11 @@ function mainHTMLDOMNewListSubmissionRender(entry) {
   wasWeatherPDiv.append(wasWeatherP);
   bottomWhiteRowDiv.append(wasWeatherDiv, wasWeatherPDiv);
 
-  containerLi.append(rowDiv, timeDateTitleDiv, descriptionRowDiv, bottomWhiteRowDiv);
+  secondColumnHalfDiv.append(timeDateTitleDiv, descriptionRowDiv, bottomWhiteRowDiv);
 
-  return containerLi;
+  mainRowLi.append(firstColumnHalfDiv, secondColumnHalfDiv);
+
+  return mainRowLi;
 }
 
 /// /  FOR LOOPS FOR LOADING /////

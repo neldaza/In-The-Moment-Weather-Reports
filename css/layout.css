@@ -126,6 +126,10 @@
   margin-bottom: 1rem;
 }
 
+.flex-wrap-wrapped {
+  flex-wrap: wrap;
+}
+
 @media only screen and (min-width: 768px) {
   .container {
     max-width: 900px;
