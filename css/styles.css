@@ -134,8 +134,9 @@ input[type="text"] {
   color: rgb(57, 162, 219);
 }
 
-.placeholder-img-before {
-  width: 50%;
+.placeholder-img {
+  width: 200px;
+  height: 200px;
 }
 
 .titles-80p {
@@ -190,10 +191,6 @@ input[type="text"] {
   margin-bottom: 1rem;
 }
 
-.whole-entry-form {
-  transform: scale(0.95);
-}
-
 .go-back-text {
   font-family: 'Playfair Display', serif;
   font-size: 17.5pt;
@@ -224,4 +221,102 @@ textarea[type="text"] {
   font-size: 10pt;
   font-family: 'Montserrat', sans-serif;
   padding-top: 4.5px;
+}
+
+ul {
+  list-style: none;
+  margin-block-start: unset;
+  margin-block-end: unset;
+  padding-inline-start: unset;
+}
+
+.reports-city-name-holder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 5.5rem;
+  width: 100%;
+  background-color: #39a2db;
+  margin-top: 2rem;
+  color: white;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.reports-title {
+  font-family: 'Playfair Display', serif;
+  margin-top: 3.25rem;
+}
+
+.list-img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.list-title {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  font-size: 9pt;
+  font-family: 'Playfair Display', serif;
+}
+
+.list-time-and-date {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 8.5pt;
+}
+
+.list-time-date-and-title {
+  padding-top: 0.5rem;
+  border-style: solid;
+  border-top-color: transparent;
+  border-left-color: transparent;
+  border-right-color: transparent;
+  border-bottom-color: #f6f9f9;
+  padding-bottom: 0.5rem;
+}
+
+.list-description {
+  font-family: 'Montserrat', sans-serif;
+  text-align: left;
+  font-size: 10.5pt;
+  padding-top: 5px;
+}
+
+.was-weather-h4 {
+  font-size: 7pt;
+  text-align: left;
+  margin-block: unset;
+}
+
+.was-weather-p {
+  font-family: 'Montserrat', sans-serif;
+  margin-block: unset;
+  font-size: 8pt;
+}
+
+.border-bottom-white {
+  border-style: solid;
+  border-top-color: transparent;
+  border-left-color: transparent;
+  border-right-color: transparent;
+  border-bottom-color: white;
+  padding-bottom: 1px;
+  margin-bottom: 1rem;
+}
+
+.list-heading {
+  font-family: 'Playfair Display', serif;
+  margin-block: unset;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  font-size: 20pt;
+  color: #2b555f;
+}
+
+.entry-form-submit {
+  position: fixed;
+  top: 5rem;
+  left: 0;
+  transform: scale(0.85);
 }

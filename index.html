@@ -24,12 +24,12 @@
         </div>
         <div class="search-and-reports column-half flex space-evenly text-align-right align-items-center">
           <a data-view="search-bar" class="search-anchor">Search</a>
-          <a data-view="reports">Reports</a>
+          <a data-view="reports-page" class="reports-anchor">Reports</a>
         </div>
       </div>
     </div>
   </header>
-  <main>
+  <main class= "main">
   <div data-view="search-bar" class="search-bar-body view">
     <div class="container height-75vh flex justify-content-center align-items-center">
       <div class="row text-align-center">
@@ -92,7 +92,7 @@
           </div>
           <div class="row wrap">
             <div class="column-half text-align-center">
-              <img src="images/placeholder-image-square.jpg" alt="placeholder-image" class="placeholder-img-before">
+              <img src="images/placeholder-image-square.jpg" alt="placeholder-image" class="placeholder-img">
               <h3 class="titles margin-block-unset text-align-left titles-80p">Report Title</h3>
               <input type="text" class="text photo-title" name="photoTitle" id="photoTitle" required>
               <h3 class="titles margin-block-unset text-align-left titles-80p">Your Weather Image</h3>
@@ -124,6 +124,100 @@
           </div>
         </div>
       </form>
+      </div>
+    </div>
+  </div>
+  <div data-view="reports-page" class="view hidden">
+    <div class="container">
+      <div class="row">
+        <div class="column-full text-align-center">
+          <h1 class="reports-title margin-block-bottom-unset">Reports</h1>
+          <div class="column-full flex flex-wrap-wrapped">
+            <ul class="column-half cities-report-list first-city-ul">
+            </ul>
+            <ul class="column-half cities-report-list second-city-ul">
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div data-view="Anaheim, California" class="view hidden">
+    <div class="container">
+      <div class="row">
+        <div class="column-full text-align-center">
+          <h1 class="list-heading">Anaheim, California</h1>
+          <ul class ="Anaheim, California">
+            <li class="container">
+              <div class="row">
+                <div class="column-full">
+                  <img src="images/phoneclouds2.jpeg" alt="user-submitted-img" class="list-img">
+                </div>
+              </div>
+              <div class="row align-items-center list-time-date-and-title">
+                <div class="column-75 list-title">
+                  <h2 class="margin-block-unset">Absolutely Beautiful Today</h2>
+                </div>
+                <div class="column-25 list-time-and-date">
+                  <h3 class="margin-block-unset">11-08-2021</h3>
+                  <h3 class="margin-block-unset">8:30 UTC</h3>
+                </div>
+              </div>
+              <div class="row">
+                <p class="list-description margin-block-unset column-full">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel
+                  atque magni quasi pariatur debitis veritatis esse reprehenderit,
+                  illo, fugit minima laborum magnam a possimus perferendis ut consequatur
+                  dolore! Eligendi, dolorem.
+                </p>
+              </div>
+              <div class="row border-bottom-white">
+                <div class="column-75 flex align-items-center">
+                  <h4 class="was-weather-h4">Was the official weather report accurate for this day?</h4>
+                </div>
+                <div class="column-25 flex align-items-center">
+                  <p class="was-weather-p">
+                    Kind of
+                  </p>
+                </div>
+              </div>
+            </li>
+            <li class="row flex-wrap-wrapped">
+              <div class="column-half">
+                <img src="images/phoneclouds2.jpeg" alt="user-submitted-img" class="list-img">
+              </div>
+              <div class="column-half">
+              <div class="row align-items-center list-time-date-and-title">
+                <div class="column-75 list-title">
+                  <h2 class="margin-block-unset">Absolutely Beautiful Today</h2>
+                </div>
+                <div class="column-25 list-time-and-date">
+                  <h3 class="margin-block-unset">11-08-2021</h3>
+                  <h3 class="margin-block-unset">8:30 UTC</h3>
+                </div>
+              </div>
+              <div class="row">
+                <p class="list-description margin-block-unset column-full">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel
+                  atque magni quasi pariatur debitis veritatis esse reprehenderit,
+                  illo, fugit minima laborum magnam a possimus perferendis ut consequatur
+                  dolore! Eligendi, dolorem.
+                </p>
+              </div>
+              <div class="row border-bottom-white">
+                <div class="column-75 flex align-items-center">
+                  <h4 class="was-weather-h4">Was the official weather report accurate for this day?</h4>
+                </div>
+                <div class="column-25 flex align-items-center">
+                  <p class="was-weather-p">
+                    Kind of
+                  </p>
+                </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>

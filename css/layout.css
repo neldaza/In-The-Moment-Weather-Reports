@@ -17,6 +17,14 @@
   width: 100%;
 }
 
+.column-75 {
+  width: 75%;
+}
+
+.column-25 {
+  width: 25%;
+}
+
 .space-between {
   justify-content: space-between;
 }
@@ -85,6 +93,10 @@
   margin-block: unset;
 }
 
+.margin-block-bottom-unset {
+  margin-block-end: unset;
+}
+
 .height-85vh {
   height: 85vh;
 }
@@ -112,6 +124,10 @@
 
 .margin-bottom-1-rem {
   margin-bottom: 1rem;
+}
+
+.flex-wrap-wrapped {
+  flex-wrap: wrap;
 }
 
 @media only screen and (min-width: 768px) {
@@ -164,6 +180,7 @@
     height: 75vh;
     align-items: center;
     display: flex;
+    transform: scale(1);
   }
 
   .radios-and-comments {
@@ -174,5 +191,18 @@
 
   .save-button {
     flex-basis: 10%;
+  }
+
+  .first-city-ul {
+    padding-right: 2rem;
+  }
+
+  .second-city-ul {
+    padding-left: 2rem;
+  }
+
+  .placeholder-img {
+    width: 50%;
+    height: 200px;
   }
 }
