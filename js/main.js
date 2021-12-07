@@ -115,7 +115,7 @@ function submitFunction(event) {
   }
   data.cities.push(submissionObject.cityName);
   submissionObject.entryId = data.nextEntryId;
-  if (submissionObject.entryId % 2 === 0) {
+  if (data.cities.length % 2 === 0) {
     $secondCityUl.append(reportsPageRender());
   } else {
     $firstCityUl.append(reportsPageRender());
@@ -299,13 +299,12 @@ function DOMDataViewForLoop(cityName) {
 for (var a = 0; a < data.cities.length; a++) {
   var city = data.cities[a];
   mainElement.append(DOMDataViewForLoop(city));
-}
-
-for (var t = 0; t < data.entries.length; t++) {
-  if (data.entries[t].entryId % 2 === 0) {
-    $secondCityUl.append(reportsPageRenderForLoop(data.entries[t].cityName));
+  if (data.cities.length === 1) {
+    $firstCityUl.append(reportsPageRenderForLoop(data.cities[a]));
+  } else if (a % 2 === 0) {
+    $secondCityUl.append(reportsPageRenderForLoop(data.cities[a]));
   } else {
-    $firstCityUl.append(reportsPageRenderForLoop(data.entries[t].cityName));
+    $firstCityUl.append(reportsPageRenderForLoop(data.cities[a]));
   }
 }
 
