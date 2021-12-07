@@ -134,8 +134,9 @@ input[type="text"] {
   color: rgb(57, 162, 219);
 }
 
-.placeholder-img-before {
-  width: 50%;
+.placeholder-img {
+  width: 200px;
+  height: 200px;
 }
 
 .titles-80p {
@@ -188,10 +189,6 @@ input[type="text"] {
 .go-back-button {
   border-radius: 5px;
   margin-bottom: 1rem;
-}
-
-.whole-entry-form {
-  transform: scale(0.95);
 }
 
 .go-back-text {
@@ -315,4 +312,11 @@ ul {
   margin-bottom: 1rem;
   font-size: 20pt;
   color: #2b555f;
+}
+
+.entry-form-submit {
+  position: fixed;
+  top: 5rem;
+  left: 0;
+  transform: scale(0.85);
 }

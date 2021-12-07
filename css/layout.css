@@ -180,6 +180,7 @@
     height: 75vh;
     align-items: center;
     display: flex;
+    transform: scale(1);
   }
 
   .radios-and-comments {
@@ -198,5 +199,10 @@
 
   .second-city-ul {
     padding-left: 2rem;
+  }
+
+  .placeholder-img {
+    width: 50%;
+    height: 200px;
   }
 }
