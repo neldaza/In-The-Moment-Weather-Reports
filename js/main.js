@@ -75,7 +75,9 @@ function submitFunction(event) {
   var commentsValue = $form.elements.comments.value;
   var photoUrlValue = $form.elements.photoUrl.value;
   var radioChecked = $form.elements.choice.value;
-  var submissionObject = { cityName, photoTitleValue, photoUrlValue, commentsValue, radioChecked };
+  var time = $cityResultTime.textContent;
+  var date = XHRDate;
+  var submissionObject = { cityName, photoTitleValue, photoUrlValue, commentsValue, radioChecked, time, date };
 
   if (data.entries.length === 0) {
     data.cities.push(submissionObject.cityName);
@@ -97,6 +99,12 @@ function submitFunction(event) {
   for (var i = 0; i < data.cities.length; i++) {
     if (data.cities[i] === submissionObject.cityName) {
       submissionObject.entryId = data.nextEntryId;
+      const $ulSelectorAll = document.querySelectorAll('ul');
+      for (var d = 0; d < $ulSelectorAll.length; d++) {
+        if ($ulSelectorAll[d].getAttribute('class') === submissionObject.cityName) {
+          $ulSelectorAll[d].append(mainHTMLDOMNewListSubmissionRender(submissionObject));
+        }
+      }
       data.nextEntryId++;
       data.entries.unshift(submissionObject);
       $form.reset();
@@ -108,6 +116,12 @@ function submitFunction(event) {
   $citiesReportsListUl.append(reportsPageRender());
   mainElement.appendChild(mainHTMLDOMNewDataViewSubmissionRender());
   submissionObject.entryId = data.nextEntryId;
+  const $ulSelectorAll = document.querySelectorAll('ul');
+  for (var f = 0; f < $ulSelectorAll.length; f++) {
+    if ($ulSelectorAll[f].getAttribute('class') === submissionObject.cityName) {
+      $ulSelectorAll[f].append(mainHTMLDOMNewListSubmissionRender(submissionObject));
+    }
+  }
   data.nextEntryId++;
   data.entries.unshift(submissionObject);
   $form.reset();
@@ -163,11 +177,6 @@ function mainHTMLDOMNewDataViewSubmissionRender() {
 }
 
 function mainHTMLDOMNewListSubmissionRender(entry) {
-  var cityName = $cityResultName.textContent;
-  var photoTitleValue = $form.elements.photoTitle.value;
-  var commentsValue = $form.elements.comments.value;
-  var photoUrlValue = $form.elements.photoUrl.value;
-  var radioChecked = $form.elements.choice.value;
 
   var containerLi = document.createElement('li');
   var rowDiv = document.createElement('div');
@@ -186,17 +195,17 @@ function mainHTMLDOMNewListSubmissionRender(entry) {
   var wasWeatherH4 = document.createElement('h4');
   var wasWeatherPDiv = document.createElement('div');
   var wasWeatherP = document.createElement('p');
-  var titleH2TextContent = document.createTextNode(photoTitleValue);
-  var dateH3TextContent = document.createTextNode(XHRDate);
-  var timeh3TextContent = document.createTextNode($cityResultTime.textContent);
-  var listDescriptionPTextContent = document.createTextNode(commentsValue);
+  var titleH2TextContent = document.createTextNode(entry.photoTitleValue);
+  var dateH3TextContent = document.createTextNode(entry.date);
+  var timeh3TextContent = document.createTextNode(entry.time);
+  var listDescriptionPTextContent = document.createTextNode(entry.commentsValue);
   var wasWeatherH4TextContent = document.createTextNode('Was the official weather report accurate for this day?');
-  var wasWeatherPTextContent = document.createTextNode(radioChecked);
+  var wasWeatherPTextContent = document.createTextNode(entry.radioChecked);
 
   containerLi.setAttribute('class', 'container');
   rowDiv.setAttribute('class', 'row');
   columnFullDiv.setAttribute('class', 'column-full');
-  submittedImg.setAttribute('src', photoUrlValue);
+  submittedImg.setAttribute('src', entry.photoUrlValue);
   submittedImg.setAttribute('alt', 'user-submitted-img');
   submittedImg.setAttribute('class', 'list-img');
   timeDateTitleDiv.setAttribute('class', 'list-time-date-and-title row align-items-center');
@@ -285,6 +294,15 @@ for (var a = 0; a < data.cities.length; a++) {
   var city = data.cities[a];
   $citiesReportsListUl.append(reportsPageRenderForLoop(city));
   mainElement.append(DOMDataViewForLoop(city));
+}
+
+for (var w = 0; w < data.entries.length; w++) {
+  const $ulSelectorAll = document.querySelectorAll('ul');
+  for (var x = 0; x < $ulSelectorAll.length; x++) {
+    if ($ulSelectorAll[x].getAttribute('class') === data.entries[w].cityName) {
+      $ulSelectorAll[x].append(mainHTMLDOMNewListSubmissionRender(data.entries[w]));
+    }
+  }
 }
 
 /// /////
