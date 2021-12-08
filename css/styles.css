@@ -333,3 +333,40 @@ ul {
   margin-top: 3px;
   padding-bottom: 5px;
 }
+
+.cancel-background {
+  height: 100vh;
+  width: 100%;
+  background-color: rgba(232, 240, 242, 0.75);
+  bottom: 0;
+}
+
+.cancel-box {
+  background-color: white;
+  height: 9rem;
+  width: 23rem;
+  border-radius: 5px;
+  top: 19rem;
+}
+
+.yes-and-no-buttons {
+  background-color: #39a2db;
+  border-radius: 5px;
+  border-color: transparent;
+  color: white;
+  flex-basis: 30%;
+  height: 2.1rem;
+  font-size: 13pt;
+  font-family: 'Playfair Display', serif;
+}
+
+.cancel-box-text {
+  font-size: 12pt;
+  font-weight: bold;
+  padding-top: 1rem;
+}
+
+.cancel-box-buttons {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}

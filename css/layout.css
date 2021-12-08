@@ -205,6 +205,10 @@
     width: 50%;
     height: 200px;
   }
+
+  .list-description {
+    padding: 0;
+  }
 }
 
 @media only screen
