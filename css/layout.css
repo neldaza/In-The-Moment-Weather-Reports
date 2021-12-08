@@ -206,3 +206,21 @@
     height: 200px;
   }
 }
+
+@media only screen
+  and (min-device-width: 375px)
+  and (min-device-height: 812px)
+  and (-webkit-device-pixel-ratio: 3)
+  and (orientation: portrait) {
+  .what-city {
+    font-size: 19pt;
+  }
+
+  .header-h2 {
+    font-size: 17pt;
+  }
+
+  .full-weather-report {
+    padding-bottom: 5rem;
+  }
+}
