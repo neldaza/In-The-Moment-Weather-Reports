@@ -284,15 +284,20 @@ ul {
 }
 
 .was-weather-h4 {
-  font-size: 7pt;
+  font-size: 8pt;
   text-align: left;
   margin-block: unset;
+  font-family: 'Playfair Display', serif;
 }
 
 .was-weather-p {
   font-family: 'Montserrat', sans-serif;
   margin-block: unset;
-  font-size: 8pt;
+  font-size: 7pt;
+}
+
+.was-weather {
+  margin-top: 3px;
 }
 
 .border-bottom-white {
@@ -322,9 +327,9 @@ ul {
 }
 
 .delete-report {
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
   font-family: 'Playfair Display', serif;
   font-size: 7pt;
   color: red;
+  margin-top: 3px;
+  padding-bottom: 5px;
 }
