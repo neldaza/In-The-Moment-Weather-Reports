@@ -30,7 +30,7 @@
     </div>
   </header>
   <main class= "main">
-  <div data-view="search-bar" class="search-bar-body view">
+  <div data-view="search-bar" class="search-bar-body view hidden">
     <div class="container height-75vh flex justify-content-center align-items-center">
       <div class="row text-align-center">
         <div class="column-full">
@@ -142,7 +142,7 @@
       </div>
     </div>
   </div>
-  <div data-view="Anaheim, California" class="view hidden">
+  <div data-view="Anaheim, California" class="view">
     <div class="container">
       <div class="row">
         <div class="column-full text-align-center">
@@ -171,7 +171,7 @@
                   dolore! Eligendi, dolorem.
                 </p>
               </div>
-              <div class="row border-bottom-white">
+              <div class="row flex-wrap-wrapped border-bottom-white">
                 <div class="column-75 flex align-items-center">
                   <h4 class="was-weather-h4">Was the official weather report accurate for this day?</h4>
                 </div>
@@ -179,6 +179,11 @@
                   <p class="was-weather-p">
                     Kind of
                   </p>
+                </div>
+                <div class="delete-report row width-100p text-align-right">
+                  <div class="column-full">
+                    <a class="delete-report-text margin-block-unset">Delete This Report</a>
+                  </div>
                 </div>
               </div>
             </li>
