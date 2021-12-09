@@ -365,6 +365,17 @@ function handleViewNavigation(event) {
 for (var b = 0; b < $reportsCityNameSelectorAll.length; b++) {
   $reportsCityNameSelectorAll[b].addEventListener('click', handleViewNavigation);
 }
+
+const $deleteModal = document.querySelector('.cancel-background');
+function showDeleteModal() {
+  $deleteModal.className = 'cancel-background flex justify-content-center position-fixed view';
+}
+
+var $deleteReportTextSelectorAll = document.querySelectorAll('.delete-report-text');
+for (var n = 0; n < $deleteReportTextSelectorAll.length; n++) {
+  $deleteReportTextSelectorAll[n].addEventListener('click', showDeleteModal);
+}
+
 $reportsNavbar.addEventListener('click', handleViewNavigation);
 $searchNavbar.addEventListener('click', handleViewNavigation);
 $createNewReportButton.addEventListener('click', handleViewNavigation);
