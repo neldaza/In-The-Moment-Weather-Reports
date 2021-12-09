@@ -293,7 +293,7 @@ ul {
 .was-weather-p {
   font-family: 'Montserrat', sans-serif;
   margin-block: unset;
-  font-size: 7pt;
+  font-size: 9pt;
 }
 
 .was-weather {
@@ -343,7 +343,7 @@ ul {
 
 .cancel-box {
   background-color: white;
-  height: 9rem;
+  height: 10rem;
   width: 23rem;
   border-radius: 5px;
   top: 19rem;
@@ -354,16 +354,17 @@ ul {
   border-radius: 5px;
   border-color: transparent;
   color: white;
-  flex-basis: 30%;
-  height: 2.1rem;
-  font-size: 13pt;
+  flex-basis: 27%;
+  height: 3rem;
+  font-size: 18pt;
   font-family: 'Playfair Display', serif;
 }
 
 .cancel-box-text {
-  font-size: 12pt;
+  font-size: 13pt;
   font-weight: bold;
   padding-top: 1rem;
+  font-family: 'Playfair Display', serif;
 }
 
 .cancel-box-buttons {

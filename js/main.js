@@ -195,7 +195,7 @@ function mainHTMLDOMNewListSubmissionRender(entry) {
   var timeH3 = document.createElement('h3');
   var descriptionRowDiv = document.createElement('div');
   var listDescriptionP = document.createElement('p');
-  var bottomWhiteRowDiv = document.createElement('div');
+  var wasWeatherRowDiv = document.createElement('div');
   var wasWeatherDiv = document.createElement('div');
   var wasWeatherH4 = document.createElement('h4');
   var wasWeatherPDiv = document.createElement('div');
@@ -206,6 +206,11 @@ function mainHTMLDOMNewListSubmissionRender(entry) {
   var listDescriptionPTextContent = document.createTextNode(entry.commentsValue);
   var wasWeatherH4TextContent = document.createTextNode('Was the official weather report accurate for this day?');
   var wasWeatherPTextContent = document.createTextNode(entry.radioChecked);
+  var deleteReportRowDiv = document.createElement('div');
+  var firstColumnHalfDeleteRow = document.createElement('div');
+  var secondColumnHalfDeleteRow = document.createElement('div');
+  var deleteRowTextA = document.createElement('a');
+  var deleteRowTextContent = document.createTextNode('Delete This Report');
 
   mainRowLi.setAttribute('class', 'row flex-wrap-wrapped');
   firstColumnHalfDiv.setAttribute('class', 'column-half');
@@ -225,13 +230,18 @@ function mainHTMLDOMNewListSubmissionRender(entry) {
   descriptionRowDiv.setAttribute('class', 'row');
   listDescriptionP.setAttribute('class', 'list-description column-full margin-block-unset');
   listDescriptionP.appendChild(listDescriptionPTextContent);
-  bottomWhiteRowDiv.setAttribute('class', 'row border-bottom-white');
+  wasWeatherRowDiv.setAttribute('class', 'was-weather row');
   wasWeatherDiv.setAttribute('class', 'column-75 flex align-items-center');
   wasWeatherH4.setAttribute('class', 'was-weather-h4');
   wasWeatherH4.appendChild(wasWeatherH4TextContent);
-  wasWeatherPDiv.setAttribute('class', 'column-25 flex align-items-center');
+  wasWeatherPDiv.setAttribute('class', 'column-25 flex align-items-center justify-content-center');
   wasWeatherP.setAttribute('class', 'was-weather-p');
   wasWeatherP.appendChild(wasWeatherPTextContent);
+  deleteReportRowDiv.setAttribute('class', 'delete-report row border-bottom-white width-100p');
+  firstColumnHalfDeleteRow.setAttribute('class', 'column-half');
+  secondColumnHalfDeleteRow.setAttribute('class', 'column-half text-align-right');
+  deleteRowTextA.setAttribute('class', 'delete-report-text margin-block-unset');
+  deleteRowTextA.appendChild(deleteRowTextContent);
 
   firstColumnHalfDiv.append(submittedImg);
 
@@ -243,9 +253,12 @@ function mainHTMLDOMNewListSubmissionRender(entry) {
 
   wasWeatherDiv.append(wasWeatherH4);
   wasWeatherPDiv.append(wasWeatherP);
-  bottomWhiteRowDiv.append(wasWeatherDiv, wasWeatherPDiv);
+  wasWeatherRowDiv.append(wasWeatherDiv, wasWeatherPDiv);
 
-  secondColumnHalfDiv.append(timeDateTitleDiv, descriptionRowDiv, bottomWhiteRowDiv);
+  secondColumnHalfDeleteRow.append(deleteRowTextA);
+  deleteReportRowDiv.append(firstColumnHalfDeleteRow, secondColumnHalfDeleteRow);
+
+  secondColumnHalfDiv.append(timeDateTitleDiv, descriptionRowDiv, wasWeatherRowDiv, deleteReportRowDiv);
 
   mainRowLi.append(firstColumnHalfDiv, secondColumnHalfDiv);
 
