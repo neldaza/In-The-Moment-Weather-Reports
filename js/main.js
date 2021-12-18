@@ -213,6 +213,8 @@ function mainHTMLDOMNewListSubmissionRender(entry) {
   var deleteRowTextContent = document.createTextNode('Delete This Report');
 
   mainRowLi.setAttribute('class', 'row flex-wrap-wrapped');
+  mainRowLi.setAttribute('data-entry-id', entry.entryId);
+  mainRowLi.setAttribute('city-id', entry.cityName);
   firstColumnHalfDiv.setAttribute('class', 'column-half');
   secondColumnHalfDiv.setAttribute('class', 'column-half');
   submittedImg.setAttribute('src', entry.photoUrlValue);
@@ -342,6 +344,7 @@ var $createNewReportButton = document.querySelector('.create-new-report-button')
 var $goBackButton = document.querySelector('.go-back-button-event');
 var $reportsNavbar = document.querySelector('.reports-anchor');
 var $reportsCityNameSelectorAll = document.querySelectorAll('.reports-city-name');
+var $deleteReportYes = document.querySelector('.delete-report-yes');
 
 function switchView(viewName) {
   var $viewSelectorAll = document.querySelectorAll('.view');
@@ -362,6 +365,28 @@ function handleViewNavigation(event) {
   switchView(buttonDataView);
 }
 
+function deleteReport(event) {
+  for (var i = 0; i < data.entries.length; i++) {
+    var $liSelectorAll = document.querySelectorAll('li');
+    var nodeListArray = [];
+    for (var a = 0; a < $liSelectorAll.length; a++) {
+      if (data.entries[i].entryId === parseInt($liSelectorAll[a].getAttribute('data-entry-id'))) {
+        var $cityUlsSelectorAll = document.querySelectorAll('ul');
+        for (var b = 0; b < $cityUlsSelectorAll.length; b++) {
+          if ($liSelectorAll[a].getAttribute('city-id') === $cityUlsSelectorAll[b].getAttribute('class')) {
+            nodeListArray.push($liSelectorAll[a]);
+            $cityUlsSelectorAll[b].removeChild($liSelectorAll[a]);
+            data.entries.splice(i, 1);
+            $deleteModal.className = 'cancel-background flex justify-center position-fixed hidden';
+            switchView(event.target.getAttribute('data-view'));
+          }
+
+        }
+      }
+    }
+  }
+}
+
 for (var b = 0; b < $reportsCityNameSelectorAll.length; b++) {
   $reportsCityNameSelectorAll[b].addEventListener('click', handleViewNavigation);
 }
@@ -376,6 +401,7 @@ for (var n = 0; n < $deleteReportTextSelectorAll.length; n++) {
   $deleteReportTextSelectorAll[n].addEventListener('click', showDeleteModal);
 }
 
+$deleteReportYes.addEventListener('click', deleteReport);
 $reportsNavbar.addEventListener('click', handleViewNavigation);
 $searchNavbar.addEventListener('click', handleViewNavigation);
 $createNewReportButton.addEventListener('click', handleViewNavigation);
