@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 function reportsPageRenderForLoop(cityName) {
   var li = document.createElement('li');
   var h2 = document.createElement('h2');

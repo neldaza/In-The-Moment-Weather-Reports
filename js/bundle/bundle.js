@@ -15,8 +15,6 @@ var submitFunction = require('./modules/submitFunction');
 var $searchForm = document.querySelector('.search-form');
 var $form = document.querySelector('.entry-form-submit');
 var $photoUrl = document.querySelector('.photo-url');
-var $firstCityUl = document.querySelector('.first-city-ul');
-var $secondCityUl = document.querySelector('.second-city-ul');
 var mainElement = document.querySelector('.main');
 var $searchNavbar = document.querySelector('.search-anchor');
 var $createNewReportButton = document.querySelector('.create-new-report-button');
@@ -40,9 +38,22 @@ $createNewReportButton.addEventListener('click', handleViewNavigation);
 $goBackButton.addEventListener('click', handleViewNavigation);
 
 // Loops
+var $firstCityUl = document.querySelector('.first-city-ul');
+var $secondCityUl = document.querySelector('.second-city-ul');
+
+for (var q = 0; q < data.entries.length; q++) {
+  for (var l = 0; l < data.cities.length; l++) {
+    var city = data.cities[l];
+    if (data.cities[l] === data.entries[q].cityName) {
+      mainElement.append(DOMDataViewForLoop(city));
+    } else {
+      data.cities.splice(l, 1);
+
+    }
+  }
+}
+
 for (var a = 0; a < data.cities.length; a++) {
-  var city = data.cities[a];
-  mainElement.append(DOMDataViewForLoop(city));
   if (data.cities.length === 1) {
     $firstCityUl.append(reportsPageRenderForLoop(data.cities[a]));
   } else if (a % 2 === 0) {
@@ -51,6 +62,21 @@ for (var a = 0; a < data.cities.length; a++) {
     $firstCityUl.append(reportsPageRenderForLoop(data.cities[a]));
   }
 }
+
+// for (var z = 0; z < data.cities.length; z++) {
+//   var $reportsPageCitySelectorAll = document.querySelectorAll('.reports-city-name-holder');
+//   for (var ab = 0; ab < $reportsPageCitySelectorAll.length; ab++) {
+//     if (data.cities[z] !== $reportsPageCitySelectorAll[ab].getAttribute('data-view')) {
+//       var closestFirstCityUl = $reportsPageCitySelectorAll[ab].closest('.first-city-ul');
+//       var closestSecondCityUl = $reportsPageCitySelectorAll[ab].closest('.second-city-ul');
+//       if (closestFirstCityUl) {
+//         closestFirstCityUl.removeChild($reportsPageCitySelectorAll[ab]);
+//       } else if (closestSecondCityUl) {
+//         closestSecondCityUl.removeChild($reportsPageCitySelectorAll[ab]);
+//       }
+//     }
+//   }
+// }
 
 for (var w = 0; w < data.entries.length; w++) {
   var $ulSelectorAll = document.querySelectorAll('ul');
@@ -102,7 +128,6 @@ module.exports = DOMDataViewForLoop;
 
 },{}],3:[function(require,module,exports){
 /* eslint-disable no-undef */
-
 var switchView = require('./switchView');
 const $deleteModal = document.querySelector('.cancel-background');
 
@@ -121,7 +146,6 @@ function deleteReport(event) {
             $deleteModal.className = 'cancel-background flex justify-center position-fixed hidden';
             switchView(event.target.getAttribute('data-view'));
           }
-
         }
       }
     }
@@ -162,7 +186,7 @@ function mainHTMLDOMNewDataViewSubmissionRender() {
   var h1ListHeadingTextContent = document.createTextNode($cityResultName.textContent);
 
   dataViewDiv.setAttribute('data-view', $cityResultName.textContent);
-  dataViewDiv.setAttribute('class', 'view hidden');
+  dataViewDiv.setAttribute('class', 'data-view-div view hidden');
   containerDiv.setAttribute('class', 'container');
   rowDiv.setAttribute('class', 'row');
   columnFullDiv.setAttribute('class', 'column-full text-align-center');
@@ -296,6 +320,7 @@ function reportsPageRender() {
 module.exports = reportsPageRender;
 
 },{"./handleViewNavigation":4}],8:[function(require,module,exports){
+/* eslint-disable no-undef */
 function reportsPageRenderForLoop(cityName) {
   var li = document.createElement('li');
   var h2 = document.createElement('h2');

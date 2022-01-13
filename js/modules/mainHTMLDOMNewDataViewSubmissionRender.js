@@ -12,7 +12,7 @@ function mainHTMLDOMNewDataViewSubmissionRender() {
   var h1ListHeadingTextContent = document.createTextNode($cityResultName.textContent);
 
   dataViewDiv.setAttribute('data-view', $cityResultName.textContent);
-  dataViewDiv.setAttribute('class', 'view hidden');
+  dataViewDiv.setAttribute('class', 'data-view-div view hidden');
   containerDiv.setAttribute('class', 'container');
   rowDiv.setAttribute('class', 'row');
   columnFullDiv.setAttribute('class', 'column-full text-align-center');
