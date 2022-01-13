@@ -6,8 +6,8 @@
   <title>AJAX Project</title>
   <link rel="icon" href="images/favicon.ico">
   <link rel="stylesheet" href="css/reset.css">
-  <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/styles.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400&family=Playfair+Display&display=swap"
@@ -31,45 +31,49 @@
   </header>
   <main class= "main">
   <div data-view="search-bar" class="search-bar-body view hidden">
-    <div class="container height-75vh flex justify-content-center align-items-center">
+    <div class="container height-75vh flex justify-content-center position-relative search-bar-holder">
       <div class="row text-align-center">
         <div class="column-full">
           <h1 class="what-city">What City Are You In Today?</h1>
-          <form class="search-form position-relative">
+          <form class="search-form position-relative flex">
             <div class="search-bar flex justify-content-right align-items-center">
-              <input type="text" class="search-input" required>
+              <div class="column-15 flex align-items-center justify-content-center height-inherit">
+                <i class="fa fa-search"></i>
+              </div>
+              <div class="column-85 height-inherit">
+                <input type="text" class="search-input" required>
+              </div>
             </div>
-            <i class="fa fa-search position-absolute"></i>
           </form>
         </div>
       </div>
     </div>
   </div>
   <div data-view="search-bar-result" class="search-bar-result view hidden">
-    <div class="full-weather-report container height-85vh align-items-center flex justify-content-center text-align-center">
+    <div class="full-weather-report container align-items-center flex justify-content-center text-align-center position-relative">
       <div class="row width-100p justify-content-center">
         <div class="column-half">
-          <h2 class="margin-block-unset city-name">Anaheim, California</h2>
-          <h4 class="margin-block-unset city-time">8:30am Local Time</h4>
+          <h2 class="margin-block-unset city-name"></h2>
+          <h4 class="margin-block-unset city-time">Local Time</h4>
 
           <h5 class="margin-block-unset">Current Weather</h5>
-          <p class="margin-block-unset weather-status">Partly Cloudy</p>
+          <p class="margin-block-unset weather-status"></p>
           <table class="weather-table width-100p">
             <tr>
-              <td class="top-td width-50 fahrenheit-td">66&#176; Fahrenheit</td>
-              <td class="top-td feels-like-td">Feels like 58.9&#176; Fahreinheit</td>
+              <td class="top-td width-50 fahrenheit-td"></td>
+              <td class="top-td feels-like-td"></td>
             </tr>
             <tr>
-              <td class="bottom-td gust-td">5.9mph Gust</td>
-              <td class="bottom-td cloud-cover-td">50% Cloud Coverage</td>
+              <td class="bottom-td gust-td"></td>
+              <td class="bottom-td cloud-cover-td"></td>
             </tr>
             <tr>
-              <td class="top-td visibility-td">9 Miles Visibility</td>
-              <td class="top-td wind-mph-td">4.3mph Wind</td>
+              <td class="top-td visibility-td"></td>
+              <td class="top-td wind-mph-td"></td>
             </tr>
             <tr>
-            <td class="bottom-td precipitation-td">0in Precipitation</td>
-            <td class="bottom-td top-td humidity-td">59% Humidity</td>
+            <td class="bottom-td precipitation-td"></td>
+            <td class="bottom-td top-td humidity-td"></td>
             </tr>
           </table>
           <button data-view="entry-form" class="create-new-report-button create-new-report search-bar flex align-items-center text-align-center justify-content-center">
@@ -82,7 +86,7 @@
   </div>
   <div data-view="entry-form" class="view hidden">
     <div class="container whole-entry-form">
-      <div class="row">
+      <div class="row height-inherit">
         <form class= "column-full entry-form-submit">
           <div class="flex justify-content-center">
             <a class="go-back-button-event go-back-button search-bar flex align-items-center text-align-center justify-content-center" data-view="search-bar-result">
@@ -116,13 +120,11 @@
               </div>
               <h3 class="titles margin-block-unset text-align-left">Your Personal Weather Report</h3>
               <textarea class="comments" name="comments" id="comments" type="text" required></textarea>
+              <div class="column-full text-align-right">
+                <button class="button" type="submit">SAVE</button>
+              </div>
             </div>
           </div>
-          <div class="row">
-            <div class="column-full justify-content-right flex">
-              <input class="save-button button" type="submit" value="SAVE">
-          </div>
-        </div>
       </form>
       </div>
     </div>
@@ -193,7 +195,7 @@
       </div>
     </div>
   </div>
-  <div class="cancel-background flex justify-content-center position-fixed view hidden">
+  <div class=" align-items-center cancel-background flex justify-content-center position-fixed view hidden">
     <div class="cancel-box text-align-center position-relative">
       <div class="cancel-box-text flex justify-content-center align-items-center height-50">
         Are you sure you want to delete this report?

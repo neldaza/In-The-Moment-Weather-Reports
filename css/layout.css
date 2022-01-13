@@ -25,6 +25,10 @@
   width: 25%;
 }
 
+.height-inherit {
+  height: inherit;
+}
+
 .space-between {
   justify-content: space-between;
 }
@@ -89,6 +93,14 @@
   width: 100%;
 }
 
+.column-15 {
+  width: 15%;
+}
+
+.column-85 {
+  width: 85%;
+}
+
 .margin-block-unset {
   margin-block: unset;
 }
@@ -130,7 +142,35 @@
   flex-wrap: wrap;
 }
 
-@media only screen and (min-width: 768px) {
+.header-h2 {
+  font-size: 14pt;
+}
+
+.what-city {
+  font-size: 18pt;
+}
+
+.entry-form-submit {
+  transform: scale(0.9);
+  position: relative;
+  top: -1rem;
+}
+
+.full-weather-report {
+  top: -1.5rem;
+}
+
+.search-bar-holder {
+  top: 10rem;
+}
+
+.cancel-box {
+  width: 98vw;
+  height: 45vw;
+  top: 3rem;
+}
+
+@media only screen and (min-width: 1366px) {
   .container {
     max-width: 900px;
   }
@@ -208,23 +248,5 @@
 
   .list-description {
     padding: 0;
-  }
-}
-
-@media only screen
-  and (min-device-width: 375px)
-  and (min-device-height: 812px)
-  and (-webkit-device-pixel-ratio: 3)
-  and (orientation: portrait) {
-  .what-city {
-    font-size: 19pt;
-  }
-
-  .header-h2 {
-    font-size: 17pt;
-  }
-
-  .full-weather-report {
-    padding-bottom: 5rem;
   }
 }

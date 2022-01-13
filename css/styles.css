@@ -2,6 +2,11 @@
   background-color: #39a2db;
   width: 100%;
   color: white;
+  height: 11vh;
+}
+
+.container {
+  height: 89vh;
 }
 
 .header-h2 {
@@ -33,7 +38,6 @@ body {
 
 .what-city {
   font-family: 'Playfair Display', serif;
-  font-size: 21pt;
 }
 
 .search-bar {
@@ -53,7 +57,7 @@ body {
 .search-input {
   background-color: inherit;
   height: 100%;
-  width: 86%;
+  width: 100%;
   border-color: transparent;
 }
 
@@ -284,10 +288,11 @@ ul {
 }
 
 .was-weather-h4 {
-  font-size: 8pt;
+  font-size: 6pt;
   text-align: left;
   margin-block: unset;
   font-family: 'Playfair Display', serif;
+  font-weight: 700;
 }
 
 .was-weather-p {
@@ -319,13 +324,6 @@ ul {
   color: #2b555f;
 }
 
-.entry-form-submit {
-  position: fixed;
-  top: 5rem;
-  left: 0;
-  transform: scale(0.85);
-}
-
 .delete-report {
   font-family: 'Playfair Display', serif;
   font-size: 7pt;
@@ -343,10 +341,7 @@ ul {
 
 .cancel-box {
   background-color: white;
-  height: 10rem;
-  width: 23rem;
   border-radius: 5px;
-  top: 19rem;
 }
 
 .yes-and-no-buttons {
