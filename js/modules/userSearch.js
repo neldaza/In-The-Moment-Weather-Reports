@@ -1,4 +1,4 @@
-var switchView = require('./switch-view');
+var switchView = require('./switchView');
 
 var $cityResultName = document.querySelector('.city-name');
 var $cityResultTime = document.querySelector('.city-time');

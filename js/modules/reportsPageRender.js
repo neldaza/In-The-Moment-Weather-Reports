@@ -1,4 +1,4 @@
-var handleViewNavigation = require('./handle-view-navigation');
+var handleViewNavigation = require('./handleViewNavigation');
 var $cityResultName = document.querySelector('.city-name');
 
 function reportsPageRender() {

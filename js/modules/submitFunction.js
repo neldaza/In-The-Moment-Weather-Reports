@@ -1,9 +1,9 @@
 /* eslint-disable no-undef */
 
-var reportsPageRender = require('./reports-page-render');
-var mainHTMLDOMNewListSubmissionRender = require('./new-main-html-list');
-var mainHTMLDOMNewDataViewSubmissionRender = require('./new-data-view-render');
-var switchView = require('./switch-view');
+var reportsPageRender = require('./reportsPageRender');
+var mainHTMLDOMNewListSubmissionRender = require('./mainHTMLDOMNewListSubmissionRender');
+var mainHTMLDOMNewDataViewSubmissionRender = require('./mainHTMLDOMNewDataViewSubmissionRender');
+var switchView = require('./switchView');
 
 var $cityResultName = document.querySelector('.city-name');
 var $form = document.querySelector('.entry-form-submit');

@@ -1,14 +1,14 @@
 
 // Modules
-var srcUpdate = require('./modules/src-update');
-var deleteReport = require('./modules/delete-report');
-var handleViewNavigation = require('./modules/handle-view-navigation');
-var DOMDataViewForLoop = require('./modules/new-data-view-FL');
-var reportsPageRenderForLoop = require('./modules/reports-page-render-FL');
-var mainHTMLDOMNewListSubmissionRender = require('./modules/new-main-html-list');
-var showDeleteModal = require('./modules/show-delete-modal');
-var submitFunction = require('./modules/submit-function');
-var userSearch = require('./modules/user-search');
+var srcUpdate = require('./modules/srcUpdate');
+var deleteReport = require('./modules/deleteReport');
+var handleViewNavigation = require('./modules/handleViewNavigation');
+var DOMDataViewForLoop = require('./modules/DOMDataViewForLoop');
+var reportsPageRenderForLoop = require('./modules/reportsPageRenderForLoop');
+var mainHTMLDOMNewListSubmissionRender = require('./modules/mainHTMLDOMNewListSubmissionRender');
+var showDeleteModal = require('./modules/showDeleteModal');
+var userSearch = require('./modules/userSearch');
+var submitFunction = require('./modules/submitFunction');
 
 // Event Targets
 var $searchForm = document.querySelector('.search-form');

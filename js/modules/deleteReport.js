@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 
-var switchView = require('./switch-view');
+var switchView = require('./switchView');
 const $deleteModal = document.querySelector('.cancel-background');
 
 function deleteReport(event) {
