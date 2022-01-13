@@ -1,11 +1,12 @@
 {
   "root": true,
   "env": {
-    "node": false,
+    "node": true,
     "browser": true
   },
   "parserOptions": {
-    "sourceType": "script"
+    "ecmaVersion": 6,
+    "sourceType": "module"
   },
   "extends": [
     "eslint:recommended",
@@ -53,5 +54,6 @@
         "data": "readonly"
       }
     }
-  ]
+  ],
+  "ignorePatterns": ["bundle.js", "bundle.map.js", "bundledata.js", "bundledata.map.js"]
 }
