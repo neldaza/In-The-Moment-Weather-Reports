@@ -41,6 +41,10 @@ $goBackButton.addEventListener('click', handleViewNavigation);
 var $firstCityUl = document.querySelector('.first-city-ul');
 var $secondCityUl = document.querySelector('.second-city-ul');
 
+if (data.entries.length === 0) {
+  data.cities = [];
+}
+
 for (var q = 0; q < data.entries.length; q++) {
   for (var l = 0; l < data.cities.length; l++) {
     var city = data.cities[l];
@@ -48,7 +52,6 @@ for (var q = 0; q < data.entries.length; q++) {
       mainElement.append(DOMDataViewForLoop(city));
     } else {
       data.cities.splice(l, 1);
-
     }
   }
 }
@@ -62,21 +65,6 @@ for (var a = 0; a < data.cities.length; a++) {
     $firstCityUl.append(reportsPageRenderForLoop(data.cities[a]));
   }
 }
-
-// for (var z = 0; z < data.cities.length; z++) {
-//   var $reportsPageCitySelectorAll = document.querySelectorAll('.reports-city-name-holder');
-//   for (var ab = 0; ab < $reportsPageCitySelectorAll.length; ab++) {
-//     if (data.cities[z] !== $reportsPageCitySelectorAll[ab].getAttribute('data-view')) {
-//       var closestFirstCityUl = $reportsPageCitySelectorAll[ab].closest('.first-city-ul');
-//       var closestSecondCityUl = $reportsPageCitySelectorAll[ab].closest('.second-city-ul');
-//       if (closestFirstCityUl) {
-//         closestFirstCityUl.removeChild($reportsPageCitySelectorAll[ab]);
-//       } else if (closestSecondCityUl) {
-//         closestSecondCityUl.removeChild($reportsPageCitySelectorAll[ab]);
-//       }
-//     }
-//   }
-// }
 
 for (var w = 0; w < data.entries.length; w++) {
   var $ulSelectorAll = document.querySelectorAll('ul');
@@ -129,7 +117,6 @@ module.exports = DOMDataViewForLoop;
 },{}],3:[function(require,module,exports){
 /* eslint-disable no-undef */
 var switchView = require('./switchView');
-const $deleteModal = document.querySelector('.cancel-background');
 
 function deleteReport(event) {
   for (var i = 0; i < data.entries.length; i++) {
@@ -143,7 +130,6 @@ function deleteReport(event) {
             nodeListArray.push($liSelectorAll[a]);
             $cityUlsSelectorAll[b].removeChild($liSelectorAll[a]);
             data.entries.splice(i, 1);
-            $deleteModal.className = 'cancel-background flex justify-center position-fixed hidden';
             switchView(event.target.getAttribute('data-view'));
           }
         }
@@ -207,6 +193,8 @@ function mainHTMLDOMNewDataViewSubmissionRender() {
 module.exports = mainHTMLDOMNewDataViewSubmissionRender;
 
 },{"./handleViewNavigation":4}],6:[function(require,module,exports){
+var handleViewNavigation = require('./handleViewNavigation');
+
 function mainHTMLDOMNewListSubmissionRender(entry) {
 
   var mainRowLi = document.createElement('li');
@@ -269,6 +257,7 @@ function mainHTMLDOMNewListSubmissionRender(entry) {
   firstColumnHalfDeleteRow.setAttribute('class', 'column-half');
   secondColumnHalfDeleteRow.setAttribute('class', 'column-half text-align-right');
   deleteRowTextA.setAttribute('class', 'delete-report-text margin-block-unset');
+  deleteRowTextA.setAttribute('data-view', 'delete');
   deleteRowTextA.appendChild(deleteRowTextContent);
 
   firstColumnHalfDiv.append(submittedImg);
@@ -290,12 +279,14 @@ function mainHTMLDOMNewListSubmissionRender(entry) {
 
   mainRowLi.append(firstColumnHalfDiv, secondColumnHalfDiv);
 
+  deleteRowTextA.addEventListener('click', handleViewNavigation);
+
   return mainRowLi;
 }
 
 module.exports = mainHTMLDOMNewListSubmissionRender;
 
-},{}],7:[function(require,module,exports){
+},{"./handleViewNavigation":4}],7:[function(require,module,exports){
 var handleViewNavigation = require('./handleViewNavigation');
 var $cityResultName = document.querySelector('.city-name');
 

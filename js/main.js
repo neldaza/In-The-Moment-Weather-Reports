@@ -40,6 +40,10 @@ $goBackButton.addEventListener('click', handleViewNavigation);
 var $firstCityUl = document.querySelector('.first-city-ul');
 var $secondCityUl = document.querySelector('.second-city-ul');
 
+if (data.entries.length === 0) {
+  data.cities = [];
+}
+
 for (var q = 0; q < data.entries.length; q++) {
   for (var l = 0; l < data.cities.length; l++) {
     var city = data.cities[l];
@@ -47,7 +51,6 @@ for (var q = 0; q < data.entries.length; q++) {
       mainElement.append(DOMDataViewForLoop(city));
     } else {
       data.cities.splice(l, 1);
-
     }
   }
 }
@@ -61,21 +64,6 @@ for (var a = 0; a < data.cities.length; a++) {
     $firstCityUl.append(reportsPageRenderForLoop(data.cities[a]));
   }
 }
-
-// for (var z = 0; z < data.cities.length; z++) {
-//   var $reportsPageCitySelectorAll = document.querySelectorAll('.reports-city-name-holder');
-//   for (var ab = 0; ab < $reportsPageCitySelectorAll.length; ab++) {
-//     if (data.cities[z] !== $reportsPageCitySelectorAll[ab].getAttribute('data-view')) {
-//       var closestFirstCityUl = $reportsPageCitySelectorAll[ab].closest('.first-city-ul');
-//       var closestSecondCityUl = $reportsPageCitySelectorAll[ab].closest('.second-city-ul');
-//       if (closestFirstCityUl) {
-//         closestFirstCityUl.removeChild($reportsPageCitySelectorAll[ab]);
-//       } else if (closestSecondCityUl) {
-//         closestSecondCityUl.removeChild($reportsPageCitySelectorAll[ab]);
-//       }
-//     }
-//   }
-// }
 
 for (var w = 0; w < data.entries.length; w++) {
   var $ulSelectorAll = document.querySelectorAll('ul');

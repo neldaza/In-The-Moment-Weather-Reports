@@ -1,6 +1,5 @@
 /* eslint-disable no-undef */
 var switchView = require('./switchView');
-const $deleteModal = document.querySelector('.cancel-background');
 
 function deleteReport(event) {
   for (var i = 0; i < data.entries.length; i++) {
@@ -14,7 +13,6 @@ function deleteReport(event) {
             nodeListArray.push($liSelectorAll[a]);
             $cityUlsSelectorAll[b].removeChild($liSelectorAll[a]);
             data.entries.splice(i, 1);
-            $deleteModal.className = 'cancel-background flex justify-center position-fixed hidden';
             switchView(event.target.getAttribute('data-view'));
           }
         }

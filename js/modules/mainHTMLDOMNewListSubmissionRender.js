@@ -1,3 +1,5 @@
+var handleViewNavigation = require('./handleViewNavigation');
+
 function mainHTMLDOMNewListSubmissionRender(entry) {
 
   var mainRowLi = document.createElement('li');
@@ -60,6 +62,7 @@ function mainHTMLDOMNewListSubmissionRender(entry) {
   firstColumnHalfDeleteRow.setAttribute('class', 'column-half');
   secondColumnHalfDeleteRow.setAttribute('class', 'column-half text-align-right');
   deleteRowTextA.setAttribute('class', 'delete-report-text margin-block-unset');
+  deleteRowTextA.setAttribute('data-view', 'delete');
   deleteRowTextA.appendChild(deleteRowTextContent);
 
   firstColumnHalfDiv.append(submittedImg);
@@ -80,6 +83,8 @@ function mainHTMLDOMNewListSubmissionRender(entry) {
   secondColumnHalfDiv.append(timeDateTitleDiv, descriptionRowDiv, wasWeatherRowDiv, deleteReportRowDiv);
 
   mainRowLi.append(firstColumnHalfDiv, secondColumnHalfDiv);
+
+  deleteRowTextA.addEventListener('click', handleViewNavigation);
 
   return mainRowLi;
 }
