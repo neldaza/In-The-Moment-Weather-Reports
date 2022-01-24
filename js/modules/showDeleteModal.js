@@ -1,6 +1,10 @@
-const $deleteModal = document.querySelector('.cancel-background');
+const $deleteModal = document.querySelector('.whole-delete-modal');
 function showDeleteModal() {
-  $deleteModal.className = 'align-items-center cancel-background flex justify-content-center position-fixed view';
+  $deleteModal.className = 'whole-delete-modal view';
 }
 
-module.exports = showDeleteModal;
+function hideDeleteModal() {
+  $deleteModal.className = 'whole-delete-modal view hidden';
+}
+
+module.exports = { showDeleteModal, hideDeleteModal };

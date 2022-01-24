@@ -6,9 +6,9 @@ var handleViewNavigation = require('./modules/handleViewNavigation');
 var mainDataViewForLoop = require('./modules/mainDataViewForLoop');
 var reportsPageRenderForLoop = require('./modules/reportsPageRenderForLoop');
 var newReportEntry = require('./modules/newReportEntry');
-var showDeleteModal = require('./modules/showDeleteModal');
 var userSearch = require('./modules/userSearch');
 var submitFunction = require('./modules/submitFunction');
+var { showDeleteModal, hideDeleteModal } = require('./modules/showDeleteModal');
 
 // Event Targets
 var $searchForm = document.querySelector('.search-form');
@@ -20,7 +20,7 @@ var $createNewReportButton = document.querySelector('.create-new-report-button')
 var $goBackButton = document.querySelector('.go-back-button-event');
 var $reportsNavbar = document.querySelector('.reports-anchor');
 var $deleteReportYes = document.querySelector('.yes-button');
-var $deleteReportText = document.querySelector('.delete-report-text');
+var $noButton = document.querySelector('.no-button');
 
 // Event Listeners
 $photoUrl.addEventListener('input', srcUpdate);
@@ -31,7 +31,7 @@ $searchNavbar.addEventListener('click', handleViewNavigation);
 $createNewReportButton.addEventListener('click', handleViewNavigation);
 $deleteReportYes.addEventListener('click', deleteReport);
 $goBackButton.addEventListener('click', handleViewNavigation);
-$deleteReportText.addEventListener('click', showDeleteModal);
+$noButton.addEventListener('click', hideDeleteModal);
 
 // Loops
 var $firstCityUl = document.querySelector('.first-city-ul');
@@ -41,16 +41,8 @@ if (data.entries.length === 0) {
   data.cities = [];
 }
 
-for (var q = 0; q < data.entries.length; q++) {
-  for (var l = 0; l < data.cities.length; l++) {
-    var city = data.cities[l];
-    if (data.cities[l] === data.entries[q].cityName) {
-      mainElement.append(mainDataViewForLoop(city));
-    }
-  }
-}
-
 for (var a = 0; a < data.cities.length; a++) {
+  mainElement.append(mainDataViewForLoop(data.cities[a]));
   if (data.cities.length === 1) {
     $firstCityUl.append(reportsPageRenderForLoop(data.cities[a]));
   } else if (a % 2 === 0) {
@@ -75,6 +67,6 @@ for (var b = 0; b < $reportsCityNameSelectorAll.length; b++) {
 }
 
 var $deleteReportTextSelectorAll = document.querySelectorAll('.delete-report-text');
-for (var n = 0; n < $deleteReportTextSelectorAll.length; n++) {
-  $deleteReportTextSelectorAll[n].addEventListener('click', showDeleteModal);
+for (var h = 0; h < $deleteReportTextSelectorAll.length; h++) {
+  $deleteReportTextSelectorAll[h].addEventListener('click', showDeleteModal);
 }

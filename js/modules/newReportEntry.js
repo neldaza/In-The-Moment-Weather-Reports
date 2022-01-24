@@ -1,4 +1,4 @@
-var showDeleteModal = require('./showDeleteModal');
+var { showDeleteModal } = require('./showDeleteModal');
 
 function newReportEntry(entry) {
 
@@ -33,7 +33,7 @@ function newReportEntry(entry) {
 
   mainRowLi.setAttribute('class', 'row flex-wrap-wrapped');
   mainRowLi.setAttribute('data-entry-id', entry.entryId);
-  mainRowLi.setAttribute('city-id', entry.cityName);
+  mainRowLi.setAttribute('data-city-id', entry.cityName);
   firstColumnHalfDiv.setAttribute('class', 'column-half');
   secondColumnHalfDiv.setAttribute('class', 'column-half');
   submittedImg.setAttribute('src', entry.photoUrlValue);
@@ -62,7 +62,9 @@ function newReportEntry(entry) {
   firstColumnHalfDeleteRow.setAttribute('class', 'column-half');
   secondColumnHalfDeleteRow.setAttribute('class', 'column-half text-align-right');
   deleteRowTextA.setAttribute('class', 'delete-report-text margin-block-unset');
+  deleteRowTextA.setAttribute('data-view', 'whole-delete-modal');
   deleteRowTextA.appendChild(deleteRowTextContent);
+  deleteRowTextA.addEventListener('click', showDeleteModal);
 
   firstColumnHalfDiv.append(submittedImg);
 
@@ -82,8 +84,6 @@ function newReportEntry(entry) {
   secondColumnHalfDiv.append(timeDateTitleDiv, descriptionRowDiv, wasWeatherRowDiv, deleteReportRowDiv);
 
   mainRowLi.append(firstColumnHalfDiv, secondColumnHalfDiv);
-
-  deleteRowTextA.addEventListener('click', showDeleteModal);
 
   return mainRowLi;
 }

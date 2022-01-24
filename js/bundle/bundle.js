@@ -92,11 +92,12 @@ function deleteReport(event) {
       if (data.entries[i].entryId === parseInt($liSelectorAll[a].getAttribute('data-entry-id'))) {
         var $cityUlsSelectorAll = document.querySelectorAll('ul');
         for (var b = 0; b < $cityUlsSelectorAll.length; b++) {
-          if ($liSelectorAll[a].getAttribute('city-id') === $cityUlsSelectorAll[b].getAttribute('class')) {
+          if ($liSelectorAll[a].getAttribute('data-city-id') === $cityUlsSelectorAll[b].getAttribute('class')) {
             nodeListArray.push($liSelectorAll[a]);
             $cityUlsSelectorAll[b].removeChild($liSelectorAll[a]);
             data.entries.splice(i, 1);
             switchView(event.target.getAttribute('data-view'));
+            return;
           }
         }
       }
@@ -124,7 +125,10 @@ function handleViewNavigation(event) {
 module.exports = handleViewNavigation;
 
 },{"./switchView":12}],4:[function(require,module,exports){
-function DOMDataViewForLoop(cityName) {
+/* eslint-disable no-undef */
+var handleViewNavigation = require('./handleViewNavigation');
+
+function mainDataViewForLoop(cityName) {
   var dataViewDiv = document.createElement('div');
   var containerDiv = document.createElement('div');
   var rowDiv = document.createElement('div');
@@ -134,15 +138,15 @@ function DOMDataViewForLoop(cityName) {
   var h1ListHeadingTextContent = document.createTextNode(cityName);
 
   dataViewDiv.setAttribute('data-view', cityName);
-  dataViewDiv.setAttribute('city-id', cityName);
+  dataViewDiv.setAttribute('data-city-id', cityName);
+  cityNameUl.setAttribute('class', cityName);
+  cityNameUl.setAttribute('data-city-id', cityName);
   dataViewDiv.setAttribute('class', 'view hidden');
   containerDiv.setAttribute('class', 'container');
   rowDiv.setAttribute('class', 'row');
   columnFullDiv.setAttribute('class', 'column-full text-align-center');
   h1ListHeading.setAttribute('class', 'list-heading');
   h1ListHeading.appendChild(h1ListHeadingTextContent);
-  cityNameUl.setAttribute('class', cityName);
-  cityNameUl.setAttribute('city-id', cityName);
 
   columnFullDiv.append(h1ListHeading, cityNameUl);
   rowDiv.append(columnFullDiv);
@@ -152,9 +156,9 @@ function DOMDataViewForLoop(cityName) {
   return dataViewDiv;
 }
 
-module.exports = DOMDataViewForLoop;
+module.exports = mainDataViewForLoop;
 
-},{}],5:[function(require,module,exports){
+},{"./handleViewNavigation":3}],5:[function(require,module,exports){
 
 var $cityResultName = document.querySelector('.city-name');
 
@@ -187,7 +191,7 @@ function newMainDataView() {
 module.exports = newMainDataView;
 
 },{}],6:[function(require,module,exports){
-var showDeleteModal = require('./showDeleteModal');
+var { showDeleteModal } = require('./showDeleteModal');
 
 function newReportEntry(entry) {
 
@@ -222,7 +226,7 @@ function newReportEntry(entry) {
 
   mainRowLi.setAttribute('class', 'row flex-wrap-wrapped');
   mainRowLi.setAttribute('data-entry-id', entry.entryId);
-  mainRowLi.setAttribute('city-id', entry.cityName);
+  mainRowLi.setAttribute('data-city-id', entry.cityName);
   firstColumnHalfDiv.setAttribute('class', 'column-half');
   secondColumnHalfDiv.setAttribute('class', 'column-half');
   submittedImg.setAttribute('src', entry.photoUrlValue);
@@ -251,7 +255,9 @@ function newReportEntry(entry) {
   firstColumnHalfDeleteRow.setAttribute('class', 'column-half');
   secondColumnHalfDeleteRow.setAttribute('class', 'column-half text-align-right');
   deleteRowTextA.setAttribute('class', 'delete-report-text margin-block-unset');
+  deleteRowTextA.setAttribute('data-view', 'whole-delete-modal');
   deleteRowTextA.appendChild(deleteRowTextContent);
+  deleteRowTextA.addEventListener('click', showDeleteModal);
 
   firstColumnHalfDiv.append(submittedImg);
 
@@ -271,8 +277,6 @@ function newReportEntry(entry) {
   secondColumnHalfDiv.append(timeDateTitleDiv, descriptionRowDiv, wasWeatherRowDiv, deleteReportRowDiv);
 
   mainRowLi.append(firstColumnHalfDiv, secondColumnHalfDiv);
-
-  deleteRowTextA.addEventListener('click', showDeleteModal);
 
   return mainRowLi;
 }
@@ -310,12 +314,10 @@ function reportsPageRenderForLoop(cityName) {
   var h2 = document.createElement('h2');
   var h2TextContent = cityName;
 
-  for (var i = 0; i < data.cities.length; i++) {
-    li.setAttribute('data-view', data.cities[i]);
-    h2.setAttribute('data-view', data.cities[i]);
-  }
+  li.setAttribute('data-view', cityName);
   li.setAttribute('class', 'reports-city-name-holder');
   h2.setAttribute('class', 'reports-city-name');
+  h2.setAttribute('data-view', cityName);
 
   h2.append(h2TextContent);
   li.append(h2);
@@ -326,12 +328,16 @@ function reportsPageRenderForLoop(cityName) {
 module.exports = reportsPageRenderForLoop;
 
 },{}],9:[function(require,module,exports){
-const $deleteModal = document.querySelector('.cancel-background');
+const $deleteModal = document.querySelector('.whole-delete-modal');
 function showDeleteModal() {
-  $deleteModal.className = 'align-items-center cancel-background flex justify-content-center position-fixed view';
+  $deleteModal.className = 'whole-delete-modal view';
 }
 
-module.exports = showDeleteModal;
+function hideDeleteModal() {
+  $deleteModal.className = 'whole-delete-modal view hidden';
+}
+
+module.exports = { showDeleteModal, hideDeleteModal };
 
 },{}],10:[function(require,module,exports){
 var $formPlaceholderImg = document.querySelector('.placeholder-img');
