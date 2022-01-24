@@ -1,8 +1,7 @@
-var handleViewNavigation = require('./handleViewNavigation');
 
 var $cityResultName = document.querySelector('.city-name');
 
-function mainHTMLDOMNewDataViewSubmissionRender() {
+function newMainDataView() {
   var dataViewDiv = document.createElement('div');
   var containerDiv = document.createElement('div');
   var rowDiv = document.createElement('div');
@@ -25,9 +24,7 @@ function mainHTMLDOMNewDataViewSubmissionRender() {
   containerDiv.append(rowDiv);
   dataViewDiv.append(containerDiv);
 
-  dataViewDiv.addEventListener('click', handleViewNavigation);
-
   return dataViewDiv;
 }
 
-module.exports = mainHTMLDOMNewDataViewSubmissionRender;
+module.exports = newMainDataView;

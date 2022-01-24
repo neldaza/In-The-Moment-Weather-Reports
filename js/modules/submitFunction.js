@@ -1,8 +1,8 @@
 /* eslint-disable no-undef */
 
 var reportsPageRender = require('./reportsPageRender');
-var mainHTMLDOMNewListSubmissionRender = require('./mainHTMLDOMNewListSubmissionRender');
-var mainHTMLDOMNewDataViewSubmissionRender = require('./mainHTMLDOMNewDataViewSubmissionRender');
+var newReportEntry = require('./newReportEntry');
+var newMainDataView = require('./newMainDataView');
 var switchView = require('./switchView');
 
 var $cityResultName = document.querySelector('.city-name');
@@ -25,13 +25,13 @@ function submitFunction(event) {
   var submissionObject = { cityName, photoTitleValue, photoUrlValue, commentsValue, radioChecked, time, date };
 
   if (data.entries.length === 0) {
-    data.cities.push(submissionObject.cityName);
+    data.cities.unshift(submissionObject.cityName);
     $firstCityUl.appendChild(reportsPageRender());
-    mainElement.appendChild(mainHTMLDOMNewDataViewSubmissionRender());
+    mainElement.appendChild(newMainDataView());
     const $ulSelectorAll = document.querySelectorAll('ul');
     for (var c = 0; c < $ulSelectorAll.length; c++) {
       if ($ulSelectorAll[c].getAttribute('class') === submissionObject.cityName) {
-        $ulSelectorAll[c].append(mainHTMLDOMNewListSubmissionRender(submissionObject));
+        $ulSelectorAll[c].append(newReportEntry(submissionObject));
       }
     }
     submissionObject.entryId = data.nextEntryId;
@@ -47,7 +47,7 @@ function submitFunction(event) {
       const $ulSelectorAll = document.querySelectorAll('ul');
       for (var d = 0; d < $ulSelectorAll.length; d++) {
         if ($ulSelectorAll[d].getAttribute('class') === submissionObject.cityName) {
-          $ulSelectorAll[d].append(mainHTMLDOMNewListSubmissionRender(submissionObject));
+          $ulSelectorAll[d].append(newReportEntry(submissionObject));
         }
       }
       data.nextEntryId++;
@@ -57,18 +57,18 @@ function submitFunction(event) {
       return;
     }
   }
-  data.cities.push(submissionObject.cityName);
+  data.cities.unshift(submissionObject.cityName);
   submissionObject.entryId = data.nextEntryId;
   if (data.cities.length % 2 === 0) {
     $secondCityUl.append(reportsPageRender());
   } else {
     $firstCityUl.append(reportsPageRender());
   }
-  mainElement.appendChild(mainHTMLDOMNewDataViewSubmissionRender());
+  mainElement.appendChild(newMainDataView());
   const $ulSelectorAll = document.querySelectorAll('ul');
   for (var f = 0; f < $ulSelectorAll.length; f++) {
     if ($ulSelectorAll[f].getAttribute('class') === submissionObject.cityName) {
-      $ulSelectorAll[f].append(mainHTMLDOMNewListSubmissionRender(submissionObject));
+      $ulSelectorAll[f].append(newReportEntry(submissionObject));
     }
   }
   data.nextEntryId++;

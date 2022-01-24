@@ -8,6 +8,7 @@ function DOMDataViewForLoop(cityName) {
   var h1ListHeadingTextContent = document.createTextNode(cityName);
 
   dataViewDiv.setAttribute('data-view', cityName);
+  dataViewDiv.setAttribute('city-id', cityName);
   dataViewDiv.setAttribute('class', 'view hidden');
   containerDiv.setAttribute('class', 'container');
   rowDiv.setAttribute('class', 'row');
@@ -15,6 +16,7 @@ function DOMDataViewForLoop(cityName) {
   h1ListHeading.setAttribute('class', 'list-heading');
   h1ListHeading.appendChild(h1ListHeadingTextContent);
   cityNameUl.setAttribute('class', cityName);
+  cityNameUl.setAttribute('city-id', cityName);
 
   columnFullDiv.append(h1ListHeading, cityNameUl);
   rowDiv.append(columnFullDiv);

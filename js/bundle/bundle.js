@@ -4,9 +4,9 @@
 var srcUpdate = require('./modules/srcUpdate');
 var deleteReport = require('./modules/deleteReport');
 var handleViewNavigation = require('./modules/handleViewNavigation');
-var DOMDataViewForLoop = require('./modules/DOMDataViewForLoop');
+var mainDataViewForLoop = require('./modules/mainDataViewForLoop');
 var reportsPageRenderForLoop = require('./modules/reportsPageRenderForLoop');
-var mainHTMLDOMNewListSubmissionRender = require('./modules/mainHTMLDOMNewListSubmissionRender');
+var newReportEntry = require('./modules/newReportEntry');
 var showDeleteModal = require('./modules/showDeleteModal');
 var userSearch = require('./modules/userSearch');
 var submitFunction = require('./modules/submitFunction');
@@ -20,22 +20,19 @@ var $searchNavbar = document.querySelector('.search-anchor');
 var $createNewReportButton = document.querySelector('.create-new-report-button');
 var $goBackButton = document.querySelector('.go-back-button-event');
 var $reportsNavbar = document.querySelector('.reports-anchor');
-var $deleteReportYes = document.querySelector('.delete-report-yes');
+var $deleteReportYes = document.querySelector('.yes-button');
+var $deleteReportText = document.querySelector('.delete-report-text');
 
 // Event Listeners
 $photoUrl.addEventListener('input', srcUpdate);
 $form.addEventListener('submit', submitFunction);
 $searchForm.addEventListener('submit', userSearch);
-$deleteReportYes.addEventListener('click', deleteReport);
 $reportsNavbar.addEventListener('click', handleViewNavigation);
 $searchNavbar.addEventListener('click', handleViewNavigation);
 $createNewReportButton.addEventListener('click', handleViewNavigation);
-$goBackButton.addEventListener('click', handleViewNavigation);
 $deleteReportYes.addEventListener('click', deleteReport);
-$reportsNavbar.addEventListener('click', handleViewNavigation);
-$searchNavbar.addEventListener('click', handleViewNavigation);
-$createNewReportButton.addEventListener('click', handleViewNavigation);
 $goBackButton.addEventListener('click', handleViewNavigation);
+$deleteReportText.addEventListener('click', showDeleteModal);
 
 // Loops
 var $firstCityUl = document.querySelector('.first-city-ul');
@@ -49,9 +46,7 @@ for (var q = 0; q < data.entries.length; q++) {
   for (var l = 0; l < data.cities.length; l++) {
     var city = data.cities[l];
     if (data.cities[l] === data.entries[q].cityName) {
-      mainElement.append(DOMDataViewForLoop(city));
-    } else {
-      data.cities.splice(l, 1);
+      mainElement.append(mainDataViewForLoop(city));
     }
   }
 }
@@ -70,7 +65,7 @@ for (var w = 0; w < data.entries.length; w++) {
   var $ulSelectorAll = document.querySelectorAll('ul');
   for (var x = 0; x < $ulSelectorAll.length; x++) {
     if ($ulSelectorAll[x].getAttribute('class') === data.entries[w].cityName) {
-      $ulSelectorAll[x].append(mainHTMLDOMNewListSubmissionRender(data.entries[w]));
+      $ulSelectorAll[x].append(newReportEntry(data.entries[w]));
     }
   }
 }
@@ -85,36 +80,7 @@ for (var n = 0; n < $deleteReportTextSelectorAll.length; n++) {
   $deleteReportTextSelectorAll[n].addEventListener('click', showDeleteModal);
 }
 
-},{"./modules/DOMDataViewForLoop":2,"./modules/deleteReport":3,"./modules/handleViewNavigation":4,"./modules/mainHTMLDOMNewListSubmissionRender":6,"./modules/reportsPageRenderForLoop":8,"./modules/showDeleteModal":9,"./modules/srcUpdate":10,"./modules/submitFunction":11,"./modules/userSearch":13}],2:[function(require,module,exports){
-function DOMDataViewForLoop(cityName) {
-  var dataViewDiv = document.createElement('div');
-  var containerDiv = document.createElement('div');
-  var rowDiv = document.createElement('div');
-  var columnFullDiv = document.createElement('div');
-  var h1ListHeading = document.createElement('h1');
-  var cityNameUl = document.createElement('ul');
-  var h1ListHeadingTextContent = document.createTextNode(cityName);
-
-  dataViewDiv.setAttribute('data-view', cityName);
-  dataViewDiv.setAttribute('class', 'view hidden');
-  containerDiv.setAttribute('class', 'container');
-  rowDiv.setAttribute('class', 'row');
-  columnFullDiv.setAttribute('class', 'column-full text-align-center');
-  h1ListHeading.setAttribute('class', 'list-heading');
-  h1ListHeading.appendChild(h1ListHeadingTextContent);
-  cityNameUl.setAttribute('class', cityName);
-
-  columnFullDiv.append(h1ListHeading, cityNameUl);
-  rowDiv.append(columnFullDiv);
-  containerDiv.append(rowDiv);
-  dataViewDiv.append(containerDiv);
-
-  return dataViewDiv;
-}
-
-module.exports = DOMDataViewForLoop;
-
-},{}],3:[function(require,module,exports){
+},{"./modules/deleteReport":2,"./modules/handleViewNavigation":3,"./modules/mainDataViewForLoop":4,"./modules/newReportEntry":6,"./modules/reportsPageRenderForLoop":8,"./modules/showDeleteModal":9,"./modules/srcUpdate":10,"./modules/submitFunction":11,"./modules/userSearch":13}],2:[function(require,module,exports){
 /* eslint-disable no-undef */
 var switchView = require('./switchView');
 
@@ -140,7 +106,7 @@ function deleteReport(event) {
 
 module.exports = deleteReport;
 
-},{"./switchView":12}],4:[function(require,module,exports){
+},{"./switchView":12}],3:[function(require,module,exports){
 var switchView = require('./switchView');
 
 var $form = document.querySelector('.entry-form-submit');
@@ -157,12 +123,42 @@ function handleViewNavigation(event) {
 
 module.exports = handleViewNavigation;
 
-},{"./switchView":12}],5:[function(require,module,exports){
-var handleViewNavigation = require('./handleViewNavigation');
+},{"./switchView":12}],4:[function(require,module,exports){
+function DOMDataViewForLoop(cityName) {
+  var dataViewDiv = document.createElement('div');
+  var containerDiv = document.createElement('div');
+  var rowDiv = document.createElement('div');
+  var columnFullDiv = document.createElement('div');
+  var h1ListHeading = document.createElement('h1');
+  var cityNameUl = document.createElement('ul');
+  var h1ListHeadingTextContent = document.createTextNode(cityName);
+
+  dataViewDiv.setAttribute('data-view', cityName);
+  dataViewDiv.setAttribute('city-id', cityName);
+  dataViewDiv.setAttribute('class', 'view hidden');
+  containerDiv.setAttribute('class', 'container');
+  rowDiv.setAttribute('class', 'row');
+  columnFullDiv.setAttribute('class', 'column-full text-align-center');
+  h1ListHeading.setAttribute('class', 'list-heading');
+  h1ListHeading.appendChild(h1ListHeadingTextContent);
+  cityNameUl.setAttribute('class', cityName);
+  cityNameUl.setAttribute('city-id', cityName);
+
+  columnFullDiv.append(h1ListHeading, cityNameUl);
+  rowDiv.append(columnFullDiv);
+  containerDiv.append(rowDiv);
+  dataViewDiv.append(containerDiv);
+
+  return dataViewDiv;
+}
+
+module.exports = DOMDataViewForLoop;
+
+},{}],5:[function(require,module,exports){
 
 var $cityResultName = document.querySelector('.city-name');
 
-function mainHTMLDOMNewDataViewSubmissionRender() {
+function newMainDataView() {
   var dataViewDiv = document.createElement('div');
   var containerDiv = document.createElement('div');
   var rowDiv = document.createElement('div');
@@ -185,17 +181,15 @@ function mainHTMLDOMNewDataViewSubmissionRender() {
   containerDiv.append(rowDiv);
   dataViewDiv.append(containerDiv);
 
-  dataViewDiv.addEventListener('click', handleViewNavigation);
-
   return dataViewDiv;
 }
 
-module.exports = mainHTMLDOMNewDataViewSubmissionRender;
+module.exports = newMainDataView;
 
-},{"./handleViewNavigation":4}],6:[function(require,module,exports){
-var handleViewNavigation = require('./handleViewNavigation');
+},{}],6:[function(require,module,exports){
+var showDeleteModal = require('./showDeleteModal');
 
-function mainHTMLDOMNewListSubmissionRender(entry) {
+function newReportEntry(entry) {
 
   var mainRowLi = document.createElement('li');
   var firstColumnHalfDiv = document.createElement('div');
@@ -257,7 +251,6 @@ function mainHTMLDOMNewListSubmissionRender(entry) {
   firstColumnHalfDeleteRow.setAttribute('class', 'column-half');
   secondColumnHalfDeleteRow.setAttribute('class', 'column-half text-align-right');
   deleteRowTextA.setAttribute('class', 'delete-report-text margin-block-unset');
-  deleteRowTextA.setAttribute('data-view', 'delete');
   deleteRowTextA.appendChild(deleteRowTextContent);
 
   firstColumnHalfDiv.append(submittedImg);
@@ -279,14 +272,14 @@ function mainHTMLDOMNewListSubmissionRender(entry) {
 
   mainRowLi.append(firstColumnHalfDiv, secondColumnHalfDiv);
 
-  deleteRowTextA.addEventListener('click', handleViewNavigation);
+  deleteRowTextA.addEventListener('click', showDeleteModal);
 
   return mainRowLi;
 }
 
-module.exports = mainHTMLDOMNewListSubmissionRender;
+module.exports = newReportEntry;
 
-},{"./handleViewNavigation":4}],7:[function(require,module,exports){
+},{"./showDeleteModal":9}],7:[function(require,module,exports){
 var handleViewNavigation = require('./handleViewNavigation');
 var $cityResultName = document.querySelector('.city-name');
 
@@ -310,17 +303,19 @@ function reportsPageRender() {
 
 module.exports = reportsPageRender;
 
-},{"./handleViewNavigation":4}],8:[function(require,module,exports){
+},{"./handleViewNavigation":3}],8:[function(require,module,exports){
 /* eslint-disable no-undef */
 function reportsPageRenderForLoop(cityName) {
   var li = document.createElement('li');
   var h2 = document.createElement('h2');
+  var h2TextContent = cityName;
 
-  li.setAttribute('data-view', cityName);
+  for (var i = 0; i < data.cities.length; i++) {
+    li.setAttribute('data-view', data.cities[i]);
+    h2.setAttribute('data-view', data.cities[i]);
+  }
   li.setAttribute('class', 'reports-city-name-holder');
   h2.setAttribute('class', 'reports-city-name');
-  h2.setAttribute('data-view', cityName);
-  var h2TextContent = cityName;
 
   h2.append(h2TextContent);
   li.append(h2);
@@ -353,8 +348,8 @@ module.exports = srcUpdate;
 /* eslint-disable no-undef */
 
 var reportsPageRender = require('./reportsPageRender');
-var mainHTMLDOMNewListSubmissionRender = require('./mainHTMLDOMNewListSubmissionRender');
-var mainHTMLDOMNewDataViewSubmissionRender = require('./mainHTMLDOMNewDataViewSubmissionRender');
+var newReportEntry = require('./newReportEntry');
+var newMainDataView = require('./newMainDataView');
 var switchView = require('./switchView');
 
 var $cityResultName = document.querySelector('.city-name');
@@ -377,13 +372,13 @@ function submitFunction(event) {
   var submissionObject = { cityName, photoTitleValue, photoUrlValue, commentsValue, radioChecked, time, date };
 
   if (data.entries.length === 0) {
-    data.cities.push(submissionObject.cityName);
+    data.cities.unshift(submissionObject.cityName);
     $firstCityUl.appendChild(reportsPageRender());
-    mainElement.appendChild(mainHTMLDOMNewDataViewSubmissionRender());
+    mainElement.appendChild(newMainDataView());
     const $ulSelectorAll = document.querySelectorAll('ul');
     for (var c = 0; c < $ulSelectorAll.length; c++) {
       if ($ulSelectorAll[c].getAttribute('class') === submissionObject.cityName) {
-        $ulSelectorAll[c].append(mainHTMLDOMNewListSubmissionRender(submissionObject));
+        $ulSelectorAll[c].append(newReportEntry(submissionObject));
       }
     }
     submissionObject.entryId = data.nextEntryId;
@@ -399,7 +394,7 @@ function submitFunction(event) {
       const $ulSelectorAll = document.querySelectorAll('ul');
       for (var d = 0; d < $ulSelectorAll.length; d++) {
         if ($ulSelectorAll[d].getAttribute('class') === submissionObject.cityName) {
-          $ulSelectorAll[d].append(mainHTMLDOMNewListSubmissionRender(submissionObject));
+          $ulSelectorAll[d].append(newReportEntry(submissionObject));
         }
       }
       data.nextEntryId++;
@@ -409,18 +404,18 @@ function submitFunction(event) {
       return;
     }
   }
-  data.cities.push(submissionObject.cityName);
+  data.cities.unshift(submissionObject.cityName);
   submissionObject.entryId = data.nextEntryId;
   if (data.cities.length % 2 === 0) {
     $secondCityUl.append(reportsPageRender());
   } else {
     $firstCityUl.append(reportsPageRender());
   }
-  mainElement.appendChild(mainHTMLDOMNewDataViewSubmissionRender());
+  mainElement.appendChild(newMainDataView());
   const $ulSelectorAll = document.querySelectorAll('ul');
   for (var f = 0; f < $ulSelectorAll.length; f++) {
     if ($ulSelectorAll[f].getAttribute('class') === submissionObject.cityName) {
-      $ulSelectorAll[f].append(mainHTMLDOMNewListSubmissionRender(submissionObject));
+      $ulSelectorAll[f].append(newReportEntry(submissionObject));
     }
   }
   data.nextEntryId++;
@@ -431,7 +426,7 @@ function submitFunction(event) {
 
 module.exports = submitFunction;
 
-},{"./mainHTMLDOMNewDataViewSubmissionRender":5,"./mainHTMLDOMNewListSubmissionRender":6,"./reportsPageRender":7,"./switchView":12}],12:[function(require,module,exports){
+},{"./newMainDataView":5,"./newReportEntry":6,"./reportsPageRender":7,"./switchView":12}],12:[function(require,module,exports){
 function switchView(viewName) {
   var $viewSelectorAll = document.querySelectorAll('.view');
   for (var i = 0; i < $viewSelectorAll.length; i++) {

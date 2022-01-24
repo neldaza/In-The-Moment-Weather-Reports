@@ -3,9 +3,9 @@
 var srcUpdate = require('./modules/srcUpdate');
 var deleteReport = require('./modules/deleteReport');
 var handleViewNavigation = require('./modules/handleViewNavigation');
-var DOMDataViewForLoop = require('./modules/DOMDataViewForLoop');
+var mainDataViewForLoop = require('./modules/mainDataViewForLoop');
 var reportsPageRenderForLoop = require('./modules/reportsPageRenderForLoop');
-var mainHTMLDOMNewListSubmissionRender = require('./modules/mainHTMLDOMNewListSubmissionRender');
+var newReportEntry = require('./modules/newReportEntry');
 var showDeleteModal = require('./modules/showDeleteModal');
 var userSearch = require('./modules/userSearch');
 var submitFunction = require('./modules/submitFunction');
@@ -19,22 +19,19 @@ var $searchNavbar = document.querySelector('.search-anchor');
 var $createNewReportButton = document.querySelector('.create-new-report-button');
 var $goBackButton = document.querySelector('.go-back-button-event');
 var $reportsNavbar = document.querySelector('.reports-anchor');
-var $deleteReportYes = document.querySelector('.delete-report-yes');
+var $deleteReportYes = document.querySelector('.yes-button');
+var $deleteReportText = document.querySelector('.delete-report-text');
 
 // Event Listeners
 $photoUrl.addEventListener('input', srcUpdate);
 $form.addEventListener('submit', submitFunction);
 $searchForm.addEventListener('submit', userSearch);
-$deleteReportYes.addEventListener('click', deleteReport);
 $reportsNavbar.addEventListener('click', handleViewNavigation);
 $searchNavbar.addEventListener('click', handleViewNavigation);
 $createNewReportButton.addEventListener('click', handleViewNavigation);
-$goBackButton.addEventListener('click', handleViewNavigation);
 $deleteReportYes.addEventListener('click', deleteReport);
-$reportsNavbar.addEventListener('click', handleViewNavigation);
-$searchNavbar.addEventListener('click', handleViewNavigation);
-$createNewReportButton.addEventListener('click', handleViewNavigation);
 $goBackButton.addEventListener('click', handleViewNavigation);
+$deleteReportText.addEventListener('click', showDeleteModal);
 
 // Loops
 var $firstCityUl = document.querySelector('.first-city-ul');
@@ -48,9 +45,7 @@ for (var q = 0; q < data.entries.length; q++) {
   for (var l = 0; l < data.cities.length; l++) {
     var city = data.cities[l];
     if (data.cities[l] === data.entries[q].cityName) {
-      mainElement.append(DOMDataViewForLoop(city));
-    } else {
-      data.cities.splice(l, 1);
+      mainElement.append(mainDataViewForLoop(city));
     }
   }
 }
@@ -69,7 +64,7 @@ for (var w = 0; w < data.entries.length; w++) {
   var $ulSelectorAll = document.querySelectorAll('ul');
   for (var x = 0; x < $ulSelectorAll.length; x++) {
     if ($ulSelectorAll[x].getAttribute('class') === data.entries[w].cityName) {
-      $ulSelectorAll[x].append(mainHTMLDOMNewListSubmissionRender(data.entries[w]));
+      $ulSelectorAll[x].append(newReportEntry(data.entries[w]));
     }
   }
 }

@@ -1,6 +1,6 @@
-var handleViewNavigation = require('./handleViewNavigation');
+var showDeleteModal = require('./showDeleteModal');
 
-function mainHTMLDOMNewListSubmissionRender(entry) {
+function newReportEntry(entry) {
 
   var mainRowLi = document.createElement('li');
   var firstColumnHalfDiv = document.createElement('div');
@@ -62,7 +62,6 @@ function mainHTMLDOMNewListSubmissionRender(entry) {
   firstColumnHalfDeleteRow.setAttribute('class', 'column-half');
   secondColumnHalfDeleteRow.setAttribute('class', 'column-half text-align-right');
   deleteRowTextA.setAttribute('class', 'delete-report-text margin-block-unset');
-  deleteRowTextA.setAttribute('data-view', 'delete');
   deleteRowTextA.appendChild(deleteRowTextContent);
 
   firstColumnHalfDiv.append(submittedImg);
@@ -84,9 +83,9 @@ function mainHTMLDOMNewListSubmissionRender(entry) {
 
   mainRowLi.append(firstColumnHalfDiv, secondColumnHalfDiv);
 
-  deleteRowTextA.addEventListener('click', handleViewNavigation);
+  deleteRowTextA.addEventListener('click', showDeleteModal);
 
   return mainRowLi;
 }
 
-module.exports = mainHTMLDOMNewListSubmissionRender;
+module.exports = newReportEntry;
