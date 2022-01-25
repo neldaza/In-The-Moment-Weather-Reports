@@ -77,44 +77,23 @@ for (var h = 0; h < $deleteReportTextSelectorAll.length; h++) {
 var switchView = require('./switchView');
 
 function deleteReport(event) {
-  event.preventDefault();
-
   var $liSelectorAll = document.querySelectorAll('li');
   for (var a = 0; a < $liSelectorAll.length; a++) {
-    if ($liSelectorAll[a].getAttribute('data-entry-id') === data.editing.entryId) {
-      var specificReport = $liSelectorAll[a];
-      var $ulSelectorAll = document.querySelectorAll('ul');
-      for (var x = 0; x < $ulSelectorAll.length; x++) {
-        var specificUl = $ulSelectorAll[x];
-        if (specificUl.getAttribute('class') === specificReport.getAttribute('data.city-id')) {
-          var reportUl = $ulSelectorAll[x];
-          var reportLi = $liSelectorAll[a];
-          reportUl.removeChild(reportLi);
-          data.entries.splice(i, 1);
-          switchView(event.target.getAttribute('data-view'));
+    var $ulSelectorAll = document.querySelectorAll('ul');
+    for (var x = 0; x < $ulSelectorAll.length; x++) {
+      if ($ulSelectorAll[x].getAttribute('class') === $liSelectorAll[a].getAttribute('data-city-id')) {
+        $ulSelectorAll[x].removeChild($liSelectorAll[a]);
+        for (var i = 0; i < data.entries.length; i++) {
+          if (data.entries[i].entryId === data.editing.entryId) {
+            data.entries.splice(i, 1);
+          }
         }
+        switchView(`${data.editing.cityName}`);
+        return;
       }
     }
   }
 }
-
-//   var $liSelectorAll = document.querySelectorAll('li');
-//   var nodeListArray = [];
-//   for (var a = 0; a < $liSelectorAll.length; a++) {
-//     if (data.entries[i].entryId === parseInt($liSelectorAll[a].getAttribute('data-entry-id'))) {
-//       var $cityUlsSelectorAll = document.querySelectorAll('ul');
-//       for (var b = 0; b < $cityUlsSelectorAll.length; b++) {
-//         if ($liSelectorAll[a].getAttribute('data-city-id') === $cityUlsSelectorAll[b].getAttribute('class')) {
-//           nodeListArray.push($liSelectorAll[a]);
-//           $cityUlsSelectorAll[b].removeChild($liSelectorAll[a]);
-//           data.entries.splice(i, 1);
-//           switchView(event.target.getAttribute('data-view'));
-//           return;
-//         }
-//       }
-//     }
-//   }
-// }
 
 module.exports = deleteReport;
 
@@ -341,13 +320,11 @@ module.exports = reportsPageRenderForLoop;
 const $deleteModal = document.querySelector('.whole-delete-modal');
 
 function showDeleteModal(event) {
-  if (event.target.className === 'delete-report-text margin-block-unset') {
-    for (var i = 0; i < data.entries.length; i++) {
-      if (data.entries[i].entryId === parseInt(event.target.closest('li').getAttribute('data-entry-id'))) {
-        data.editing = data.entries[i];
-        $deleteModal.className = 'whole-delete-modal view';
-        return;
-      }
+  for (var i = 0; i < data.entries.length; i++) {
+    if (data.entries[i].entryId === parseInt(event.target.closest('li').getAttribute('data-entry-id'))) {
+      data.editing = data.entries[i];
+      $deleteModal.className = 'whole-delete-modal view';
+      return;
     }
   }
 }
