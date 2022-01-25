@@ -62,7 +62,6 @@ function newReportEntry(entry) {
   firstColumnHalfDeleteRow.setAttribute('class', 'column-half');
   secondColumnHalfDeleteRow.setAttribute('class', 'column-half text-align-right');
   deleteRowTextA.setAttribute('class', 'delete-report-text margin-block-unset');
-  deleteRowTextA.setAttribute('data-view', 'whole-delete-modal');
   deleteRowTextA.appendChild(deleteRowTextContent);
   deleteRowTextA.addEventListener('click', showDeleteModal);
 
