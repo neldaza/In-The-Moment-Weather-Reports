@@ -6,9 +6,9 @@ var handleViewNavigation = require('./modules/handleViewNavigation');
 var mainDataViewForLoop = require('./modules/mainDataViewForLoop');
 var reportsPageRenderForLoop = require('./modules/reportsPageRenderForLoop');
 var newReportEntry = require('./modules/newReportEntry');
-var userSearch = require('./modules/userSearch');
+var { userSearch } = require('./modules/userSearch');
 var submitFunction = require('./modules/submitFunction');
-var { showDeleteModal, hideDeleteModal } = require('./modules/showDeleteModal');
+var { hideDeleteModal } = require('./modules/showDeleteModal');
 
 // Event Targets
 var $searchForm = document.querySelector('.search-form');
@@ -32,7 +32,6 @@ $createNewReportButton.addEventListener('click', handleViewNavigation);
 $deleteReportYes.addEventListener('click', deleteReport);
 $goBackButton.addEventListener('click', handleViewNavigation);
 $noButton.addEventListener('click', hideDeleteModal);
-
 // Loops
 var $firstCityUl = document.querySelector('.first-city-ul');
 var $secondCityUl = document.querySelector('.second-city-ul');
@@ -55,7 +54,7 @@ for (var a = 0; a < data.cities.length; a++) {
 for (var w = 0; w < data.entries.length; w++) {
   var $ulSelectorAll = document.querySelectorAll('ul');
   for (var x = 0; x < $ulSelectorAll.length; x++) {
-    if ($ulSelectorAll[x].getAttribute('class') === data.entries[w].cityName) {
+    if ($ulSelectorAll[x].getAttribute('data-city-id') === data.entries[w].cityName) {
       $ulSelectorAll[x].append(newReportEntry(data.entries[w]));
     }
   }
@@ -64,9 +63,4 @@ for (var w = 0; w < data.entries.length; w++) {
 var $reportsCityNameSelectorAll = document.querySelectorAll('.reports-city-name');
 for (var b = 0; b < $reportsCityNameSelectorAll.length; b++) {
   $reportsCityNameSelectorAll[b].addEventListener('click', handleViewNavigation);
-}
-
-var $deleteReportTextSelectorAll = document.querySelectorAll('.delete-report-text');
-for (var h = 0; h < $deleteReportTextSelectorAll.length; h++) {
-  $deleteReportTextSelectorAll[h].addEventListener('click', showDeleteModal);
 }

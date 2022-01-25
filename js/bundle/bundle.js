@@ -7,9 +7,9 @@ var handleViewNavigation = require('./modules/handleViewNavigation');
 var mainDataViewForLoop = require('./modules/mainDataViewForLoop');
 var reportsPageRenderForLoop = require('./modules/reportsPageRenderForLoop');
 var newReportEntry = require('./modules/newReportEntry');
-var userSearch = require('./modules/userSearch');
+var { userSearch } = require('./modules/userSearch');
 var submitFunction = require('./modules/submitFunction');
-var { showDeleteModal, hideDeleteModal } = require('./modules/showDeleteModal');
+var { hideDeleteModal } = require('./modules/showDeleteModal');
 
 // Event Targets
 var $searchForm = document.querySelector('.search-form');
@@ -33,7 +33,6 @@ $createNewReportButton.addEventListener('click', handleViewNavigation);
 $deleteReportYes.addEventListener('click', deleteReport);
 $goBackButton.addEventListener('click', handleViewNavigation);
 $noButton.addEventListener('click', hideDeleteModal);
-
 // Loops
 var $firstCityUl = document.querySelector('.first-city-ul');
 var $secondCityUl = document.querySelector('.second-city-ul');
@@ -56,7 +55,7 @@ for (var a = 0; a < data.cities.length; a++) {
 for (var w = 0; w < data.entries.length; w++) {
   var $ulSelectorAll = document.querySelectorAll('ul');
   for (var x = 0; x < $ulSelectorAll.length; x++) {
-    if ($ulSelectorAll[x].getAttribute('class') === data.entries[w].cityName) {
+    if ($ulSelectorAll[x].getAttribute('data-city-id') === data.entries[w].cityName) {
       $ulSelectorAll[x].append(newReportEntry(data.entries[w]));
     }
   }
@@ -65,11 +64,6 @@ for (var w = 0; w < data.entries.length; w++) {
 var $reportsCityNameSelectorAll = document.querySelectorAll('.reports-city-name');
 for (var b = 0; b < $reportsCityNameSelectorAll.length; b++) {
   $reportsCityNameSelectorAll[b].addEventListener('click', handleViewNavigation);
-}
-
-var $deleteReportTextSelectorAll = document.querySelectorAll('.delete-report-text');
-for (var h = 0; h < $deleteReportTextSelectorAll.length; h++) {
-  $deleteReportTextSelectorAll[h].addEventListener('click', showDeleteModal);
 }
 
 },{"./modules/deleteReport":2,"./modules/handleViewNavigation":3,"./modules/mainDataViewForLoop":4,"./modules/newReportEntry":6,"./modules/reportsPageRenderForLoop":8,"./modules/showDeleteModal":9,"./modules/srcUpdate":10,"./modules/submitFunction":11,"./modules/userSearch":13}],2:[function(require,module,exports){
@@ -81,7 +75,8 @@ function deleteReport(event) {
   for (var a = 0; a < $liSelectorAll.length; a++) {
     var $ulSelectorAll = document.querySelectorAll('ul');
     for (var x = 0; x < $ulSelectorAll.length; x++) {
-      if ($ulSelectorAll[x].getAttribute('class') === $liSelectorAll[a].getAttribute('data-city-id')) {
+      if ($ulSelectorAll[x].getAttribute('data-city-id') === $liSelectorAll[a].getAttribute('data-city-id') &&
+      parseInt($liSelectorAll[a].getAttribute('data-entry-id')) === data.editing.entryId) {
         $ulSelectorAll[x].removeChild($liSelectorAll[a]);
         for (var i = 0; i < data.entries.length; i++) {
           if (data.entries[i].entryId === data.editing.entryId) {
@@ -167,7 +162,8 @@ function newMainDataView() {
   columnFullDiv.setAttribute('class', 'column-full text-align-center');
   h1ListHeading.setAttribute('class', 'list-heading');
   h1ListHeading.appendChild(h1ListHeadingTextContent);
-  cityNameUl.setAttribute('class', $cityResultName.textContent);
+  cityNameUl.setAttribute('data-city-id', $cityResultName.textContent);
+  cityNameUl.setAttribute('class', 'report-ul');
 
   columnFullDiv.append(h1ListHeading, cityNameUl);
   rowDiv.append(columnFullDiv);
@@ -180,7 +176,6 @@ function newMainDataView() {
 module.exports = newMainDataView;
 
 },{}],6:[function(require,module,exports){
-var { showDeleteModal } = require('./showDeleteModal');
 
 function newReportEntry(entry) {
 
@@ -213,7 +208,7 @@ function newReportEntry(entry) {
   var deleteRowTextA = document.createElement('a');
   var deleteRowTextContent = document.createTextNode('Delete This Report');
 
-  mainRowLi.setAttribute('class', 'row flex-wrap-wrapped');
+  mainRowLi.setAttribute('class', 'entry-li row flex-wrap-wrapped');
   mainRowLi.setAttribute('data-entry-id', entry.entryId);
   mainRowLi.setAttribute('data-city-id', entry.cityName);
   firstColumnHalfDiv.setAttribute('class', 'column-half');
@@ -245,8 +240,6 @@ function newReportEntry(entry) {
   secondColumnHalfDeleteRow.setAttribute('class', 'column-half text-align-right');
   deleteRowTextA.setAttribute('class', 'delete-report-text margin-block-unset');
   deleteRowTextA.appendChild(deleteRowTextContent);
-  deleteRowTextA.addEventListener('click', showDeleteModal);
-
   firstColumnHalfDiv.append(submittedImg);
 
   listTitleDiv.append(titleH2);
@@ -271,7 +264,7 @@ function newReportEntry(entry) {
 
 module.exports = newReportEntry;
 
-},{"./showDeleteModal":9}],7:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 var handleViewNavigation = require('./handleViewNavigation');
 var $cityResultName = document.querySelector('.city-name');
 
@@ -357,7 +350,6 @@ var switchView = require('./switchView');
 var $cityResultName = document.querySelector('.city-name');
 var $form = document.querySelector('.entry-form-submit');
 var $cityResultTime = document.querySelector('.city-time');
-const XHRDate = '';
 var $firstCityUl = document.querySelector('.first-city-ul');
 var mainElement = document.querySelector('.main');
 var $secondCityUl = document.querySelector('.second-city-ul');
@@ -370,7 +362,7 @@ function submitFunction(event) {
   var photoUrlValue = $form.elements.photoUrl.value;
   var radioChecked = $form.elements.choice.value;
   var time = $cityResultTime.textContent;
-  var date = XHRDate;
+  var date = data.date;
   var submissionObject = { cityName, photoTitleValue, photoUrlValue, commentsValue, radioChecked, time, date };
 
   if (data.entries.length === 0) {
@@ -379,7 +371,7 @@ function submitFunction(event) {
     mainElement.appendChild(newMainDataView());
     const $ulSelectorAll = document.querySelectorAll('ul');
     for (var c = 0; c < $ulSelectorAll.length; c++) {
-      if ($ulSelectorAll[c].getAttribute('class') === submissionObject.cityName) {
+      if ($ulSelectorAll[c].getAttribute('data-city-id') === submissionObject.cityName) {
         $ulSelectorAll[c].append(newReportEntry(submissionObject));
       }
     }
@@ -395,7 +387,7 @@ function submitFunction(event) {
       submissionObject.entryId = data.nextEntryId;
       const $ulSelectorAll = document.querySelectorAll('ul');
       for (var d = 0; d < $ulSelectorAll.length; d++) {
-        if ($ulSelectorAll[d].getAttribute('class') === submissionObject.cityName) {
+        if ($ulSelectorAll[d].getAttribute('data-city-id') === submissionObject.cityName) {
           $ulSelectorAll[d].append(newReportEntry(submissionObject));
         }
       }
@@ -416,7 +408,7 @@ function submitFunction(event) {
   mainElement.appendChild(newMainDataView());
   const $ulSelectorAll = document.querySelectorAll('ul');
   for (var f = 0; f < $ulSelectorAll.length; f++) {
-    if ($ulSelectorAll[f].getAttribute('class') === submissionObject.cityName) {
+    if ($ulSelectorAll[f].getAttribute('data-city-id') === submissionObject.cityName) {
       $ulSelectorAll[f].append(newReportEntry(submissionObject));
     }
   }
@@ -442,6 +434,7 @@ function switchView(viewName) {
 module.exports = switchView;
 
 },{}],13:[function(require,module,exports){
+/* eslint-disable no-undef */
 var switchView = require('./switchView');
 
 var $cityResultName = document.querySelector('.city-name');
@@ -457,8 +450,6 @@ var $windMphResult = document.querySelector('.wind-mph-td');
 var $precipitationResult = document.querySelector('.precipitation-td');
 var $searchForm = document.querySelector('.search-form');
 var $searchInput = document.querySelector('.search-input');
-// eslint-disable-next-line no-unused-vars
-let XHRDate = '';
 
 function userSearch(event) {
   event.preventDefault();
@@ -487,7 +478,7 @@ function userSearch(event) {
 
     $cityResultName.textContent = xhr.response.location.name + ', ' + xhr.response.location.region;
     $cityResultTime.textContent = timeAndDateArray[1] + ' UTC';
-    XHRDate = timeAndDateArray[0];
+    data.date = timeAndDateArray[0];
     $weatherStatusResult.textContent = weatherStatus;
     $fahrenheitResult.textContent = xhr.response.current.temp_f + '\xB0' + ' ' + 'Fahrenheit';
     $feelsLikeResult.textContent = 'Feels like ' + xhr.response.current.feelslike_f + '\xB0' + ' Fahreinheit';
@@ -497,13 +488,13 @@ function userSearch(event) {
     $windMphResult.textContent = xhr.response.current.wind_mph + 'mph' + ' Wind';
     $precipitationResult.textContent = xhr.response.current.precip_in + 'in' + ' Precipitation';
     $humidityResult.textContent = xhr.response.current.humidity + '%' + ' Humidity';
+
   });
   xhr.send();
   $searchForm.reset();
   switchView('search-bar-result');
-
 }
 
-module.exports = userSearch;
+module.exports = { userSearch };
 
 },{"./switchView":12}]},{},[1]);

@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 var switchView = require('./switchView');
 
 var $cityResultName = document.querySelector('.city-name');
@@ -13,8 +14,6 @@ var $windMphResult = document.querySelector('.wind-mph-td');
 var $precipitationResult = document.querySelector('.precipitation-td');
 var $searchForm = document.querySelector('.search-form');
 var $searchInput = document.querySelector('.search-input');
-// eslint-disable-next-line no-unused-vars
-let XHRDate = '';
 
 function userSearch(event) {
   event.preventDefault();
@@ -43,7 +42,7 @@ function userSearch(event) {
 
     $cityResultName.textContent = xhr.response.location.name + ', ' + xhr.response.location.region;
     $cityResultTime.textContent = timeAndDateArray[1] + ' UTC';
-    XHRDate = timeAndDateArray[0];
+    data.date = timeAndDateArray[0];
     $weatherStatusResult.textContent = weatherStatus;
     $fahrenheitResult.textContent = xhr.response.current.temp_f + '\xB0' + ' ' + 'Fahrenheit';
     $feelsLikeResult.textContent = 'Feels like ' + xhr.response.current.feelslike_f + '\xB0' + ' Fahreinheit';
@@ -53,11 +52,11 @@ function userSearch(event) {
     $windMphResult.textContent = xhr.response.current.wind_mph + 'mph' + ' Wind';
     $precipitationResult.textContent = xhr.response.current.precip_in + 'in' + ' Precipitation';
     $humidityResult.textContent = xhr.response.current.humidity + '%' + ' Humidity';
+
   });
   xhr.send();
   $searchForm.reset();
   switchView('search-bar-result');
-
 }
 
-module.exports = userSearch;
+module.exports = { userSearch };

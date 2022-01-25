@@ -6,7 +6,8 @@ function deleteReport(event) {
   for (var a = 0; a < $liSelectorAll.length; a++) {
     var $ulSelectorAll = document.querySelectorAll('ul');
     for (var x = 0; x < $ulSelectorAll.length; x++) {
-      if ($ulSelectorAll[x].getAttribute('class') === $liSelectorAll[a].getAttribute('data-city-id')) {
+      if ($ulSelectorAll[x].getAttribute('data-city-id') === $liSelectorAll[a].getAttribute('data-city-id') &&
+      parseInt($liSelectorAll[a].getAttribute('data-entry-id')) === data.editing.entryId) {
         $ulSelectorAll[x].removeChild($liSelectorAll[a]);
         for (var i = 0; i < data.entries.length; i++) {
           if (data.entries[i].entryId === data.editing.entryId) {

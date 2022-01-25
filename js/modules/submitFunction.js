@@ -8,7 +8,6 @@ var switchView = require('./switchView');
 var $cityResultName = document.querySelector('.city-name');
 var $form = document.querySelector('.entry-form-submit');
 var $cityResultTime = document.querySelector('.city-time');
-const XHRDate = '';
 var $firstCityUl = document.querySelector('.first-city-ul');
 var mainElement = document.querySelector('.main');
 var $secondCityUl = document.querySelector('.second-city-ul');
@@ -21,7 +20,7 @@ function submitFunction(event) {
   var photoUrlValue = $form.elements.photoUrl.value;
   var radioChecked = $form.elements.choice.value;
   var time = $cityResultTime.textContent;
-  var date = XHRDate;
+  var date = data.date;
   var submissionObject = { cityName, photoTitleValue, photoUrlValue, commentsValue, radioChecked, time, date };
 
   if (data.entries.length === 0) {
@@ -30,7 +29,7 @@ function submitFunction(event) {
     mainElement.appendChild(newMainDataView());
     const $ulSelectorAll = document.querySelectorAll('ul');
     for (var c = 0; c < $ulSelectorAll.length; c++) {
-      if ($ulSelectorAll[c].getAttribute('class') === submissionObject.cityName) {
+      if ($ulSelectorAll[c].getAttribute('data-city-id') === submissionObject.cityName) {
         $ulSelectorAll[c].append(newReportEntry(submissionObject));
       }
     }
@@ -46,7 +45,7 @@ function submitFunction(event) {
       submissionObject.entryId = data.nextEntryId;
       const $ulSelectorAll = document.querySelectorAll('ul');
       for (var d = 0; d < $ulSelectorAll.length; d++) {
-        if ($ulSelectorAll[d].getAttribute('class') === submissionObject.cityName) {
+        if ($ulSelectorAll[d].getAttribute('data-city-id') === submissionObject.cityName) {
           $ulSelectorAll[d].append(newReportEntry(submissionObject));
         }
       }
@@ -67,7 +66,7 @@ function submitFunction(event) {
   mainElement.appendChild(newMainDataView());
   const $ulSelectorAll = document.querySelectorAll('ul');
   for (var f = 0; f < $ulSelectorAll.length; f++) {
-    if ($ulSelectorAll[f].getAttribute('class') === submissionObject.cityName) {
+    if ($ulSelectorAll[f].getAttribute('data-city-id') === submissionObject.cityName) {
       $ulSelectorAll[f].append(newReportEntry(submissionObject));
     }
   }

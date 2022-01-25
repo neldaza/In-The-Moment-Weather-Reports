@@ -17,7 +17,8 @@ function newMainDataView() {
   columnFullDiv.setAttribute('class', 'column-full text-align-center');
   h1ListHeading.setAttribute('class', 'list-heading');
   h1ListHeading.appendChild(h1ListHeadingTextContent);
-  cityNameUl.setAttribute('class', $cityResultName.textContent);
+  cityNameUl.setAttribute('data-city-id', $cityResultName.textContent);
+  cityNameUl.setAttribute('class', 'report-ul');
 
   columnFullDiv.append(h1ListHeading, cityNameUl);
   rowDiv.append(columnFullDiv);

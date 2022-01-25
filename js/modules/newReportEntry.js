@@ -1,4 +1,3 @@
-var { showDeleteModal } = require('./showDeleteModal');
 
 function newReportEntry(entry) {
 
@@ -31,7 +30,7 @@ function newReportEntry(entry) {
   var deleteRowTextA = document.createElement('a');
   var deleteRowTextContent = document.createTextNode('Delete This Report');
 
-  mainRowLi.setAttribute('class', 'row flex-wrap-wrapped');
+  mainRowLi.setAttribute('class', 'entry-li row flex-wrap-wrapped');
   mainRowLi.setAttribute('data-entry-id', entry.entryId);
   mainRowLi.setAttribute('data-city-id', entry.cityName);
   firstColumnHalfDiv.setAttribute('class', 'column-half');
@@ -63,8 +62,6 @@ function newReportEntry(entry) {
   secondColumnHalfDeleteRow.setAttribute('class', 'column-half text-align-right');
   deleteRowTextA.setAttribute('class', 'delete-report-text margin-block-unset');
   deleteRowTextA.appendChild(deleteRowTextContent);
-  deleteRowTextA.addEventListener('click', showDeleteModal);
-
   firstColumnHalfDiv.append(submittedImg);
 
   listTitleDiv.append(titleH2);

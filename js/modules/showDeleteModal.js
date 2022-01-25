@@ -2,8 +2,9 @@
 const $deleteModal = document.querySelector('.whole-delete-modal');
 
 function showDeleteModal(event) {
+  event.preventDefault();
   for (var i = 0; i < data.entries.length; i++) {
-    if (data.entries[i].entryId === parseInt(event.target.closest('li').getAttribute('data-entry-id'))) {
+    if (data.entries[i].entryId === parseInt(event.target.closest('.entry-li').getAttribute('data-entry-id'))) {
       data.editing = data.entries[i];
       $deleteModal.className = 'whole-delete-modal view';
       return;
