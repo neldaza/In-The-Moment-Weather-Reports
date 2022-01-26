@@ -41,6 +41,11 @@ if (data.entries.length === 0) {
   data.cities = [];
 }
 
+var $noRecordingsText = document.querySelector('.no-recorded');
+if (data.entries.length !== 0) {
+  $noRecordingsText.className = 'no-recorded hide';
+}
+
 for (var a = 0; a < data.cities.length; a++) {
   mainElement.append(mainDataViewForLoop(data.cities[a]));
   if (data.cities.length === 1) {

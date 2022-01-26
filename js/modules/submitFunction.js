@@ -12,6 +12,7 @@ var $cityResultTime = document.querySelector('.city-time');
 var $firstCityUl = document.querySelector('.first-city-ul');
 var mainElement = document.querySelector('.main');
 var $secondCityUl = document.querySelector('.second-city-ul');
+var $noRecordingsText = document.querySelector('.no-recorded');
 
 function submitFunction(event) {
   event.preventDefault();
@@ -43,6 +44,7 @@ function submitFunction(event) {
     }
     data.nextEntryId++;
     data.entries.unshift(submissionObject);
+    $noRecordingsText.className = 'no-recorded hide';
     $form.reset();
     switchView('search-bar');
     return;
