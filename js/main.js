@@ -42,8 +42,11 @@ if (data.entries.length === 0) {
 }
 
 var $noRecordingsText = document.querySelector('.no-recorded');
+
 if (data.entries.length !== 0) {
   $noRecordingsText.className = 'no-recorded hide';
+} else {
+  $noRecordingsText.className = 'no-recorded';
 }
 
 for (var a = 0; a < data.cities.length; a++) {

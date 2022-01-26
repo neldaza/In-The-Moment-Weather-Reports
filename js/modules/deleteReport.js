@@ -14,6 +14,20 @@ function deleteReport(event) {
             data.entries.splice(i, 1);
           }
         }
+        if (data.entries.length === 0) {
+          var $firstCityUl = document.querySelector('.first-city-ul');
+          var $secondCityUl = document.querySelector('.second-city-ul');
+          var $noRecordingsText = document.querySelector('.no-recorded');
+          while ($firstCityUl.firstChild) {
+            $firstCityUl.removeChild($firstCityUl.firstChild);
+          }
+          while ($secondCityUl.firstChild) {
+            $secondCityUl.removeChild($secondCityUl.firstChild);
+          }
+          $noRecordingsText.className = 'no-recorded';
+          switchView('reports-page');
+          return;
+        }
         switchView(`${data.editing.cityName}`);
         return;
       }
