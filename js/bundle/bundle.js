@@ -65,11 +65,11 @@ for (var w = 0; w < data.entries.length; w++) {
   var $ulSelectorAll = document.querySelectorAll('ul');
   for (var x = 0; x < $ulSelectorAll.length; x++) {
     if ($ulSelectorAll[x].getAttribute('data-city-id') === data.entries[w].cityName) {
-      $ulSelectorAll[x].append(newReportEntry(data.entries[w]));
+      $ulSelectorAll[x].prepend(newReportEntry(data.entries[w]));
       $ulSelectorAll[x].addEventListener('click', e => {
         const target = e.target;
         if (target.matches('a')) {
-          target.addEventListener('click', showDeleteModal);
+          showDeleteModal(e);
         }
       });
     }
