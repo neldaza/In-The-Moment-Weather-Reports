@@ -4,6 +4,7 @@ var reportsPageRender = require('./reportsPageRender');
 var newReportEntry = require('./newReportEntry');
 var newMainDataView = require('./newMainDataView');
 var switchView = require('./switchView');
+var { showDeleteModal } = require('./showDeleteModal');
 
 var $cityResultName = document.querySelector('.city-name');
 var $form = document.querySelector('.entry-form-submit');
@@ -30,10 +31,16 @@ function submitFunction(event) {
     const $ulSelectorAll = document.querySelectorAll('ul');
     for (var c = 0; c < $ulSelectorAll.length; c++) {
       if ($ulSelectorAll[c].getAttribute('data-city-id') === submissionObject.cityName) {
+        submissionObject.entryId = 1;
         $ulSelectorAll[c].append(newReportEntry(submissionObject));
+        $ulSelectorAll[c].addEventListener('click', e => {
+          const target = e.target;
+          if (target.matches('a')) {
+            target.addEventListener('click', showDeleteModal);
+          }
+        });
       }
     }
-    submissionObject.entryId = data.nextEntryId;
     data.nextEntryId++;
     data.entries.unshift(submissionObject);
     $form.reset();

@@ -1,3 +1,4 @@
+var { showDeleteModal } = require('./showDeleteModal');
 
 var $cityResultName = document.querySelector('.city-name');
 
@@ -19,6 +20,12 @@ function newMainDataView() {
   h1ListHeading.appendChild(h1ListHeadingTextContent);
   cityNameUl.setAttribute('data-city-id', $cityResultName.textContent);
   cityNameUl.setAttribute('class', 'report-ul');
+  cityNameUl.addEventListener('click', e => {
+    const target = e.target;
+    if (target.matches('a')) {
+      showDeleteModal(e);
+    }
+  });
 
   columnFullDiv.append(h1ListHeading, cityNameUl);
   rowDiv.append(columnFullDiv);

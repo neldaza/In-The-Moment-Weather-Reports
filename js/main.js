@@ -8,7 +8,7 @@ var reportsPageRenderForLoop = require('./modules/reportsPageRenderForLoop');
 var newReportEntry = require('./modules/newReportEntry');
 var { userSearch } = require('./modules/userSearch');
 var submitFunction = require('./modules/submitFunction');
-var { hideDeleteModal } = require('./modules/showDeleteModal');
+var { showDeleteModal, hideDeleteModal } = require('./modules/showDeleteModal');
 
 // Event Targets
 var $searchForm = document.querySelector('.search-form');
@@ -32,6 +32,7 @@ $createNewReportButton.addEventListener('click', handleViewNavigation);
 $deleteReportYes.addEventListener('click', deleteReport);
 $goBackButton.addEventListener('click', handleViewNavigation);
 $noButton.addEventListener('click', hideDeleteModal);
+
 // Loops
 var $firstCityUl = document.querySelector('.first-city-ul');
 var $secondCityUl = document.querySelector('.second-city-ul');
@@ -56,6 +57,12 @@ for (var w = 0; w < data.entries.length; w++) {
   for (var x = 0; x < $ulSelectorAll.length; x++) {
     if ($ulSelectorAll[x].getAttribute('data-city-id') === data.entries[w].cityName) {
       $ulSelectorAll[x].append(newReportEntry(data.entries[w]));
+      $ulSelectorAll[x].addEventListener('click', e => {
+        const target = e.target;
+        if (target.matches('a')) {
+          target.addEventListener('click', showDeleteModal);
+        }
+      });
     }
   }
 }
