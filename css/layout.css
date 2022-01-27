@@ -210,7 +210,7 @@
 }
 
 .form-inputs-holder {
-  padding-bottom: 2rem;
+  padding-bottom: 0.5rem;
 }
 
 .full-weather-report {
@@ -403,6 +403,7 @@
 
   .form-save {
     margin: 0;
+    width: 10%;
   }
 
   .comments {
