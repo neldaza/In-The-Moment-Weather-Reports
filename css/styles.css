@@ -2,11 +2,6 @@
   background-color: #39a2db;
   width: 100%;
   color: white;
-  height: 11vh;
-}
-
-.container {
-  height: 89vh;
 }
 
 .header-h2 {
@@ -26,8 +21,6 @@
 }
 
 .search-and-reports > a {
-  position: relative;
-  left: 1rem;
   font-size: 14pt;
   cursor: pointer;
 }
@@ -42,7 +35,6 @@ body {
 
 .search-bar {
   height: 3.5rem;
-  width: 100%;
   background-color: #a2dbfa;
   border-color: transparent;
 }
@@ -146,7 +138,6 @@ input[type="text"] {
 .titles-80p {
   padding-top: 1rem;
   position: relative;
-  left: 2.3rem;
   bottom: 1px;
 }
 
@@ -156,15 +147,12 @@ input[type="text"] {
 }
 
 .text {
-  width: 80%;
-  height: 2rem;
   border-color: #dbe1e6;
   border-style: solid;
   padding-left: 0.5rem;
 }
 
 .comments {
-  height: 8rem;
   width: 100%;
   border-style: solid;
   border-color: #dbe1e6;

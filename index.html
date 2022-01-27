@@ -30,7 +30,7 @@
     </div>
   </header>
   <main class= "main">
-  <div data-view="search-bar" class="search-bar-body view">
+  <div data-view="search-bar" class="search-bar-body view hidden">
     <div class="container height-75vh flex justify-content-center position-relative search-bar-holder">
       <div class="row text-align-center">
         <div class="column-full">
@@ -84,9 +84,9 @@
       </div>
     </div>
   </div>
-  <div data-view="entry-form" class="view hidden">
+  <div data-view="entry-form" class="view">
     <div class="container whole-entry-form">
-      <div class="row height-inherit">
+      <div class="row">
         <form class= "column-full entry-form-submit">
           <div class="flex justify-content-center">
             <a class="go-back-button-event go-back-button search-bar flex align-items-center text-align-center justify-content-center" data-view="search-bar-result">
@@ -94,13 +94,17 @@
               <h1 class="go-back-text go-back-button-event" data-view="search-bar-result">Go Back</h1>
             </a>
           </div>
-          <div class="row wrap">
-            <div class="column-half text-align-center">
+          <div class="form-inputs-holder row wrap">
+            <div class="picture-and-title column-half text-align-center">
               <img src="images/placeholder-image-square.jpg" alt="placeholder-image" class="placeholder-img">
-              <h3 class="titles margin-block-unset text-align-left titles-80p">Report Title</h3>
-              <input type="text" class="text photo-title" name="photoTitle" id="photoTitle" required>
-              <h3 class="titles margin-block-unset text-align-left titles-80p">Your Weather Image</h3>
-              <input type="text" class="text photo-url" name="photoUrl" id="photoUrl" required>
+              <div>
+                <h3 class="titles margin-block-unset text-align-left titles-80p">Report Title</h3>
+                <input type="text" class="text photo-title" name="photoTitle" id="photoTitle" required>
+              </div>
+              <div>
+                <h3 class="titles margin-block-unset text-align-left titles-80p">Your Weather Image</h3>
+                <input type="text" class="text photo-url" name="photoUrl" id="photoUrl" required>
+              </div>
             </div>
             <div class="radios-and-comments column-half text-align-center margin-top-1-rem">
               <h2 class="was-report-accurate margin-block-unset">Was the official weather report accurate?</h2>

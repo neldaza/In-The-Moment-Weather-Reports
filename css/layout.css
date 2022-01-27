@@ -10,6 +10,7 @@
   max-width: 575px;
   margin: 0 auto;
   padding: 0 1.5rem;
+  height: 89vh;
 }
 
 .row {
@@ -160,10 +161,6 @@
   top: -1rem;
 }
 
-.full-weather-report {
-  top: -1.5rem;
-}
-
 .search-bar-holder {
   top: 10rem;
 }
@@ -174,7 +171,169 @@
   top: 3rem;
 }
 
-@media only screen and (min-width: 1366px) {
+.header {
+  height: 10vh;
+}
+
+.search-anchor,
+.reports-anchor {
+  position: relative;
+  left: 1rem;
+}
+
+.text {
+  width: 80%;
+  height: 8vw;
+}
+
+.search-bar {
+  width: 100%;
+}
+
+.comments {
+  height: 30vw;
+}
+
+.titles-80p {
+  left: 2.3rem;
+}
+
+@media only screen and (max-device-width: 767px)
+  and (orientation: landscape) {
+  .container {
+    height: unset;
+  }
+
+  .header {
+    height: 20vh;
+  }
+
+  .radios-and-comments {
+    margin-bottom: 2rem;
+  }
+
+  .text {
+    height: 6vw;
+  }
+
+  .titles-80p {
+    left: 3.3rem;
+  }
+
+  .search-bar-holder {
+    top: 5rem;
+  }
+
+  .full-weather-report {
+    top: 1.5rem;
+    padding-bottom: 2rem;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .container {
+    max-width: 900px;
+  }
+
+  .column-full,
+  .column-half {
+    padding: 0 0.75rem;
+  }
+
+  .column-half {
+    width: 50%;
+  }
+
+  .header {
+    height: 7.5vh;
+  }
+
+  .header-h2,
+  .header-h4 {
+    position: relative;
+    left: -2.5rem;
+  }
+
+  .search-anchor,
+  .reports-anchor {
+    left: unset;
+    right: -2.75rem;
+  }
+
+  .full-weather-report {
+    align-items: unset;
+    top: 7.5rem;
+  }
+
+  .entry-form-submit {
+    transform: unset;
+    top: 3rem;
+  }
+
+  .form-inputs-holder {
+    width: 80%;
+    margin: 0 auto;
+    justify-content: center;
+  }
+
+  .picture-and-title {
+    width: 60%;
+    margin: 0 auto;
+  }
+
+  .radios-and-comments {
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 1rem;
+  }
+
+  .go-back-button {
+    width: 60%;
+  }
+
+  .text {
+    height: 4vw;
+  }
+
+  .comments {
+    height: 15vw;
+  }
+}
+
+@media only screen and (max-device-width: 1180px)
+  and (orientation: landscape) {
+  .header {
+    height: 7.5vw;
+  }
+
+  .entry-form-submit {
+    padding-bottom: 2rem;
+  }
+}
+
+@media only screen and (max-device-width: 896px)
+  and (orientation: landscape) {
+  .header {
+    height: 9.5vw;
+  }
+
+  .entry-form-submit {
+    padding-bottom: 2rem;
+  }
+}
+
+@media only screen and (max-device-width: 740px)
+  and (orientation: landscape) {
+  .header {
+    height: 11vw;
+  }
+
+  .entry-form-submit {
+    padding-bottom: 2rem;
+  }
+}
+
+@media only screen and (min-width: 1280px) {
   .container {
     max-width: 900px;
   }
