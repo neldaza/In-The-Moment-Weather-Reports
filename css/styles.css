@@ -1,3 +1,19 @@
+a {
+  cursor: pointer;
+}
+
+a:hover {
+  color: lightblue;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:hover {
+  color: lightblue;
+}
+
 .header {
   background-color: #39a2db;
   width: 100%;

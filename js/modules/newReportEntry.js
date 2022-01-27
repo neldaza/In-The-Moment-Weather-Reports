@@ -1,3 +1,4 @@
+var { showDeleteModal } = require('./showDeleteModal');
 
 function newReportEntry(entry) {
 
@@ -61,6 +62,13 @@ function newReportEntry(entry) {
   firstColumnHalfDeleteRow.setAttribute('class', 'column-half');
   secondColumnHalfDeleteRow.setAttribute('class', 'column-half text-align-right');
   deleteRowTextA.setAttribute('class', 'delete-report-text margin-block-unset');
+  mainRowLi.addEventListener('click', e => {
+    const target = e.target;
+    if (target.matches('.delete-report-text')) {
+      showDeleteModal(e);
+    }
+  });
+
   deleteRowTextA.appendChild(deleteRowTextContent);
   firstColumnHalfDiv.append(submittedImg);
 

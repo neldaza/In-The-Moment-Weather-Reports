@@ -22,6 +22,9 @@ var $goBackButton = document.querySelector('.go-back-button-event');
 var $reportsNavbar = document.querySelector('.reports-anchor');
 var $deleteReportYes = document.querySelector('.yes-button');
 var $noButton = document.querySelector('.no-button');
+var $headerH2 = document.querySelector('.header-h2-a');
+var $firstCityUl = document.querySelector('.first-city-ul');
+var $secondCityUl = document.querySelector('.second-city-ul');
 
 // Event Listeners
 $photoUrl.addEventListener('input', srcUpdate);
@@ -33,10 +36,9 @@ $createNewReportButton.addEventListener('click', handleViewNavigation);
 $deleteReportYes.addEventListener('click', deleteReport);
 $goBackButton.addEventListener('click', handleViewNavigation);
 $noButton.addEventListener('click', hideDeleteModal);
+$headerH2.addEventListener('click', handleViewNavigation);
 
 // Loops
-var $firstCityUl = document.querySelector('.first-city-ul');
-var $secondCityUl = document.querySelector('.second-city-ul');
 
 if (data.entries.length === 0) {
   data.cities = [];
@@ -76,9 +78,16 @@ for (var w = 0; w < data.entries.length; w++) {
   }
 }
 
-var $reportsCityNameSelectorAll = document.querySelectorAll('.reports-city-name');
-for (var b = 0; b < $reportsCityNameSelectorAll.length; b++) {
-  $reportsCityNameSelectorAll[b].addEventListener('click', handleViewNavigation);
+var $liSelectorAll = document.querySelectorAll('li');
+for (var b = 0; b < $liSelectorAll.length; b++) {
+  $liSelectorAll[b].addEventListener('click', e => {
+    const target = e.target;
+    if (target.matches('.reports-city-name-a')) {
+      handleViewNavigation(e);
+    } else if (target.matches('h2')) {
+      handleViewNavigation(e);
+    }
+  });
 }
 
 },{"./modules/deleteReport":2,"./modules/handleViewNavigation":3,"./modules/mainDataViewForLoop":4,"./modules/newReportEntry":6,"./modules/reportsPageRenderForLoop":8,"./modules/showDeleteModal":9,"./modules/srcUpdate":10,"./modules/submitFunction":11,"./modules/userSearch":13}],2:[function(require,module,exports){
@@ -172,8 +181,6 @@ function mainDataViewForLoop(cityName) {
 module.exports = mainDataViewForLoop;
 
 },{}],5:[function(require,module,exports){
-var { showDeleteModal } = require('./showDeleteModal');
-
 var $cityResultName = document.querySelector('.city-name');
 
 function newMainDataView() {
@@ -194,12 +201,6 @@ function newMainDataView() {
   h1ListHeading.appendChild(h1ListHeadingTextContent);
   cityNameUl.setAttribute('data-city-id', $cityResultName.textContent);
   cityNameUl.setAttribute('class', 'report-ul');
-  cityNameUl.addEventListener('click', e => {
-    const target = e.target;
-    if (target.matches('a')) {
-      showDeleteModal(e);
-    }
-  });
 
   columnFullDiv.append(h1ListHeading, cityNameUl);
   rowDiv.append(columnFullDiv);
@@ -211,7 +212,8 @@ function newMainDataView() {
 
 module.exports = newMainDataView;
 
-},{"./showDeleteModal":9}],6:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
+var { showDeleteModal } = require('./showDeleteModal');
 
 function newReportEntry(entry) {
 
@@ -275,6 +277,13 @@ function newReportEntry(entry) {
   firstColumnHalfDeleteRow.setAttribute('class', 'column-half');
   secondColumnHalfDeleteRow.setAttribute('class', 'column-half text-align-right');
   deleteRowTextA.setAttribute('class', 'delete-report-text margin-block-unset');
+  mainRowLi.addEventListener('click', e => {
+    const target = e.target;
+    if (target.matches('.delete-report-text')) {
+      showDeleteModal(e);
+    }
+  });
+
   deleteRowTextA.appendChild(deleteRowTextContent);
   firstColumnHalfDiv.append(submittedImg);
 
@@ -300,23 +309,29 @@ function newReportEntry(entry) {
 
 module.exports = newReportEntry;
 
-},{}],7:[function(require,module,exports){
+},{"./showDeleteModal":9}],7:[function(require,module,exports){
 var handleViewNavigation = require('./handleViewNavigation');
 var $cityResultName = document.querySelector('.city-name');
 
 function reportsPageRender() {
   var li = document.createElement('li');
   var h2 = document.createElement('h2');
+  var a = document.createElement('a');
   var h2TextContent = document.createTextNode($cityResultName.textContent);
 
   li.setAttribute('data-view', $cityResultName.textContent);
   li.setAttribute('class', 'reports-city-name-holder');
   h2.setAttribute('class', 'reports-city-name');
   h2.setAttribute('data-view', $cityResultName.textContent);
+  a.setAttribute('data-view', $cityResultName.textContent);
+  a.setAttribute('class', 'reports-city-name-a');
+
   h2.appendChild(h2TextContent);
-  li.append(h2);
+  a.append(h2);
+  li.append(a);
 
   li.addEventListener('click', handleViewNavigation);
+  a.addEventListener('click', handleViewNavigation);
   h2.addEventListener('click', handleViewNavigation);
 
   return li;
@@ -329,15 +344,19 @@ module.exports = reportsPageRender;
 function reportsPageRenderForLoop(cityName) {
   var li = document.createElement('li');
   var h2 = document.createElement('h2');
+  var a = document.createElement('a');
   var h2TextContent = cityName;
 
   li.setAttribute('data-view', cityName);
   li.setAttribute('class', 'reports-city-name-holder');
   h2.setAttribute('class', 'reports-city-name');
   h2.setAttribute('data-view', cityName);
+  a.setAttribute('data-view', cityName);
+  a.setAttribute('class', 'reports-city-name-a');
 
   h2.append(h2TextContent);
-  li.append(h2);
+  a.append(h2);
+  li.append(a);
 
   return li;
 }
@@ -349,11 +368,10 @@ module.exports = reportsPageRenderForLoop;
 const $deleteModal = document.querySelector('.whole-delete-modal');
 
 function showDeleteModal(event) {
+  $deleteModal.className = 'whole-delete-modal view';
   for (var i = 0; i < data.entries.length; i++) {
     if (data.entries[i].entryId === parseInt(event.target.closest('li').getAttribute('data-entry-id'))) {
       data.editing = data.entries[i];
-      $deleteModal.className = 'whole-delete-modal view';
-      return;
     }
   }
 }

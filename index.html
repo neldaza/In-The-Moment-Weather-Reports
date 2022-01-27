@@ -19,8 +19,10 @@
     <div class="container">
       <div class="logo-and-anchors row space-between">
         <div class="header-logo column-half align-items-center text-align-center">
-          <h2 class="header-h2">In The Moment</h2>
-          <h4 class="header-h4">Weather Reports</h4>
+          <a class="header-h2-a" data-view="search-bar">
+            <h2 class="header-h2" data-view="search-bar">In The Moment</h2>
+            <h4 class="header-h4" data-view="search-bar">Weather Reports</h4>
+          </a>
         </div>
         <div class="search-and-reports column-half flex space-evenly text-align-right align-items-center">
           <a data-view="search-bar" class="search-anchor">Search</a>
@@ -149,58 +151,7 @@
       </div>
     </div>
   </div>
-  <div data-view="Anaheim, California" class="view hidden">
-    <div class="container">
-      <div class="row">
-        <div class="column-full text-align-center">
-          <h1 class="list-heading">Anaheim, California</h1>
-          <ul class ="Anaheim, California">
-           <li class="row flex-wrap-wrapped">
-              <div class="column-half">
-                <img src="images/phoneclouds2.jpeg" alt="user-submitted-img" class="list-img">
-              </div>
-              <div class="column-half">
-              <div class="row align-items-center list-time-date-and-title">
-                <div class="column-75 list-title">
-                  <h2 class="margin-block-unset">Absolutely Beautiful Today</h2>
-                </div>
-                <div class="column-25 list-time-and-date">
-                  <h3 class="margin-block-unset">11-08-2021</h3>
-                  <h3 class="margin-block-unset">8:30 UTC</h3>
-                </div>
-              </div>
-              <div class="row">
-                <p class="list-description margin-block-unset column-full">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel
-                  atque magni quasi pariatur debitis veritatis esse reprehenderit,
-                  illo, fugit minima laborum magnam a possimus perferendis ut consequatur
-                  dolore! Eligendi, dolorem.
-                </p>
-              </div>
-              <div class="was-weather row">
-                <div class="column-75 flex align-items-center">
-                  <h4 class="was-weather-h4">Was the official weather report accurate for this day?</h4>
-                </div>
-                <div class="column-25 flex align-items-center justify-content-center">
-                  <p class="was-weather-p">
-                    Kind of
-                  </p>
-                </div>
-              </div>
-              <div class="delete-report row border-bottom-white width-100p">
-                <div class="column-half"></div>
-                <div class="column-half text-align-right">
-                  <a class="delete-report-text margin-block-unset">Delete This Report</a>
-                </div>
-              </div>
-            </div>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="whole-delete-modal view hidden">
+  <div class="whole-delete-modal view hidden" data-view="delete">
     <div class="align-items-center cancel-background flex justify-content-center position-fixed">
       <div class="cancel-box text-align-center position-relative">
         <div class="cancel-box-text flex justify-content-center align-items-center height-50">
