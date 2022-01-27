@@ -6,8 +6,8 @@
   <title>AJAX Project</title>
   <link rel="icon" href="images/favicon.ico">
   <link rel="stylesheet" href="css/reset.css">
-  <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/styles.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400&family=Playfair+Display&display=swap"
@@ -29,47 +29,51 @@
       </div>
     </div>
   </header>
-  <main class= "main">
+  <main class="main">
   <div data-view="search-bar" class="search-bar-body view">
-    <div class="container height-75vh flex justify-content-center align-items-center">
+    <div class="container height-75vh flex justify-content-center position-relative search-bar-holder">
       <div class="row text-align-center">
         <div class="column-full">
           <h1 class="what-city">What City Are You In Today?</h1>
-          <form class="search-form position-relative">
+          <form class="search-form position-relative flex">
             <div class="search-bar flex justify-content-right align-items-center">
-              <input type="text" class="search-input" required>
+              <div class="column-15 flex align-items-center justify-content-center height-inherit">
+                <i class="fa fa-search"></i>
+              </div>
+              <div class="column-85 height-inherit">
+                <input type="text" class="search-input" required>
+              </div>
             </div>
-            <i class="fa fa-search position-absolute"></i>
           </form>
         </div>
       </div>
     </div>
   </div>
   <div data-view="search-bar-result" class="search-bar-result view hidden">
-    <div class="full-weather-report container height-85vh align-items-center flex justify-content-center text-align-center">
+    <div class="full-weather-report container align-items-center flex justify-content-center text-align-center position-relative">
       <div class="row width-100p justify-content-center">
         <div class="column-half">
-          <h2 class="margin-block-unset city-name">Anaheim, California</h2>
-          <h4 class="margin-block-unset city-time">8:30am Local Time</h4>
+          <h2 class="margin-block-unset city-name"></h2>
+          <h4 class="margin-block-unset city-time">Local Time</h4>
 
           <h5 class="margin-block-unset">Current Weather</h5>
-          <p class="margin-block-unset weather-status">Partly Cloudy</p>
+          <p class="margin-block-unset weather-status"></p>
           <table class="weather-table width-100p">
             <tr>
-              <td class="top-td width-50 fahrenheit-td">66&#176; Fahrenheit</td>
-              <td class="top-td feels-like-td">Feels like 58.9&#176; Fahreinheit</td>
+              <td class="top-td width-50 fahrenheit-td"></td>
+              <td class="top-td feels-like-td"></td>
             </tr>
             <tr>
-              <td class="bottom-td gust-td">5.9mph Gust</td>
-              <td class="bottom-td cloud-cover-td">50% Cloud Coverage</td>
+              <td class="bottom-td gust-td"></td>
+              <td class="bottom-td cloud-cover-td"></td>
             </tr>
             <tr>
-              <td class="top-td visibility-td">9 Miles Visibility</td>
-              <td class="top-td wind-mph-td">4.3mph Wind</td>
+              <td class="top-td visibility-td"></td>
+              <td class="top-td wind-mph-td"></td>
             </tr>
             <tr>
-            <td class="bottom-td precipitation-td">0in Precipitation</td>
-            <td class="bottom-td top-td humidity-td">59% Humidity</td>
+            <td class="bottom-td precipitation-td"></td>
+            <td class="bottom-td top-td humidity-td"></td>
             </tr>
           </table>
           <button data-view="entry-form" class="create-new-report-button create-new-report search-bar flex align-items-center text-align-center justify-content-center">
@@ -82,7 +86,7 @@
   </div>
   <div data-view="entry-form" class="view hidden">
     <div class="container whole-entry-form">
-      <div class="row">
+      <div class="row height-inherit">
         <form class= "column-full entry-form-submit">
           <div class="flex justify-content-center">
             <a class="go-back-button-event go-back-button search-bar flex align-items-center text-align-center justify-content-center" data-view="search-bar-result">
@@ -90,13 +94,17 @@
               <h1 class="go-back-text go-back-button-event" data-view="search-bar-result">Go Back</h1>
             </a>
           </div>
-          <div class="row wrap">
-            <div class="column-half text-align-center">
+          <div class="form-inputs-holder row wrap">
+            <div class="picture-and-title column-half text-align-center">
               <img src="images/placeholder-image-square.jpg" alt="placeholder-image" class="placeholder-img">
-              <h3 class="titles margin-block-unset text-align-left titles-80p">Report Title</h3>
-              <input type="text" class="text photo-title" name="photoTitle" id="photoTitle" required>
-              <h3 class="titles margin-block-unset text-align-left titles-80p">Your Weather Image</h3>
-              <input type="text" class="text photo-url" name="photoUrl" id="photoUrl" required>
+              <div class="width-60p margin-auto">
+                <h3 class="titles margin-block-unset text-align-left titles-80p">Report Title</h3>
+                <input type="text" class="text photo-title" name="photoTitle" id="photoTitle" required>
+              </div>
+              <div class="width-60p margin-auto">
+                <h3 class="titles margin-block-unset text-align-left titles-80p">Your Weather Image</h3>
+                <input type="text" class="text photo-url" name="photoUrl" id="photoUrl" required>
+              </div>
             </div>
             <div class="radios-and-comments column-half text-align-center margin-top-1-rem">
               <h2 class="was-report-accurate margin-block-unset">Was the official weather report accurate?</h2>
@@ -118,12 +126,10 @@
               <textarea class="comments" name="comments" id="comments" type="text" required></textarea>
             </div>
           </div>
-          <div class="row">
-            <div class="column-full justify-content-right flex">
-              <input class="save-button button" type="submit" value="SAVE">
+          <div class="column-full text-align-right">
+            <button class="form-save button" type="submit">SAVE</button>
           </div>
-        </div>
-      </form>
+        </form>
       </div>
     </div>
   </div>
@@ -132,6 +138,7 @@
       <div class="row">
         <div class="column-full text-align-center">
           <h1 class="reports-title margin-block-bottom-unset">Reports</h1>
+          <p class="no-recorded hide">No personal weather reports have been recorded.</p>
           <div class="column-full flex flex-wrap-wrapped">
             <ul class="column-half cities-report-list first-city-ul">
             </ul>
@@ -148,41 +155,7 @@
         <div class="column-full text-align-center">
           <h1 class="list-heading">Anaheim, California</h1>
           <ul class ="Anaheim, California">
-            <li class="container">
-              <div class="row">
-                <div class="column-full">
-                  <img src="images/phoneclouds2.jpeg" alt="user-submitted-img" class="list-img">
-                </div>
-              </div>
-              <div class="row align-items-center list-time-date-and-title">
-                <div class="column-75 list-title">
-                  <h2 class="margin-block-unset">Absolutely Beautiful Today</h2>
-                </div>
-                <div class="column-25 list-time-and-date">
-                  <h3 class="margin-block-unset">11-08-2021</h3>
-                  <h3 class="margin-block-unset">8:30 UTC</h3>
-                </div>
-              </div>
-              <div class="row">
-                <p class="list-description margin-block-unset column-full">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel
-                  atque magni quasi pariatur debitis veritatis esse reprehenderit,
-                  illo, fugit minima laborum magnam a possimus perferendis ut consequatur
-                  dolore! Eligendi, dolorem.
-                </p>
-              </div>
-              <div class="row border-bottom-white">
-                <div class="column-75 flex align-items-center">
-                  <h4 class="was-weather-h4">Was the official weather report accurate for this day?</h4>
-                </div>
-                <div class="column-25 flex align-items-center">
-                  <p class="was-weather-p">
-                    Kind of
-                  </p>
-                </div>
-              </div>
-            </li>
-            <li class="row flex-wrap-wrapped">
+           <li class="row flex-wrap-wrapped">
               <div class="column-half">
                 <img src="images/phoneclouds2.jpeg" alt="user-submitted-img" class="list-img">
               </div>
@@ -204,25 +177,44 @@
                   dolore! Eligendi, dolorem.
                 </p>
               </div>
-              <div class="row border-bottom-white">
+              <div class="was-weather row">
                 <div class="column-75 flex align-items-center">
                   <h4 class="was-weather-h4">Was the official weather report accurate for this day?</h4>
                 </div>
-                <div class="column-25 flex align-items-center">
+                <div class="column-25 flex align-items-center justify-content-center">
                   <p class="was-weather-p">
                     Kind of
                   </p>
                 </div>
+              </div>
+              <div class="delete-report row border-bottom-white width-100p">
+                <div class="column-half"></div>
+                <div class="column-half text-align-right">
+                  <a class="delete-report-text margin-block-unset">Delete This Report</a>
                 </div>
               </div>
+            </div>
             </li>
           </ul>
         </div>
       </div>
     </div>
   </div>
+  <div class="whole-delete-modal view hidden">
+    <div class="align-items-center cancel-background flex justify-content-center position-fixed">
+      <div class="cancel-box text-align-center position-relative">
+        <div class="cancel-box-text flex justify-content-center align-items-center height-50">
+          Are you sure you want to delete this report?
+        </div>
+        <div class="cancel-box-buttons flex space-between align-items-center height-50">
+          <button data-view="reports-page" type="submit" class="yes-and-no-buttons yes-button delete-report-yes">Yes</button>
+          <button class="yes-and-no-buttons no-button">No</button>
+        </div>
+      </div>
+    </div>
+  </div>
   </main>
   <script src="js/data.js"></script>
-  <script src="js/main.js"></script>
+  <script src="js/bundle/bundle.js"></script>
 </body>
 </html>

@@ -1,10 +1,10 @@
-/* exported data */
 var data = {
   view: 'submissions',
   entries: [],
   editing: null,
   nextEntryId: 1,
-  cities: []
+  cities: [],
+  date: ''
 
 };
 
