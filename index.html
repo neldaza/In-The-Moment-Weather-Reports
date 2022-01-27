@@ -29,7 +29,7 @@
       </div>
     </div>
   </header>
-  <main class= "main">
+  <main class="main">
   <div data-view="search-bar" class="search-bar-body view hidden">
     <div class="container height-75vh flex justify-content-center position-relative search-bar-holder">
       <div class="row text-align-center">
@@ -86,7 +86,7 @@
   </div>
   <div data-view="entry-form" class="view">
     <div class="container whole-entry-form">
-      <div class="row">
+      <div class="row height-inherit">
         <form class= "column-full entry-form-submit">
           <div class="flex justify-content-center">
             <a class="go-back-button-event go-back-button search-bar flex align-items-center text-align-center justify-content-center" data-view="search-bar-result">
@@ -97,11 +97,11 @@
           <div class="form-inputs-holder row wrap">
             <div class="picture-and-title column-half text-align-center">
               <img src="images/placeholder-image-square.jpg" alt="placeholder-image" class="placeholder-img">
-              <div>
+              <div class="width-60p margin-auto">
                 <h3 class="titles margin-block-unset text-align-left titles-80p">Report Title</h3>
                 <input type="text" class="text photo-title" name="photoTitle" id="photoTitle" required>
               </div>
-              <div>
+              <div class="width-60p margin-auto">
                 <h3 class="titles margin-block-unset text-align-left titles-80p">Your Weather Image</h3>
                 <input type="text" class="text photo-url" name="photoUrl" id="photoUrl" required>
               </div>
@@ -125,11 +125,11 @@
               <h3 class="titles margin-block-unset text-align-left">Your Personal Weather Report</h3>
               <textarea class="comments" name="comments" id="comments" type="text" required></textarea>
               <div class="column-full text-align-right">
-                <button class="button" type="submit">SAVE</button>
+                <button class="form-save button" type="submit">SAVE</button>
               </div>
             </div>
           </div>
-      </form>
+        </form>
       </div>
     </div>
   </div>
