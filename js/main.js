@@ -9,6 +9,7 @@ var newReportEntry = require('./modules/newReportEntry');
 var { userSearch } = require('./modules/userSearch');
 var submitFunction = require('./modules/submitFunction');
 var { showDeleteModal, hideDeleteModal } = require('./modules/showDeleteModal');
+var invalidTextHide = require('./modules/invalidTextHide');
 
 // Event Targets
 var $searchForm = document.querySelector('.search-form');
@@ -24,6 +25,7 @@ var $noButton = document.querySelector('.no-button');
 var $headerH2 = document.querySelector('.header-h2-a');
 var $firstCityUl = document.querySelector('.first-city-ul');
 var $secondCityUl = document.querySelector('.second-city-ul');
+var $searchBar = document.querySelector('.search-input');
 
 // Event Listeners
 $photoUrl.addEventListener('input', srcUpdate);
@@ -36,6 +38,7 @@ $deleteReportYes.addEventListener('click', deleteReport);
 $goBackButton.addEventListener('click', handleViewNavigation);
 $noButton.addEventListener('click', hideDeleteModal);
 $headerH2.addEventListener('click', handleViewNavigation);
+$searchBar.onkeydown = invalidTextHide;
 
 // Loops
 

@@ -2,10 +2,6 @@
   display: none !important;
 }
 
-.hide {
-  display: none;
-}
-
 .container {
   max-width: 575px;
   margin: 0 auto;
@@ -305,6 +301,18 @@
 
   .comments {
     height: 15vw;
+  }
+
+  .search-bar-holder {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .invalid-network {
+    width: 50%;
+    margin: 0 auto;
+    padding-top: 2rem;
   }
 }
 

@@ -10,6 +10,7 @@ var newReportEntry = require('./modules/newReportEntry');
 var { userSearch } = require('./modules/userSearch');
 var submitFunction = require('./modules/submitFunction');
 var { showDeleteModal, hideDeleteModal } = require('./modules/showDeleteModal');
+var invalidTextHide = require('./modules/invalidTextHide');
 
 // Event Targets
 var $searchForm = document.querySelector('.search-form');
@@ -25,6 +26,7 @@ var $noButton = document.querySelector('.no-button');
 var $headerH2 = document.querySelector('.header-h2-a');
 var $firstCityUl = document.querySelector('.first-city-ul');
 var $secondCityUl = document.querySelector('.second-city-ul');
+var $searchBar = document.querySelector('.search-input');
 
 // Event Listeners
 $photoUrl.addEventListener('input', srcUpdate);
@@ -37,6 +39,7 @@ $deleteReportYes.addEventListener('click', deleteReport);
 $goBackButton.addEventListener('click', handleViewNavigation);
 $noButton.addEventListener('click', hideDeleteModal);
 $headerH2.addEventListener('click', handleViewNavigation);
+$searchBar.onkeydown = invalidTextHide;
 
 // Loops
 
@@ -90,7 +93,7 @@ for (var b = 0; b < $liSelectorAll.length; b++) {
   });
 }
 
-},{"./modules/deleteReport":2,"./modules/handleViewNavigation":3,"./modules/mainDataViewForLoop":4,"./modules/newReportEntry":6,"./modules/reportsPageRenderForLoop":8,"./modules/showDeleteModal":9,"./modules/srcUpdate":10,"./modules/submitFunction":11,"./modules/userSearch":13}],2:[function(require,module,exports){
+},{"./modules/deleteReport":2,"./modules/handleViewNavigation":3,"./modules/invalidTextHide":4,"./modules/mainDataViewForLoop":5,"./modules/newReportEntry":7,"./modules/reportsPageRenderForLoop":9,"./modules/showDeleteModal":10,"./modules/srcUpdate":11,"./modules/submitFunction":12,"./modules/userSearch":14}],2:[function(require,module,exports){
 /* eslint-disable no-undef */
 var switchView = require('./switchView');
 
@@ -130,15 +133,17 @@ function deleteReport(event) {
 
 module.exports = deleteReport;
 
-},{"./switchView":12}],3:[function(require,module,exports){
+},{"./switchView":13}],3:[function(require,module,exports){
 var switchView = require('./switchView');
 
 var $form = document.querySelector('.entry-form-submit');
 var $formPlaceholderImg = document.querySelector('.placeholder-img');
 var $searchForm = document.querySelector('.search-form');
+var $invalidCity = document.querySelector('.invalid-city');
 
 function handleViewNavigation(event) {
   $formPlaceholderImg.setAttribute('src', 'images/placeholder-image-square.jpg');
+  $invalidCity.className = 'invalid-city hide';
   $form.reset();
   $searchForm.reset();
   var buttonDataView = event.target.getAttribute('data-view');
@@ -147,7 +152,21 @@ function handleViewNavigation(event) {
 
 module.exports = handleViewNavigation;
 
-},{"./switchView":12}],4:[function(require,module,exports){
+},{"./switchView":13}],4:[function(require,module,exports){
+var $invalidCity = document.querySelector('.invalid-city');
+var $invalidNetwork = document.querySelector('.invalid-network');
+
+function invalidTextHide(event) {
+  if ($invalidCity.className === 'invalid-city red-text show') {
+    $invalidCity.className = 'invalid-city hide';
+  } else if ($invalidNetwork.className === 'invalid-network red-text show') {
+    $invalidNetwork.className = 'invalid-network hide';
+  }
+}
+
+module.exports = invalidTextHide;
+
+},{}],5:[function(require,module,exports){
 /* eslint-disable no-undef */
 
 function mainDataViewForLoop(cityName) {
@@ -180,7 +199,7 @@ function mainDataViewForLoop(cityName) {
 
 module.exports = mainDataViewForLoop;
 
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 var $cityResultName = document.querySelector('.city-name');
 
 function newMainDataView() {
@@ -212,7 +231,7 @@ function newMainDataView() {
 
 module.exports = newMainDataView;
 
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 var { showDeleteModal } = require('./showDeleteModal');
 
 function newReportEntry(entry) {
@@ -309,7 +328,7 @@ function newReportEntry(entry) {
 
 module.exports = newReportEntry;
 
-},{"./showDeleteModal":9}],7:[function(require,module,exports){
+},{"./showDeleteModal":10}],8:[function(require,module,exports){
 var handleViewNavigation = require('./handleViewNavigation');
 var $cityResultName = document.querySelector('.city-name');
 
@@ -339,7 +358,7 @@ function reportsPageRender() {
 
 module.exports = reportsPageRender;
 
-},{"./handleViewNavigation":3}],8:[function(require,module,exports){
+},{"./handleViewNavigation":3}],9:[function(require,module,exports){
 /* eslint-disable no-undef */
 function reportsPageRenderForLoop(cityName) {
   var li = document.createElement('li');
@@ -363,7 +382,7 @@ function reportsPageRenderForLoop(cityName) {
 
 module.exports = reportsPageRenderForLoop;
 
-},{}],9:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 /* eslint-disable no-undef */
 const $deleteModal = document.querySelector('.whole-delete-modal');
 
@@ -382,7 +401,7 @@ function hideDeleteModal(event) {
 
 module.exports = { showDeleteModal, hideDeleteModal };
 
-},{}],10:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 var $formPlaceholderImg = document.querySelector('.placeholder-img');
 var $photoUrl = document.querySelector('.photo-url');
 
@@ -393,7 +412,7 @@ function srcUpdate(event) {
 
 module.exports = srcUpdate;
 
-},{}],11:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 /* eslint-disable no-undef */
 
 var reportsPageRender = require('./reportsPageRender');
@@ -483,7 +502,7 @@ function submitFunction(event) {
 
 module.exports = submitFunction;
 
-},{"./newMainDataView":5,"./newReportEntry":6,"./reportsPageRender":7,"./showDeleteModal":9,"./switchView":12}],12:[function(require,module,exports){
+},{"./newMainDataView":6,"./newReportEntry":7,"./reportsPageRender":8,"./showDeleteModal":10,"./switchView":13}],13:[function(require,module,exports){
 function switchView(viewName) {
   var $viewSelectorAll = document.querySelectorAll('.view');
   for (var i = 0; i < $viewSelectorAll.length; i++) {
@@ -496,7 +515,7 @@ function switchView(viewName) {
 }
 module.exports = switchView;
 
-},{}],13:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 /* eslint-disable no-undef */
 var switchView = require('./switchView');
 
@@ -513,13 +532,33 @@ var $windMphResult = document.querySelector('.wind-mph-td');
 var $precipitationResult = document.querySelector('.precipitation-td');
 var $searchForm = document.querySelector('.search-form');
 var $searchInput = document.querySelector('.search-input');
+var $loadingSpinner = document.querySelector('.lds-spinner');
+var $invalidText = document.querySelector('.invalid-city');
+var $invalidNetwork = document.querySelector('.invalid-network');
 
 function userSearch(event) {
   event.preventDefault();
   var xhr = new XMLHttpRequest();
   xhr.open('GET', 'https://api.weatherapi.com/v1/current.json?key=182e266b7561494e81d230926211611&q=' + $searchInput.value + '&aqi=no');
+  xhr.onerror = function () {
+    $searchForm.className = 'search-form position position-relative flex show';
+    $loadingSpinner.className = 'lds-spinner hide';
+    $invalidNetwork.className = 'invalid-network red-text show';
+  };
+  xhr.onprogress = function () {
+    $searchForm.className = 'search-form position position-relative flex hide';
+    $loadingSpinner.className = 'lds-spinner show';
+    if (xhr.status === 400) {
+      $searchForm.className = 'search-form position position-relative flex show';
+      $loadingSpinner.className = 'lds-spinner hide';
+      $invalidText.className = 'invalid-city red-text show';
+    } else if (xhr.status === 200) {
+      $loadingSpinner.className = 'lds-spinner hide';
+      $searchForm.className = 'search-form position position-relative flex show';
+    }
+  };
   xhr.responseType = 'json';
-  xhr.addEventListener('load', function () {
+  xhr.onload = function () {
     var XHRLocalTime = xhr.response.location.localtime;
     var timeAndDateString = '';
     timeAndDateString += '' + XHRLocalTime + '';
@@ -539,6 +578,8 @@ function userSearch(event) {
 
     var weatherStatus = Object.values(xhr.response.current.condition)[0];
 
+    $loadingSpinner.className = 'lds-spinner hide';
+    $searchForm.className = 'search-form position position-relative flex show';
     $cityResultName.textContent = xhr.response.location.name + ', ' + xhr.response.location.region;
     $cityResultTime.textContent = timeAndDateArray[1] + ' UTC';
     data.date = timeAndDateArray[0];
@@ -551,13 +592,12 @@ function userSearch(event) {
     $windMphResult.textContent = xhr.response.current.wind_mph + 'mph' + ' Wind';
     $precipitationResult.textContent = xhr.response.current.precip_in + 'in' + ' Precipitation';
     $humidityResult.textContent = xhr.response.current.humidity + '%' + ' Humidity';
-
-  });
+    $searchForm.reset();
+    switchView('search-bar-result');
+  };
   xhr.send();
-  $searchForm.reset();
-  switchView('search-bar-result');
 }
 
 module.exports = { userSearch };
 
-},{"./switchView":12}]},{},[1]);
+},{"./switchView":13}]},{},[1]);

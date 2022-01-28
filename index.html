@@ -33,7 +33,7 @@
   </header>
   <main class="main">
   <div data-view="search-bar" class="search-bar-body view">
-    <div class="container height-75vh flex justify-content-center position-relative search-bar-holder">
+    <div class="container position-relative search-bar-holder text-align-center">
       <div class="row text-align-center">
         <div class="column-full">
           <h1 class="what-city">What City Are You In Today?</h1>
@@ -47,6 +47,29 @@
               </div>
             </div>
           </form>
+        </div>
+      </div>
+      <div class="row text-align-center">
+        <div class="column-full">
+          <div class="lds-spinner hide" data-view="loading">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+          <p class="invalid-city red-text hide">Invalid city name, please try again</p>
+          <p class="invalid-network red-text hide">
+            Sorry, there was an issue connecting to the network! Please check your internet
+            connection and try again.
+          </p>
         </div>
       </div>
     </div>
