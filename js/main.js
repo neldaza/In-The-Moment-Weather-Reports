@@ -9,6 +9,7 @@ var newReportEntry = require('./modules/newReportEntry');
 var { userSearch } = require('./modules/userSearch');
 var submitFunction = require('./modules/submitFunction');
 var { showDeleteModal, hideDeleteModal } = require('./modules/showDeleteModal');
+var invalidTextHide = require('./modules/invalidTextHide');
 
 // Event Targets
 var $searchForm = document.querySelector('.search-form');
@@ -21,6 +22,10 @@ var $goBackButton = document.querySelector('.go-back-button-event');
 var $reportsNavbar = document.querySelector('.reports-anchor');
 var $deleteReportYes = document.querySelector('.yes-button');
 var $noButton = document.querySelector('.no-button');
+var $headerH2 = document.querySelector('.header-h2-a');
+var $firstCityUl = document.querySelector('.first-city-ul');
+var $secondCityUl = document.querySelector('.second-city-ul');
+var $searchBar = document.querySelector('.search-input');
 
 // Event Listeners
 $photoUrl.addEventListener('input', srcUpdate);
@@ -32,10 +37,10 @@ $createNewReportButton.addEventListener('click', handleViewNavigation);
 $deleteReportYes.addEventListener('click', deleteReport);
 $goBackButton.addEventListener('click', handleViewNavigation);
 $noButton.addEventListener('click', hideDeleteModal);
+$headerH2.addEventListener('click', handleViewNavigation);
+$searchBar.onkeydown = invalidTextHide;
 
 // Loops
-var $firstCityUl = document.querySelector('.first-city-ul');
-var $secondCityUl = document.querySelector('.second-city-ul');
 
 if (data.entries.length === 0) {
   data.cities = [];
@@ -75,7 +80,14 @@ for (var w = 0; w < data.entries.length; w++) {
   }
 }
 
-var $reportsCityNameSelectorAll = document.querySelectorAll('.reports-city-name');
-for (var b = 0; b < $reportsCityNameSelectorAll.length; b++) {
-  $reportsCityNameSelectorAll[b].addEventListener('click', handleViewNavigation);
+var $liSelectorAll = document.querySelectorAll('li');
+for (var b = 0; b < $liSelectorAll.length; b++) {
+  $liSelectorAll[b].addEventListener('click', e => {
+    const target = e.target;
+    if (target.matches('.reports-city-name-a')) {
+      handleViewNavigation(e);
+    } else if (target.matches('h2')) {
+      handleViewNavigation(e);
+    }
+  });
 }

@@ -2,10 +2,6 @@
   display: none !important;
 }
 
-.hide {
-  display: none;
-}
-
 .container {
   max-width: 575px;
   margin: 0 auto;
@@ -169,7 +165,7 @@
 }
 
 .search-bar-holder {
-  top: 10rem;
+  margin-top: 10rem;
 }
 
 .cancel-box {
@@ -215,6 +211,11 @@
 
 .full-weather-report {
   top: 3rem;
+}
+
+.header-h2-a {
+  position: relative;
+  left: -2rem;
 }
 
 @media only screen and (max-device-width: 767px)
@@ -305,6 +306,10 @@
 
   .comments {
     height: 15vw;
+  }
+
+  .search-form-and-invalid {
+    display: block;
   }
 }
 
