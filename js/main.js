@@ -1,5 +1,4 @@
 
-// Modules
 var srcUpdate = require('./modules/src-update');
 var deleteReport = require('./modules/delete-report');
 var handleViewNavigation = require('./modules/handle-view-navigation');
@@ -11,7 +10,6 @@ var submitFunction = require('./modules/submit-function');
 var { showDeleteModal, hideDeleteModal } = require('./modules/show-delete-modal');
 var invalidTextHide = require('./modules/invalid-text-hide');
 
-// Event Targets
 var $searchForm = document.querySelector('.search-form');
 var $form = document.querySelector('.entry-form-submit');
 var $photoUrl = document.querySelector('.photo-url');
@@ -27,7 +25,6 @@ var $firstCityUl = document.querySelector('.first-city-ul');
 var $secondCityUl = document.querySelector('.second-city-ul');
 var $searchBar = document.querySelector('.search-input');
 
-// Event Listeners
 $photoUrl.addEventListener('input', srcUpdate);
 $form.addEventListener('submit', submitFunction);
 $searchForm.addEventListener('submit', userSearch);
@@ -39,8 +36,6 @@ $goBackButton.addEventListener('click', handleViewNavigation);
 $noButton.addEventListener('click', hideDeleteModal);
 $headerH2.addEventListener('click', handleViewNavigation);
 $searchBar.onkeydown = invalidTextHide;
-
-// Loops
 
 if (data.entries.length === 0) {
   data.cities = [];
