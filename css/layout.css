@@ -85,14 +85,6 @@
   justify-content: right;
 }
 
-.height-75vh {
-  height: 75vh;
-}
-
-.height-100vh {
-  height: 100vh;
-}
-
 .space-evenly {
   justify-content: space-evenly;
 }
@@ -117,10 +109,6 @@
   margin-block-end: unset;
 }
 
-.height-85vh {
-  height: 85vh;
-}
-
 .wrap {
   flex-wrap: wrap;
 }
@@ -129,21 +117,12 @@
   flex-basis: calc(100% / 3);
 }
 
-.display-table-cell-bottom {
-  display: table-cell;
-  vertical-align: bottom;
-}
-
 .text-align-left {
   text-align: left;
 }
 
 .margin-top-1-rem {
   margin-top: 1rem;
-}
-
-.margin-bottom-1-rem {
-  margin-bottom: 1rem;
 }
 
 .flex-wrap-wrapped {
@@ -349,10 +328,6 @@
   .fa-search {
     top: 1.1rem;
     left: 1rem;
-  }
-
-  .full-weather-report {
-    height: 75vh;
   }
 
   .go-back-button {
