@@ -55,7 +55,7 @@ body {
   border-color: transparent;
 }
 
-.fa-search {
+.search-icon {
   color: white;
   top: 1rem;
   left: 1rem;
@@ -469,4 +469,9 @@ ul {
 
 .show {
   display: visible;
+}
+
+.overflow {
+  overflow-y: scroll;
+  overflow-x: scroll;
 }

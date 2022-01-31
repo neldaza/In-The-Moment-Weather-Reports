@@ -1,10 +1,10 @@
 /* eslint-disable no-undef */
 
-var reportsPageRender = require('./reportsPageRender');
-var newReportEntry = require('./newReportEntry');
-var newMainDataView = require('./newMainDataView');
-var switchView = require('./switchView');
-var { showDeleteModal } = require('./showDeleteModal');
+var reportsPageRender = require('./reports-page-render');
+var newReportEntry = require('./new-report-entry');
+var newMainDataView = require('./new-main-data-view');
+var switchView = require('./switch-view');
+var { showDeleteModal } = require('./show-delete-modal');
 
 var $cityResultName = document.querySelector('.city-name');
 var $form = document.querySelector('.entry-form-submit');

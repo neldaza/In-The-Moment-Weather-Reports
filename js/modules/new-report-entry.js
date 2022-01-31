@@ -1,4 +1,4 @@
-var { showDeleteModal } = require('./showDeleteModal');
+var { showDeleteModal } = require('./show-delete-modal');
 
 function newReportEntry(entry) {
 
@@ -49,7 +49,7 @@ function newReportEntry(entry) {
   timeH3.setAttribute('class', 'margin-block-unset');
   timeH3.appendChild(timeh3TextContent);
   descriptionRowDiv.setAttribute('class', 'row');
-  listDescriptionP.setAttribute('class', 'list-description column-full margin-block-unset');
+  listDescriptionP.setAttribute('class', 'list-description column-full margin-block-unset overflow');
   listDescriptionP.appendChild(listDescriptionPTextContent);
   wasWeatherRowDiv.setAttribute('class', 'was-weather row');
   wasWeatherDiv.setAttribute('class', 'column-75 flex align-items-center');
