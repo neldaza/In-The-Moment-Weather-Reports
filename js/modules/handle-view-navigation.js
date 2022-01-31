@@ -1,4 +1,4 @@
-var switchView = require('./switchView');
+var switchView = require('./switch-view');
 
 var $form = document.querySelector('.entry-form-submit');
 var $formPlaceholderImg = document.querySelector('.placeholder-img');

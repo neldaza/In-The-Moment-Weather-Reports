@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-var switchView = require('./switchView');
+var switchView = require('./switch-view');
 
 function deleteReport(event) {
   var $liSelectorAll = document.querySelectorAll('li');

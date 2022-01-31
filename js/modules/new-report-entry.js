@@ -1,4 +1,4 @@
-var { showDeleteModal } = require('./showDeleteModal');
+var { showDeleteModal } = require('./show-delete-modal');
 
 function newReportEntry(entry) {
 

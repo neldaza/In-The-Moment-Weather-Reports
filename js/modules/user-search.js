@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-var switchView = require('./switchView');
+var switchView = require('./switch-view');
 
 var $cityResultName = document.querySelector('.city-name');
 var $cityResultTime = document.querySelector('.city-time');
