@@ -21,7 +21,7 @@ var $invalidNetwork = document.querySelector('.invalid-network');
 function userSearch(event) {
   event.preventDefault();
   var xhr = new XMLHttpRequest();
-  xhr.open('GET', 'https://api.weatherapi.com/v1/current.json?key=182e266b7561494e81d230926211611&q=' + $searchInput.value + '&aqi=no');
+  xhr.open('GET', 'https://api.weatherapi.com/v1/current.json?key=3b2c49a9fe25484891c190823223101&q=' + $searchInput.value + '&aqi=no');
   xhr.onerror = function () {
     $searchForm.className = 'search-form position position-relative flex show';
     $loadingSpinner.className = 'lds-spinner hide';
