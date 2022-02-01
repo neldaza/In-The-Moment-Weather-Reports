@@ -25,10 +25,13 @@ function deleteReport(event) {
             $secondCityUl.removeChild($secondCityUl.firstChild);
           }
           $noRecordingsText.className = 'no-recorded';
+          data.editing = null;
           switchView('reports-page');
           return;
         }
+
         switchView(`${data.editing.cityName}`);
+        data.editing = null;
         return;
       }
     }

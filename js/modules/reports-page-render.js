@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 var handleViewNavigation = require('./handle-view-navigation');
 
 var $cityResultName = document.querySelector('.city-name');
@@ -10,6 +11,11 @@ function reportsPageRender() {
 
   li.setAttribute('data-view', $cityResultName.textContent);
   li.setAttribute('class', 'reports-city-name-holder');
+  if (data.entries === 0) {
+    li.setAttribute('data-city-count', 1);
+  } else {
+    li.setAttribute('data-city-count', data.nextCityCount);
+  }
   h2.setAttribute('class', 'reports-city-name');
   h2.setAttribute('data-view', $cityResultName.textContent);
   a.setAttribute('data-view', $cityResultName.textContent);

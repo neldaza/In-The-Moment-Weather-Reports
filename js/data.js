@@ -4,8 +4,8 @@ var data = {
   editing: null,
   nextEntryId: 1,
   cities: [],
+  nextCityCount: 1,
   date: ''
-
 };
 
 var previousDataJSON = localStorage.getItem('javascript-local-storage');

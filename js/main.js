@@ -50,10 +50,10 @@ if (data.entries.length !== 0) {
 }
 
 for (var a = 0; a < data.cities.length; a++) {
-  mainElement.append(mainDataViewForLoop(data.cities[a]));
-  if (data.cities.length === 1) {
+  mainElement.append(mainDataViewForLoop(data.cities[a].city));
+  if (data.cities[a].cityCount === 1) {
     $firstCityUl.append(reportsPageRenderForLoop(data.cities[a]));
-  } else if (a % 2 === 0) {
+  } else if (data.cities[a].cityCount % 2 === 0) {
     $secondCityUl.append(reportsPageRenderForLoop(data.cities[a]));
   } else {
     $firstCityUl.append(reportsPageRenderForLoop(data.cities[a]));

@@ -51,10 +51,10 @@ if (data.entries.length !== 0) {
 }
 
 for (var a = 0; a < data.cities.length; a++) {
-  mainElement.append(mainDataViewForLoop(data.cities[a]));
-  if (data.cities.length === 1) {
+  mainElement.append(mainDataViewForLoop(data.cities[a].city));
+  if (data.cities[a].cityCount === 1) {
     $firstCityUl.append(reportsPageRenderForLoop(data.cities[a]));
-  } else if (a % 2 === 0) {
+  } else if (data.cities[a].cityCount % 2 === 0) {
     $secondCityUl.append(reportsPageRenderForLoop(data.cities[a]));
   } else {
     $firstCityUl.append(reportsPageRenderForLoop(data.cities[a]));
@@ -116,10 +116,13 @@ function deleteReport(event) {
             $secondCityUl.removeChild($secondCityUl.firstChild);
           }
           $noRecordingsText.className = 'no-recorded';
+          data.editing = null;
           switchView('reports-page');
           return;
         }
+
         switchView(`${data.editing.cityName}`);
+        data.editing = null;
         return;
       }
     }
@@ -325,17 +328,18 @@ module.exports = newReportEntry;
 
 },{"./show-delete-modal":10}],8:[function(require,module,exports){
 /* eslint-disable no-undef */
-function reportsPageRenderForLoop(cityName) {
+function reportsPageRenderForLoop(city) {
   var li = document.createElement('li');
   var h2 = document.createElement('h2');
   var a = document.createElement('a');
-  var h2TextContent = cityName;
+  var h2TextContent = city.cityName;
 
-  li.setAttribute('data-view', cityName);
+  li.setAttribute('data-view', city.cityName);
   li.setAttribute('class', 'reports-city-name-holder');
+  li.setAttribute('data-city-count', city.cityCount);
   h2.setAttribute('class', 'reports-city-name');
-  h2.setAttribute('data-view', cityName);
-  a.setAttribute('data-view', cityName);
+  h2.setAttribute('data-view', city.cityName);
+  a.setAttribute('data-view', city.cityName);
   a.setAttribute('class', 'reports-city-name-a');
 
   h2.append(h2TextContent);
@@ -348,6 +352,7 @@ function reportsPageRenderForLoop(cityName) {
 module.exports = reportsPageRenderForLoop;
 
 },{}],9:[function(require,module,exports){
+/* eslint-disable no-undef */
 var handleViewNavigation = require('./handle-view-navigation');
 
 var $cityResultName = document.querySelector('.city-name');
@@ -360,6 +365,11 @@ function reportsPageRender() {
 
   li.setAttribute('data-view', $cityResultName.textContent);
   li.setAttribute('class', 'reports-city-name-holder');
+  if (data.entries === 0) {
+    li.setAttribute('data-city-count', 1);
+  } else {
+    li.setAttribute('data-city-count', data.nextCityCount);
+  }
   h2.setAttribute('class', 'reports-city-name');
   h2.setAttribute('data-view', $cityResultName.textContent);
   a.setAttribute('data-view', $cityResultName.textContent);
@@ -435,9 +445,11 @@ function submitFunction(event) {
   var time = $cityResultTime.textContent;
   var date = data.date;
   var submissionObject = { cityName, photoTitleValue, photoUrlValue, commentsValue, radioChecked, time, date };
-
   if (data.entries.length === 0) {
-    data.cities.unshift(submissionObject.cityName);
+    data.cities.unshift({
+      cityName: submissionObject.cityName,
+      cityCount: data.nextCityCount
+    });
     $firstCityUl.appendChild(reportsPageRender());
     mainElement.appendChild(newMainDataView());
     const $ulSelectorAll = document.querySelectorAll('ul');
@@ -453,6 +465,7 @@ function submitFunction(event) {
         });
       }
     }
+    data.nextCityCount++;
     data.nextEntryId++;
     data.entries.unshift(submissionObject);
     $noRecordingsText.className = 'no-recorded hide';
@@ -461,7 +474,7 @@ function submitFunction(event) {
     return;
   }
   for (var i = 0; i < data.cities.length; i++) {
-    if (data.cities[i] === submissionObject.cityName) {
+    if (data.cities[i].cityName === submissionObject.cityName) {
       submissionObject.entryId = data.nextEntryId;
       const $ulSelectorAll = document.querySelectorAll('ul');
       for (var d = 0; d < $ulSelectorAll.length; d++) {
@@ -476,7 +489,10 @@ function submitFunction(event) {
       return;
     }
   }
-  data.cities.unshift(submissionObject.cityName);
+  data.cities.unshift({
+    cityName: submissionObject.cityName,
+    cityCount: data.nextCityCount
+  });
   submissionObject.entryId = data.nextEntryId;
   if (data.cities.length % 2 === 0) {
     $secondCityUl.append(reportsPageRender());
@@ -490,6 +506,7 @@ function submitFunction(event) {
       $ulSelectorAll[f].append(newReportEntry(submissionObject));
     }
   }
+  data.nextCityCount++;
   data.nextEntryId++;
   data.entries.unshift(submissionObject);
   $form.reset();

@@ -42,8 +42,6 @@
   },
   "license": "ISC",
   "dependencies": {
-    "browserify": "^17.0.0",
-    "exorcist": "^2.0.0",
     "watchify": "^4.0.0"
   }
 }
