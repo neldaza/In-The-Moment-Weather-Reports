@@ -5,6 +5,7 @@ var newReportEntry = require('./new-report-entry');
 var newMainDataView = require('./new-main-data-view');
 var switchView = require('./switch-view');
 var { showDeleteModal } = require('./show-delete-modal');
+var { reshuffleDataCities } = require('./reshuffle-data-cities');
 
 var $cityResultName = document.querySelector('.city-name');
 var $form = document.querySelector('.entry-form-submit');
@@ -25,10 +26,11 @@ function submitFunction(event) {
   var date = data.date;
   var submissionObject = { cityName, photoTitleValue, photoUrlValue, commentsValue, radioChecked, time, date };
   if (data.entries.length === 0) {
-    data.cities.unshift({
+    data.cities.push({
       cityName: submissionObject.cityName,
       cityCount: data.nextCityCount
     });
+    reshuffleDataCities(data.cities);
     $firstCityUl.appendChild(reportsPageRender());
     mainElement.appendChild(newMainDataView());
     const $ulSelectorAll = document.querySelectorAll('ul');
@@ -68,10 +70,11 @@ function submitFunction(event) {
       return;
     }
   }
-  data.cities.unshift({
+  data.cities.push({
     cityName: submissionObject.cityName,
     cityCount: data.nextCityCount
   });
+  reshuffleDataCities(data.cities);
   submissionObject.entryId = data.nextEntryId;
   if (data.cities.length % 2 === 0) {
     $secondCityUl.append(reportsPageRender());

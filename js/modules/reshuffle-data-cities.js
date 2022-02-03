@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 
 function reshuffleDataCities(citiesArray) {
   let count = 1;

@@ -32,32 +32,36 @@ function deleteReport(event) {
     }
   }
 
-  var cities = [];
-  var deleteCity = [];
+  var presentCities = [];
+  var deletedCity = [];
+
   for (var b = 0; b < data.entries.length; b++) {
     for (var q = 0; q < data.cities.length; q++) {
       if (data.cities[q].cityName === data.entries[b].cityName) {
-        cities.unshift(data.cities[q]);
+        presentCities.unshift(data.cities[q]);
       } else {
-        deleteCity.push(data.cities[q]);
+        deletedCity.push(data.cities[q]);
       }
     }
   }
+
   var $cityNameHolderSelectorAll = document.querySelectorAll('.reports-city-name-holder');
   for (var n1 = 0; n1 < $cityNameHolderSelectorAll.length; n1++) {
-    if ($cityNameHolderSelectorAll[n1].getAttribute('data-view') === deleteCity[0].cityName) {
-      var $divSelectorAll = document.querySelectorAll('.data-view-div');
-      for (x1 = 0; x1 < $divSelectorAll.length; x1++) {
-        if ($divSelectorAll[x1].getAttribute('data') === 'new-main-data-view' &&
-        $divSelectorAll[x1].getAttribute('data-view') === deleteCity[0].cityName) {
+    if ($cityNameHolderSelectorAll[n1].getAttribute('data-view') === deletedCity[0].cityName) {
+      var $dataViewDivSelectorAll = document.querySelectorAll('.data-view-div');
+      for (x1 = 0; x1 < $dataViewDivSelectorAll.length; x1++) {
+        if ($dataViewDivSelectorAll[x1].getAttribute('data') === 'new-main-data-view' &&
+        $dataViewDivSelectorAll[x1].getAttribute('data-view') === deletedCity[0].cityName) {
           var $main = document.querySelector('.main');
           $main.removeChild($divSelectorAll[x1]);
         }
       }
       removeAllChildNodes($firstCityUl);
       removeAllChildNodes($secondCityUl);
-      reshuffleDataCities(cities);
-      data.cities = cities;
+      var setCities = new Set(presentCities);
+      var final = Array.from(setCities);
+      reshuffleDataCities(final);
+      data.cities = final;
       for (d = 0; d < data.cities.length; d++) {
         if (data.cities[d].cityCount === 1) {
           $firstCityUl.append(reportsPageRenderForLoop(data.cities[d]));
@@ -72,6 +76,7 @@ function deleteReport(event) {
       return;
     }
   }
+
   switchView(`${data.editing.cityName}`);
   data.editing = null;
 }

@@ -10,6 +10,7 @@ var { userSearch } = require('./modules/user-search');
 var submitFunction = require('./modules/submit-function');
 var { showDeleteModal, hideDeleteModal } = require('./modules/show-delete-modal');
 var invalidTextHide = require('./modules/invalid-text-hide');
+var { reshuffleDataCities } = require('./modules/reshuffle-data-cities');
 
 var $searchForm = document.querySelector('.search-form');
 var $form = document.querySelector('.entry-form-submit');
@@ -50,10 +51,11 @@ if (data.entries.length !== 0) {
   $noRecordingsText.className = 'no-recorded';
 }
 
+reshuffleDataCities(data.cities);
 for (var a = 0; a < data.cities.length; a++) {
-  mainElement.append(mainDataViewForLoop(data.cities[a].city));
+  mainElement.append(mainDataViewForLoop(data.cities[a]));
   if (data.cities[a].cityCount === 1) {
-    $firstCityUl.append(reportsPageRenderForLoop(data.cities[a]));
+    $firstCityUl.prepend(reportsPageRenderForLoop(data.cities[a]));
   } else if (data.cities[a].cityCount % 2 === 0) {
     $secondCityUl.append(reportsPageRenderForLoop(data.cities[a]));
   } else {
@@ -88,7 +90,7 @@ for (var b = 0; b < $liSelectorAll.length; b++) {
   });
 }
 
-},{"./modules/delete-report":2,"./modules/handle-view-navigation":3,"./modules/invalid-text-hide":4,"./modules/main-data-view-for-loop":5,"./modules/new-report-entry":7,"./modules/reports-page-render-for-loop":8,"./modules/show-delete-modal":11,"./modules/src-update":12,"./modules/submit-function":13,"./modules/user-search":15}],2:[function(require,module,exports){
+},{"./modules/delete-report":2,"./modules/handle-view-navigation":3,"./modules/invalid-text-hide":4,"./modules/main-data-view-for-loop":5,"./modules/new-report-entry":7,"./modules/reports-page-render-for-loop":8,"./modules/reshuffle-data-cities":10,"./modules/show-delete-modal":11,"./modules/src-update":12,"./modules/submit-function":13,"./modules/user-search":15}],2:[function(require,module,exports){
 /* eslint-disable no-undef */
 var switchView = require('./switch-view');
 var { reshuffleDataCities, removeAllChildNodes } = require('./reshuffle-data-cities');
@@ -123,32 +125,36 @@ function deleteReport(event) {
     }
   }
 
-  var cities = [];
-  var deleteCity = [];
+  var presentCities = [];
+  var deletedCity = [];
+
   for (var b = 0; b < data.entries.length; b++) {
     for (var q = 0; q < data.cities.length; q++) {
       if (data.cities[q].cityName === data.entries[b].cityName) {
-        cities.unshift(data.cities[q]);
+        presentCities.unshift(data.cities[q]);
       } else {
-        deleteCity.push(data.cities[q]);
+        deletedCity.push(data.cities[q]);
       }
     }
   }
+
   var $cityNameHolderSelectorAll = document.querySelectorAll('.reports-city-name-holder');
   for (var n1 = 0; n1 < $cityNameHolderSelectorAll.length; n1++) {
-    if ($cityNameHolderSelectorAll[n1].getAttribute('data-view') === deleteCity[0].cityName) {
-      var $divSelectorAll = document.querySelectorAll('.data-view-div');
-      for (x1 = 0; x1 < $divSelectorAll.length; x1++) {
-        if ($divSelectorAll[x1].getAttribute('data') === 'new-main-data-view' &&
-        $divSelectorAll[x1].getAttribute('data-view') === deleteCity[0].cityName) {
+    if ($cityNameHolderSelectorAll[n1].getAttribute('data-view') === deletedCity[0].cityName) {
+      var $dataViewDivSelectorAll = document.querySelectorAll('.data-view-div');
+      for (x1 = 0; x1 < $dataViewDivSelectorAll.length; x1++) {
+        if ($dataViewDivSelectorAll[x1].getAttribute('data') === 'new-main-data-view' &&
+        $dataViewDivSelectorAll[x1].getAttribute('data-view') === deletedCity[0].cityName) {
           var $main = document.querySelector('.main');
           $main.removeChild($divSelectorAll[x1]);
         }
       }
       removeAllChildNodes($firstCityUl);
       removeAllChildNodes($secondCityUl);
-      reshuffleDataCities(cities);
-      data.cities = cities;
+      var setCities = new Set(presentCities);
+      var final = Array.from(setCities);
+      reshuffleDataCities(final);
+      data.cities = final;
       for (d = 0; d < data.cities.length; d++) {
         if (data.cities[d].cityCount === 1) {
           $firstCityUl.append(reportsPageRenderForLoop(data.cities[d]));
@@ -163,6 +169,7 @@ function deleteReport(event) {
       return;
     }
   }
+
   switchView(`${data.editing.cityName}`);
   data.editing = null;
 }
@@ -434,6 +441,7 @@ function reportsPageRender() {
 module.exports = reportsPageRender;
 
 },{"./handle-view-navigation":3}],10:[function(require,module,exports){
+/* eslint-disable no-undef */
 
 function reshuffleDataCities(citiesArray) {
   let count = 1;
@@ -489,6 +497,7 @@ var newReportEntry = require('./new-report-entry');
 var newMainDataView = require('./new-main-data-view');
 var switchView = require('./switch-view');
 var { showDeleteModal } = require('./show-delete-modal');
+var { reshuffleDataCities } = require('./reshuffle-data-cities');
 
 var $cityResultName = document.querySelector('.city-name');
 var $form = document.querySelector('.entry-form-submit');
@@ -509,10 +518,11 @@ function submitFunction(event) {
   var date = data.date;
   var submissionObject = { cityName, photoTitleValue, photoUrlValue, commentsValue, radioChecked, time, date };
   if (data.entries.length === 0) {
-    data.cities.unshift({
+    data.cities.push({
       cityName: submissionObject.cityName,
       cityCount: data.nextCityCount
     });
+    reshuffleDataCities(data.cities);
     $firstCityUl.appendChild(reportsPageRender());
     mainElement.appendChild(newMainDataView());
     const $ulSelectorAll = document.querySelectorAll('ul');
@@ -552,10 +562,11 @@ function submitFunction(event) {
       return;
     }
   }
-  data.cities.unshift({
+  data.cities.push({
     cityName: submissionObject.cityName,
     cityCount: data.nextCityCount
   });
+  reshuffleDataCities(data.cities);
   submissionObject.entryId = data.nextEntryId;
   if (data.cities.length % 2 === 0) {
     $secondCityUl.append(reportsPageRender());
@@ -578,7 +589,7 @@ function submitFunction(event) {
 
 module.exports = submitFunction;
 
-},{"./new-main-data-view":6,"./new-report-entry":7,"./reports-page-render":9,"./show-delete-modal":11,"./switch-view":14}],14:[function(require,module,exports){
+},{"./new-main-data-view":6,"./new-report-entry":7,"./reports-page-render":9,"./reshuffle-data-cities":10,"./show-delete-modal":11,"./switch-view":14}],14:[function(require,module,exports){
 function switchView(viewName) {
   var $viewSelectorAll = document.querySelectorAll('.view');
   for (var i = 0; i < $viewSelectorAll.length; i++) {
