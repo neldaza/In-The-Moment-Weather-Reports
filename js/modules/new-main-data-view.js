@@ -9,6 +9,7 @@ function newMainDataView() {
   var cityNameUl = document.createElement('ul');
   var h1ListHeadingTextContent = document.createTextNode($cityResultName.textContent);
 
+  dataViewDiv.setAttribute('data', 'new-main-data-view');
   dataViewDiv.setAttribute('data-view', $cityResultName.textContent);
   dataViewDiv.setAttribute('class', 'data-view-div view hidden');
   containerDiv.setAttribute('class', 'container');

@@ -49,8 +49,11 @@ if (data.entries.length !== 0) {
   $noRecordingsText.className = 'no-recorded';
 }
 
+for (var l1 = 0; l1 < data.cities.length; l1++) {
+  mainElement.append(mainDataViewForLoop(data.cities[l1]));
+}
+
 for (var a = 0; a < data.cities.length; a++) {
-  mainElement.append(mainDataViewForLoop(data.cities[a].city));
   if (data.cities[a].cityCount === 1) {
     $firstCityUl.append(reportsPageRenderForLoop(data.cities[a]));
   } else if (data.cities[a].cityCount % 2 === 0) {

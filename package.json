@@ -37,8 +37,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "watchify": "watchify",
-    "browserify": "browserify"
+    "watchify": "watchify"
+
   },
   "license": "ISC",
   "dependencies": {

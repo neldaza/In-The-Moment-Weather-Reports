@@ -1,4 +1,6 @@
 /* eslint-disable no-undef */
+var handleViewNavigation = require('./handle-view-navigation');
+
 function reportsPageRenderForLoop(city) {
   var li = document.createElement('li');
   var h2 = document.createElement('h2');
@@ -16,6 +18,10 @@ function reportsPageRenderForLoop(city) {
   h2.append(h2TextContent);
   a.append(h2);
   li.append(a);
+
+  li.addEventListener('click', handleViewNavigation);
+  a.addEventListener('click', handleViewNavigation);
+  h2.addEventListener('click', handleViewNavigation);
 
   return li;
 }
