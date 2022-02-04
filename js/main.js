@@ -9,6 +9,7 @@ var { userSearch } = require('./modules/user-search');
 var submitFunction = require('./modules/submit-function');
 var { showDeleteModal, hideDeleteModal } = require('./modules/show-delete-modal');
 var invalidTextHide = require('./modules/invalid-text-hide');
+var { reshuffleDataCities } = require('./modules/reshuffle-data-cities');
 
 var $searchForm = document.querySelector('.search-form');
 var $form = document.querySelector('.entry-form-submit');
@@ -49,11 +50,12 @@ if (data.entries.length !== 0) {
   $noRecordingsText.className = 'no-recorded';
 }
 
+reshuffleDataCities(data.cities);
 for (var a = 0; a < data.cities.length; a++) {
   mainElement.append(mainDataViewForLoop(data.cities[a]));
-  if (data.cities.length === 1) {
-    $firstCityUl.append(reportsPageRenderForLoop(data.cities[a]));
-  } else if (a % 2 === 0) {
+  if (data.cities[a].cityCount === 1) {
+    $firstCityUl.prepend(reportsPageRenderForLoop(data.cities[a]));
+  } else if (data.cities[a].cityCount % 2 === 0) {
     $secondCityUl.append(reportsPageRenderForLoop(data.cities[a]));
   } else {
     $firstCityUl.append(reportsPageRenderForLoop(data.cities[a]));

@@ -10,6 +10,7 @@ var { userSearch } = require('./modules/user-search');
 var submitFunction = require('./modules/submit-function');
 var { showDeleteModal, hideDeleteModal } = require('./modules/show-delete-modal');
 var invalidTextHide = require('./modules/invalid-text-hide');
+var { reshuffleDataCities } = require('./modules/reshuffle-data-cities');
 
 var $searchForm = document.querySelector('.search-form');
 var $form = document.querySelector('.entry-form-submit');
@@ -50,11 +51,12 @@ if (data.entries.length !== 0) {
   $noRecordingsText.className = 'no-recorded';
 }
 
+reshuffleDataCities(data.cities);
 for (var a = 0; a < data.cities.length; a++) {
   mainElement.append(mainDataViewForLoop(data.cities[a]));
-  if (data.cities.length === 1) {
-    $firstCityUl.append(reportsPageRenderForLoop(data.cities[a]));
-  } else if (a % 2 === 0) {
+  if (data.cities[a].cityCount === 1) {
+    $firstCityUl.prepend(reportsPageRenderForLoop(data.cities[a]));
+  } else if (data.cities[a].cityCount % 2 === 0) {
     $secondCityUl.append(reportsPageRenderForLoop(data.cities[a]));
   } else {
     $firstCityUl.append(reportsPageRenderForLoop(data.cities[a]));
@@ -88,9 +90,15 @@ for (var b = 0; b < $liSelectorAll.length; b++) {
   });
 }
 
-},{"./modules/delete-report":2,"./modules/handle-view-navigation":3,"./modules/invalid-text-hide":4,"./modules/main-data-view-for-loop":5,"./modules/new-report-entry":7,"./modules/reports-page-render-for-loop":8,"./modules/show-delete-modal":10,"./modules/src-update":11,"./modules/submit-function":12,"./modules/user-search":14}],2:[function(require,module,exports){
+},{"./modules/delete-report":2,"./modules/handle-view-navigation":3,"./modules/invalid-text-hide":4,"./modules/main-data-view-for-loop":5,"./modules/new-report-entry":7,"./modules/reports-page-render-for-loop":8,"./modules/reshuffle-data-cities":10,"./modules/show-delete-modal":11,"./modules/src-update":12,"./modules/submit-function":13,"./modules/user-search":15}],2:[function(require,module,exports){
 /* eslint-disable no-undef */
 var switchView = require('./switch-view');
+var { reshuffleDataCities, removeAllChildNodes } = require('./reshuffle-data-cities');
+var reportsPageRenderForLoop = require('./reports-page-render-for-loop');
+
+var $firstCityUl = document.querySelector('.first-city-ul');
+var $secondCityUl = document.querySelector('.second-city-ul');
+var $noRecordingsText = document.querySelector('.no-recorded');
 
 function deleteReport(event) {
   var $liSelectorAll = document.querySelectorAll('li');
@@ -103,32 +111,72 @@ function deleteReport(event) {
         for (var i = 0; i < data.entries.length; i++) {
           if (data.entries[i].entryId === data.editing.entryId) {
             data.entries.splice(i, 1);
+            if (data.entries.length === 0) {
+              removeAllChildNodes($firstCityUl);
+              removeAllChildNodes($secondCityUl);
+              $noRecordingsText.className = 'no-recorded';
+              data.editing = null;
+              switchView('reports-page');
+              return;
+            }
           }
         }
-        if (data.entries.length === 0) {
-          var $firstCityUl = document.querySelector('.first-city-ul');
-          var $secondCityUl = document.querySelector('.second-city-ul');
-          var $noRecordingsText = document.querySelector('.no-recorded');
-          while ($firstCityUl.firstChild) {
-            $firstCityUl.removeChild($firstCityUl.firstChild);
-          }
-          while ($secondCityUl.firstChild) {
-            $secondCityUl.removeChild($secondCityUl.firstChild);
-          }
-          $noRecordingsText.className = 'no-recorded';
-          switchView('reports-page');
-          return;
-        }
-        switchView(`${data.editing.cityName}`);
-        return;
       }
     }
   }
+
+  var presentCities = [];
+  var deletedCity = [];
+
+  for (var b = 0; b < data.entries.length; b++) {
+    for (var q = 0; q < data.cities.length; q++) {
+      if (data.cities[q].cityName === data.entries[b].cityName) {
+        presentCities.unshift(data.cities[q]);
+      } else {
+        deletedCity.push(data.cities[q]);
+      }
+    }
+  }
+
+  var $cityNameHolderSelectorAll = document.querySelectorAll('.reports-city-name-holder');
+  for (var n1 = 0; n1 < $cityNameHolderSelectorAll.length; n1++) {
+    if ($cityNameHolderSelectorAll[n1].getAttribute('data-view') === deletedCity[0].cityName) {
+      var $dataViewDivSelectorAll = document.querySelectorAll('.data-view-div');
+      for (x1 = 0; x1 < $dataViewDivSelectorAll.length; x1++) {
+        if ($dataViewDivSelectorAll[x1].getAttribute('data') === 'new-main-data-view' &&
+        $dataViewDivSelectorAll[x1].getAttribute('data-view') === deletedCity[0].cityName) {
+          var $main = document.querySelector('.main');
+          $main.removeChild($divSelectorAll[x1]);
+        }
+      }
+      removeAllChildNodes($firstCityUl);
+      removeAllChildNodes($secondCityUl);
+      var setCities = new Set(presentCities);
+      var final = Array.from(setCities);
+      reshuffleDataCities(final);
+      data.cities = final;
+      for (d = 0; d < data.cities.length; d++) {
+        if (data.cities[d].cityCount === 1) {
+          $firstCityUl.append(reportsPageRenderForLoop(data.cities[d]));
+        } else if (data.cities[d].cityCount % 2 === 0) {
+          $secondCityUl.append(reportsPageRenderForLoop(data.cities[d]));
+        } else {
+          $firstCityUl.append(reportsPageRenderForLoop(data.cities[d]));
+        }
+        switchView('reports-page');
+        data.editing = null;
+      }
+      return;
+    }
+  }
+
+  switchView(`${data.editing.cityName}`);
+  data.editing = null;
 }
 
 module.exports = deleteReport;
 
-},{"./switch-view":13}],3:[function(require,module,exports){
+},{"./reports-page-render-for-loop":8,"./reshuffle-data-cities":10,"./switch-view":14}],3:[function(require,module,exports){
 var switchView = require('./switch-view');
 
 var $form = document.querySelector('.entry-form-submit');
@@ -147,7 +195,7 @@ function handleViewNavigation(event) {
 
 module.exports = handleViewNavigation;
 
-},{"./switch-view":13}],4:[function(require,module,exports){
+},{"./switch-view":14}],4:[function(require,module,exports){
 var $invalidCity = document.querySelector('.invalid-city');
 var $invalidNetwork = document.querySelector('.invalid-network');
 
@@ -164,25 +212,25 @@ module.exports = invalidTextHide;
 },{}],5:[function(require,module,exports){
 /* eslint-disable no-undef */
 
-function mainDataViewForLoop(cityName) {
+function mainDataViewForLoop(city) {
   var dataViewDiv = document.createElement('div');
   var containerDiv = document.createElement('div');
   var rowDiv = document.createElement('div');
   var columnFullDiv = document.createElement('div');
   var h1ListHeading = document.createElement('h1');
   var cityNameUl = document.createElement('ul');
-  var h1ListHeadingTextContent = document.createTextNode(cityName);
+  var h1ListHeadingTextContent = city.cityName;
 
-  dataViewDiv.setAttribute('data-view', cityName);
-  dataViewDiv.setAttribute('data-city-id', cityName);
-  cityNameUl.setAttribute('class', cityName);
-  cityNameUl.setAttribute('data-city-id', cityName);
+  dataViewDiv.setAttribute('data-view', city.cityName);
+  dataViewDiv.setAttribute('data-city-id', city.cityName);
+  cityNameUl.setAttribute('class', city.cityName);
+  cityNameUl.setAttribute('data-city-id', city.cityName);
   dataViewDiv.setAttribute('class', 'view hidden');
   containerDiv.setAttribute('class', 'container');
   rowDiv.setAttribute('class', 'row');
   columnFullDiv.setAttribute('class', 'column-full text-align-center');
   h1ListHeading.setAttribute('class', 'list-heading');
-  h1ListHeading.appendChild(h1ListHeadingTextContent);
+  h1ListHeading.append(h1ListHeadingTextContent);
 
   columnFullDiv.append(h1ListHeading, cityNameUl);
   rowDiv.append(columnFullDiv);
@@ -206,6 +254,7 @@ function newMainDataView() {
   var cityNameUl = document.createElement('ul');
   var h1ListHeadingTextContent = document.createTextNode($cityResultName.textContent);
 
+  dataViewDiv.setAttribute('data', 'new-main-data-view');
   dataViewDiv.setAttribute('data-view', $cityResultName.textContent);
   dataViewDiv.setAttribute('class', 'data-view-div view hidden');
   containerDiv.setAttribute('class', 'container');
@@ -323,31 +372,39 @@ function newReportEntry(entry) {
 
 module.exports = newReportEntry;
 
-},{"./show-delete-modal":10}],8:[function(require,module,exports){
+},{"./show-delete-modal":11}],8:[function(require,module,exports){
 /* eslint-disable no-undef */
-function reportsPageRenderForLoop(cityName) {
+var handleViewNavigation = require('./handle-view-navigation');
+
+function reportsPageRenderForLoop(city) {
   var li = document.createElement('li');
   var h2 = document.createElement('h2');
   var a = document.createElement('a');
-  var h2TextContent = cityName;
+  var h2TextContent = city.cityName;
 
-  li.setAttribute('data-view', cityName);
+  li.setAttribute('data-view', city.cityName);
   li.setAttribute('class', 'reports-city-name-holder');
+  li.setAttribute('data-city-count', city.cityCount);
   h2.setAttribute('class', 'reports-city-name');
-  h2.setAttribute('data-view', cityName);
-  a.setAttribute('data-view', cityName);
+  h2.setAttribute('data-view', city.cityName);
+  a.setAttribute('data-view', city.cityName);
   a.setAttribute('class', 'reports-city-name-a');
 
   h2.append(h2TextContent);
   a.append(h2);
   li.append(a);
 
+  li.addEventListener('click', handleViewNavigation);
+  a.addEventListener('click', handleViewNavigation);
+  h2.addEventListener('click', handleViewNavigation);
+
   return li;
 }
 
 module.exports = reportsPageRenderForLoop;
 
-},{}],9:[function(require,module,exports){
+},{"./handle-view-navigation":3}],9:[function(require,module,exports){
+/* eslint-disable no-undef */
 var handleViewNavigation = require('./handle-view-navigation');
 
 var $cityResultName = document.querySelector('.city-name');
@@ -360,6 +417,11 @@ function reportsPageRender() {
 
   li.setAttribute('data-view', $cityResultName.textContent);
   li.setAttribute('class', 'reports-city-name-holder');
+  if (data.entries === 0) {
+    li.setAttribute('data-city-count', 1);
+  } else {
+    li.setAttribute('data-city-count', data.nextCityCount);
+  }
   h2.setAttribute('class', 'reports-city-name');
   h2.setAttribute('data-view', $cityResultName.textContent);
   a.setAttribute('data-view', $cityResultName.textContent);
@@ -380,6 +442,25 @@ module.exports = reportsPageRender;
 
 },{"./handle-view-navigation":3}],10:[function(require,module,exports){
 /* eslint-disable no-undef */
+
+function reshuffleDataCities(citiesArray) {
+  let count = 1;
+  for (var i = 0; i < citiesArray.length; i++) {
+    citiesArray[i].cityCount = count;
+    count++;
+  }
+}
+
+function removeAllChildNodes(parent) {
+  while (parent.firstChild) {
+    parent.removeChild(parent.firstChild);
+  }
+}
+
+module.exports = { reshuffleDataCities, removeAllChildNodes };
+
+},{}],11:[function(require,module,exports){
+/* eslint-disable no-undef */
 const $deleteModal = document.querySelector('.whole-delete-modal');
 
 function showDeleteModal(event) {
@@ -397,7 +478,7 @@ function hideDeleteModal(event) {
 
 module.exports = { showDeleteModal, hideDeleteModal };
 
-},{}],11:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 var $formPlaceholderImg = document.querySelector('.placeholder-img');
 var $photoUrl = document.querySelector('.photo-url');
 
@@ -408,7 +489,7 @@ function srcUpdate(event) {
 
 module.exports = srcUpdate;
 
-},{}],12:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 /* eslint-disable no-undef */
 
 var reportsPageRender = require('./reports-page-render');
@@ -416,6 +497,7 @@ var newReportEntry = require('./new-report-entry');
 var newMainDataView = require('./new-main-data-view');
 var switchView = require('./switch-view');
 var { showDeleteModal } = require('./show-delete-modal');
+var { reshuffleDataCities } = require('./reshuffle-data-cities');
 
 var $cityResultName = document.querySelector('.city-name');
 var $form = document.querySelector('.entry-form-submit');
@@ -435,9 +517,12 @@ function submitFunction(event) {
   var time = $cityResultTime.textContent;
   var date = data.date;
   var submissionObject = { cityName, photoTitleValue, photoUrlValue, commentsValue, radioChecked, time, date };
-
   if (data.entries.length === 0) {
-    data.cities.unshift(submissionObject.cityName);
+    data.cities.push({
+      cityName: submissionObject.cityName,
+      cityCount: data.nextCityCount
+    });
+    reshuffleDataCities(data.cities);
     $firstCityUl.appendChild(reportsPageRender());
     mainElement.appendChild(newMainDataView());
     const $ulSelectorAll = document.querySelectorAll('ul');
@@ -453,6 +538,7 @@ function submitFunction(event) {
         });
       }
     }
+    data.nextCityCount++;
     data.nextEntryId++;
     data.entries.unshift(submissionObject);
     $noRecordingsText.className = 'no-recorded hide';
@@ -461,7 +547,7 @@ function submitFunction(event) {
     return;
   }
   for (var i = 0; i < data.cities.length; i++) {
-    if (data.cities[i] === submissionObject.cityName) {
+    if (data.cities[i].cityName === submissionObject.cityName) {
       submissionObject.entryId = data.nextEntryId;
       const $ulSelectorAll = document.querySelectorAll('ul');
       for (var d = 0; d < $ulSelectorAll.length; d++) {
@@ -476,7 +562,11 @@ function submitFunction(event) {
       return;
     }
   }
-  data.cities.unshift(submissionObject.cityName);
+  data.cities.push({
+    cityName: submissionObject.cityName,
+    cityCount: data.nextCityCount
+  });
+  reshuffleDataCities(data.cities);
   submissionObject.entryId = data.nextEntryId;
   if (data.cities.length % 2 === 0) {
     $secondCityUl.append(reportsPageRender());
@@ -490,6 +580,7 @@ function submitFunction(event) {
       $ulSelectorAll[f].append(newReportEntry(submissionObject));
     }
   }
+  data.nextCityCount++;
   data.nextEntryId++;
   data.entries.unshift(submissionObject);
   $form.reset();
@@ -498,7 +589,7 @@ function submitFunction(event) {
 
 module.exports = submitFunction;
 
-},{"./new-main-data-view":6,"./new-report-entry":7,"./reports-page-render":9,"./show-delete-modal":10,"./switch-view":13}],13:[function(require,module,exports){
+},{"./new-main-data-view":6,"./new-report-entry":7,"./reports-page-render":9,"./reshuffle-data-cities":10,"./show-delete-modal":11,"./switch-view":14}],14:[function(require,module,exports){
 function switchView(viewName) {
   var $viewSelectorAll = document.querySelectorAll('.view');
   for (var i = 0; i < $viewSelectorAll.length; i++) {
@@ -511,7 +602,7 @@ function switchView(viewName) {
 }
 module.exports = switchView;
 
-},{}],14:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 /* eslint-disable no-undef */
 var switchView = require('./switch-view');
 
@@ -596,4 +687,4 @@ function userSearch(event) {
 
 module.exports = { userSearch };
 
-},{"./switch-view":13}]},{},[1]);
+},{"./switch-view":14}]},{},[1]);

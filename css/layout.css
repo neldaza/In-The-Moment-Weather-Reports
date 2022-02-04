@@ -139,8 +139,6 @@
 
 .entry-form-submit {
   transform: scale(0.9);
-  position: relative;
-  top: -1rem;
 }
 
 .search-bar-holder {
@@ -254,7 +252,6 @@
 
   .entry-form-submit {
     transform: unset;
-    top: 3rem;
     padding-bottom: 2rem;
   }
 
@@ -378,7 +375,7 @@
 
   .entry-form-submit {
     transform: none;
-    margin-top: 2rem;
+    margin-top: 5rem;
   }
 
   .form-save {

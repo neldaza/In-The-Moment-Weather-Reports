@@ -5,6 +5,7 @@ var newReportEntry = require('./new-report-entry');
 var newMainDataView = require('./new-main-data-view');
 var switchView = require('./switch-view');
 var { showDeleteModal } = require('./show-delete-modal');
+var { reshuffleDataCities } = require('./reshuffle-data-cities');
 
 var $cityResultName = document.querySelector('.city-name');
 var $form = document.querySelector('.entry-form-submit');
@@ -24,9 +25,12 @@ function submitFunction(event) {
   var time = $cityResultTime.textContent;
   var date = data.date;
   var submissionObject = { cityName, photoTitleValue, photoUrlValue, commentsValue, radioChecked, time, date };
-
   if (data.entries.length === 0) {
-    data.cities.unshift(submissionObject.cityName);
+    data.cities.push({
+      cityName: submissionObject.cityName,
+      cityCount: data.nextCityCount
+    });
+    reshuffleDataCities(data.cities);
     $firstCityUl.appendChild(reportsPageRender());
     mainElement.appendChild(newMainDataView());
     const $ulSelectorAll = document.querySelectorAll('ul');
@@ -42,6 +46,7 @@ function submitFunction(event) {
         });
       }
     }
+    data.nextCityCount++;
     data.nextEntryId++;
     data.entries.unshift(submissionObject);
     $noRecordingsText.className = 'no-recorded hide';
@@ -50,7 +55,7 @@ function submitFunction(event) {
     return;
   }
   for (var i = 0; i < data.cities.length; i++) {
-    if (data.cities[i] === submissionObject.cityName) {
+    if (data.cities[i].cityName === submissionObject.cityName) {
       submissionObject.entryId = data.nextEntryId;
       const $ulSelectorAll = document.querySelectorAll('ul');
       for (var d = 0; d < $ulSelectorAll.length; d++) {
@@ -65,7 +70,11 @@ function submitFunction(event) {
       return;
     }
   }
-  data.cities.unshift(submissionObject.cityName);
+  data.cities.push({
+    cityName: submissionObject.cityName,
+    cityCount: data.nextCityCount
+  });
+  reshuffleDataCities(data.cities);
   submissionObject.entryId = data.nextEntryId;
   if (data.cities.length % 2 === 0) {
     $secondCityUl.append(reportsPageRender());
@@ -79,6 +88,7 @@ function submitFunction(event) {
       $ulSelectorAll[f].append(newReportEntry(submissionObject));
     }
   }
+  data.nextCityCount++;
   data.nextEntryId++;
   data.entries.unshift(submissionObject);
   $form.reset();
