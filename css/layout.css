@@ -253,6 +253,13 @@
   .entry-form-submit {
     transform: unset;
     padding-bottom: 2rem;
+    margin-top: 3rem;
+  }
+
+  .save-button-holder {
+    width: 61%;
+    margin: 0 auto;
+    padding: unset;
   }
 
   .form-inputs-holder {
@@ -385,5 +392,10 @@
 
   .comments {
     height: 12.25vw;
+  }
+
+  .save-button-holder {
+    width: 100%;
+    margin: unset;
   }
 }
