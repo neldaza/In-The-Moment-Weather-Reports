@@ -83,7 +83,7 @@ Try the application live at https://neldaza.github.io/In-The-Moment-Weather-Repo
 
 5.  Enter the following command into the terminal that is currently cd'd in the project's js folder
     ```
-    shell watchify main.js -o bundle/bundle.js -v
+    watchify main.js -o bundle/bundle.js -v
     ```
     ##### **This is so that any changes you make to any of the modules or main.js are rebuilt into bundle.js in real time upon saving**
 
