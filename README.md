@@ -14,6 +14,8 @@ This idea was my primary motivation for building this application - growing up I
 - jquery
 - Node.js
 - Watchify
+- [Weather API](https://www.weatherapi.com/)
+
 
 ## Live Demo 
 
