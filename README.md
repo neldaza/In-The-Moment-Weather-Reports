@@ -37,6 +37,7 @@ Try the application live at https://neldaza.github.io/In-The-Moment-Weather-Repo
 
 ## Future Stretch Features
 
+- User photo submission optional
 - User can create an account 
 - User can look at other users' reports
 - User can view a live feed of other user's reports
