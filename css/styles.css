@@ -487,3 +487,16 @@ ul {
   overflow-y: scroll;
   overflow-x: scroll;
 }
+
+.optional-image-holder {
+  margin-top: 0.75rem;
+  margin-bottom: 0.25rem;
+}
+
+.add-image-url-p {
+  font-size: 12pt;
+}
+
+.radio-font {
+  font-family: 'Playfair Display', serif;
+}

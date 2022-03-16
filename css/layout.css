@@ -101,6 +101,10 @@
   width: 85%;
 }
 
+.width-80p {
+  width: 80%;
+}
+
 .margin-block-unset {
   margin-block: unset;
 }
@@ -193,6 +197,10 @@
 .header-h2-a {
   position: relative;
   left: -2rem;
+}
+
+.no-url-holder {
+  right: -0.5rem;
 }
 
 @media only screen and (max-device-width: 767px)

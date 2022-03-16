@@ -48,7 +48,7 @@
     </div>
   </header>
   <main class="main">
-  <div data-view="search-bar" class="search-bar-body view">
+  <div data-view="search-bar" class="search-bar-body hidden">
     <div class="container search-bar-holder text-align-center">
       <div class="search-form-and-invalid row text-align-center wrap width-100p">
         <div class="column-half margin-auto">
@@ -123,7 +123,7 @@
       </div>
     </div>
   </div>
-  <div data-view="entry-form" class="view hidden">
+  <div data-view="entry-form" class="view">
     <div class="container whole-entry-form">
       <div class="row height-inherit">
         <form class= "column-full entry-form-submit">
@@ -136,11 +136,26 @@
           <div class="form-inputs-holder row wrap">
             <div class="picture-and-title column-half text-align-center">
               <img src="images/placeholder-image-square.jpg" alt="placeholder-image" class="placeholder-img">
-              <div class="width-60p margin-auto">
+              <div class="width-80p margin-auto">
                 <h3 class="titles margin-block-unset text-align-left titles-80p">Report Title</h3>
                 <input type="text" class="text photo-title" name="photoTitle" id="photoTitle" required>
               </div>
-              <div class="width-60p margin-auto">
+              <div class="optional-image-holder row width-80p margin-auto">
+                <div class="column-half flex justify-content-left align-items-center">
+                  <h3 class="add-image-url-p margin-block-unset">Add Image URL?</h3>
+                </div>
+                <div class="column-half flex">
+                  <div class="column-half flex justify-content-center align-items-center">
+                    <input type="radio" name="url-choice" value="Yes">
+                    <p class="radio-font margin-block-unset">Yes</p>
+                  </div>
+                  <div class="no-url-holder position-relative column-half flex justify-content-center align-items-center">
+                    <input type="radio" name="url-choice" value="No" checked>
+                    <p class="radio-font margin-block-unset">No</p>
+                  </div>
+                </div>
+              </div>
+              <div class="width-80p margin-auto hidden">
                 <h3 class="titles margin-block-unset text-align-left titles-80p">Your Weather Image URL</h3>
                 <input type="text" class="text photo-url" name="photoUrl" id="photoUrl" required>
               </div>
@@ -150,15 +165,15 @@
               <div class="radios row space-evenly align-items-center">
                 <div class="column-third flex align-items-center justify-content-center">
                   <input type="radio" name="choice" value="Yes" required>
-                  <p class="yes">Yes</p>
+                  <p class="radio-font yes">Yes</p>
                 </div>
                 <div class="column-third flex align-items-center justify-content-center">
                   <input type="radio" name="choice" value="Kind Of" required>
-                  <p class="kind-of">Kind Of</p>
+                  <p class="radio-font kind-of">Kind Of</p>
                 </div>
                 <div class="column-third flex align-items-center justify-content-center">
                   <input type="radio" name="choice" value="No" required>
-                  <p class="no">No</p>
+                  <p class="radio-font no">No</p>
                 </div>
               </div>
               <h3 class="titles margin-block-unset text-align-left">Your Personal Weather Report</h3>
