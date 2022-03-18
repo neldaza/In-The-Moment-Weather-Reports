@@ -11,6 +11,7 @@ var submitFunction = require('./modules/submit-function');
 var { showDeleteModal, hideDeleteModal } = require('./modules/show-delete-modal');
 var invalidTextHide = require('./modules/invalid-text-hide');
 var { reshuffleDataCities } = require('./modules/reshuffle-data-cities');
+var { showImageInput, hideImageInput } = require('./modules/toggle-image-input');
 
 var $searchForm = document.querySelector('.search-form');
 var $form = document.querySelector('.entry-form-submit');
@@ -26,6 +27,8 @@ var $headerH2 = document.querySelector('.header-h2-a');
 var $firstCityUl = document.querySelector('.first-city-ul');
 var $secondCityUl = document.querySelector('.second-city-ul');
 var $searchBar = document.querySelector('.search-input');
+var $yesImageUrlRadio = document.querySelector('.yes-url-radio');
+var $noImageUrlRadio = document.querySelector('.no-url-radio');
 
 $photoUrl.addEventListener('input', srcUpdate);
 $form.addEventListener('submit', submitFunction);
@@ -37,6 +40,8 @@ $deleteReportYes.addEventListener('click', deleteReport);
 $goBackButton.addEventListener('click', handleViewNavigation);
 $noButton.addEventListener('click', hideDeleteModal);
 $headerH2.addEventListener('click', handleViewNavigation);
+$yesImageUrlRadio.addEventListener('click', showImageInput);
+$noImageUrlRadio.addEventListener('click', hideImageInput);
 $searchBar.onkeydown = invalidTextHide;
 
 if (data.entries.length === 0) {
@@ -90,7 +95,7 @@ for (var b = 0; b < $liSelectorAll.length; b++) {
   });
 }
 
-},{"./modules/delete-report":2,"./modules/handle-view-navigation":3,"./modules/invalid-text-hide":4,"./modules/main-data-view-for-loop":5,"./modules/new-report-entry":7,"./modules/reports-page-render-for-loop":8,"./modules/reshuffle-data-cities":10,"./modules/show-delete-modal":11,"./modules/src-update":12,"./modules/submit-function":13,"./modules/user-search":15}],2:[function(require,module,exports){
+},{"./modules/delete-report":2,"./modules/handle-view-navigation":3,"./modules/invalid-text-hide":4,"./modules/main-data-view-for-loop":5,"./modules/new-report-entry":7,"./modules/reports-page-render-for-loop":8,"./modules/reshuffle-data-cities":10,"./modules/show-delete-modal":11,"./modules/src-update":12,"./modules/submit-function":13,"./modules/toggle-image-input":15,"./modules/user-search":16}],2:[function(require,module,exports){
 /* eslint-disable no-undef */
 var switchView = require('./switch-view');
 var { reshuffleDataCities, removeAllChildNodes } = require('./reshuffle-data-cities');
@@ -603,6 +608,23 @@ function switchView(viewName) {
 module.exports = switchView;
 
 },{}],15:[function(require,module,exports){
+var $imageInput = document.querySelector('.image-url-holder');
+
+function showImageInput(event) {
+  if ($imageInput.className === 'image-url-holder width-80p margin-auto hidden') {
+    $imageInput.className = 'image-url-holder width-80p margin-auto view';
+  }
+}
+
+function hideImageInput(event) {
+  if ($imageInput.className === 'image-url-holder width-80p margin-auto view') {
+    $imageInput.className = 'image-url-holder width-80p margin-auto hidden';
+  }
+}
+
+module.exports = { showImageInput, hideImageInput };
+
+},{}],16:[function(require,module,exports){
 /* eslint-disable no-undef */
 var switchView = require('./switch-view');
 
