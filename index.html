@@ -135,7 +135,7 @@
           </div>
           <div class="form-inputs-holder row wrap">
             <div class="picture-and-title column-half text-align-center">
-              <img src="images/placeholder-image-square.jpg" alt="placeholder-image" class="placeholder-img">
+              <img src="images/placeholder-image-square.jpg" alt="placeholder-image" class="placeholder-img hidden">
               <div class="width-80p margin-auto">
                 <h3 class="titles margin-block-unset text-align-left titles-80p">Report Title</h3>
                 <input type="text" class="text photo-title" name="photoTitle" id="photoTitle" required>
@@ -146,16 +146,16 @@
                 </div>
                 <div class="column-half flex">
                   <div class="column-half flex justify-content-center align-items-center">
-                    <input type="radio" name="url-choice" value="Yes">
+                    <input class="yes-url-radio" type="radio" name="url-choice" value="Yes">
                     <p class="radio-font margin-block-unset">Yes</p>
                   </div>
                   <div class="no-url-holder position-relative column-half flex justify-content-center align-items-center">
-                    <input type="radio" name="url-choice" value="No" checked>
+                    <input class="no-url-radio" type="radio" name="url-choice" value="No" checked>
                     <p class="radio-font margin-block-unset">No</p>
                   </div>
                 </div>
               </div>
-              <div class="width-80p margin-auto hidden">
+              <div class="image-url-holder width-80p margin-auto hidden">
                 <h3 class="titles margin-block-unset text-align-left titles-80p">Your Weather Image URL</h3>
                 <input type="text" class="text photo-url" name="photoUrl" id="photoUrl" required>
               </div>
