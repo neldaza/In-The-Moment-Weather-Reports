@@ -63,7 +63,7 @@ Try the application live at https://neldaza.github.io/In-The-Moment-Weather-Repo
     cd In-The-Moment-Weather-Reports/js 
     ```
 
-3.  install watchify globally
+3.  install Watchify globally
     ```shell
     npm install sudo --global watchify
     ```
