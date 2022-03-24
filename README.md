@@ -65,7 +65,7 @@ Try the application live at https://neldaza.github.io/In-The-Moment-Weather-Repo
 
 3.  install Watchify globally
     ```shell
-    npm install sudo --global watchify
+    sudo npm install --g watchify
     ```
 
 4.  Enter the following command into the terminal that is currently cd'd in the project's js folder
