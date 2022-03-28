@@ -6,6 +6,7 @@ var handleViewNavigation = require('./modules/handle-view-navigation');
 var mainDataViewForLoop = require('./modules/main-data-view-for-loop');
 var reportsPageRenderForLoop = require('./modules/reports-page-render-for-loop');
 var newReportEntry = require('./modules/new-report-entry-with-img');
+var newReportEntryNoImg = require('./modules/new-report-entry-no-img');
 
 var { userSearch } = require('./modules/user-search');
 var submitFunction = require('./modules/submit-function');
@@ -73,7 +74,11 @@ for (var w = 0; w < data.entries.length; w++) {
   var $ulSelectorAll = document.querySelectorAll('ul');
   for (var x = 0; x < $ulSelectorAll.length; x++) {
     if ($ulSelectorAll[x].getAttribute('data-city-id') === data.entries[w].cityName) {
-      $ulSelectorAll[x].prepend(newReportEntry(data.entries[w]));
+      if (!data.entries[w].photoUrlValue) {
+        $ulSelectorAll[x].prepend(newReportEntryNoImg(data.entries[w]));
+      } else {
+        $ulSelectorAll[x].prepend(newReportEntry(data.entries[w]));
+      }
       $ulSelectorAll[x].addEventListener('click', e => {
         const target = e.target;
         if (target.matches('a')) {
@@ -96,7 +101,7 @@ for (var b = 0; b < $liSelectorAll.length; b++) {
   });
 }
 
-},{"./modules/delete-report":2,"./modules/handle-view-navigation":3,"./modules/invalid-text-hide":4,"./modules/main-data-view-for-loop":5,"./modules/new-report-entry-with-img":8,"./modules/reports-page-render-for-loop":9,"./modules/reshuffle-data-cities":11,"./modules/show-delete-modal":12,"./modules/src-update":13,"./modules/submit-function":14,"./modules/toggle-image-input":16,"./modules/user-search":17}],2:[function(require,module,exports){
+},{"./modules/delete-report":2,"./modules/handle-view-navigation":3,"./modules/invalid-text-hide":4,"./modules/main-data-view-for-loop":5,"./modules/new-report-entry-no-img":7,"./modules/new-report-entry-with-img":8,"./modules/reports-page-render-for-loop":9,"./modules/reshuffle-data-cities":11,"./modules/show-delete-modal":12,"./modules/src-update":13,"./modules/submit-function":14,"./modules/toggle-image-input":16,"./modules/user-search":17}],2:[function(require,module,exports){
 /* eslint-disable no-undef */
 var switchView = require('./switch-view');
 var { reshuffleDataCities, removeAllChildNodes } = require('./reshuffle-data-cities');
@@ -313,10 +318,10 @@ function newReportEntryNoImg(entry) {
   var deleteRowTextA = document.createElement('a');
   var deleteRowTextContent = document.createTextNode('Delete This Report');
 
-  mainRowLi.setAttribute('class', 'entry-li row flex-wrap-wrapped width-100p');
+  mainRowLi.setAttribute('class', 'entry-li row flex-wrap-wrapped width-100p justify-content-center');
   mainRowLi.setAttribute('data-entry-id', entry.entryId);
   mainRowLi.setAttribute('data-city-id', entry.cityName);
-  secondColumnHalfDiv.setAttribute('class', 'column-full');
+  secondColumnHalfDiv.setAttribute('class', 'column width-50');
   timeDateTitleDiv.setAttribute('class', 'list-time-date-and-title row align-items-center');
   listTitleDiv.setAttribute('class', 'list-title column-75');
   titleH2.setAttribute('class', 'margin-block-unset');
@@ -706,12 +711,14 @@ module.exports = switchView;
 },{}],16:[function(require,module,exports){
 var $imageInput = document.querySelector('.image-url-holder');
 var $placeholderImage = document.querySelector('.placeholder-img');
+var $formInputsHolder = document.querySelector('.form-inputs-holder');
 
 function showImageInput(event) {
   if ($imageInput.className === 'image-url-holder width-80p margin-auto hidden' &&
     $placeholderImage.className === 'placeholder-img hidden') {
     $imageInput.className = 'image-url-holder width-80p margin-auto view';
     $placeholderImage.className = 'placeholder-img view';
+    $formInputsHolder.className = 'form-inputs-holder';
   }
 }
 

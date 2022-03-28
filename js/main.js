@@ -5,6 +5,7 @@ var handleViewNavigation = require('./modules/handle-view-navigation');
 var mainDataViewForLoop = require('./modules/main-data-view-for-loop');
 var reportsPageRenderForLoop = require('./modules/reports-page-render-for-loop');
 var newReportEntry = require('./modules/new-report-entry-with-img');
+var newReportEntryNoImg = require('./modules/new-report-entry-no-img');
 
 var { userSearch } = require('./modules/user-search');
 var submitFunction = require('./modules/submit-function');
@@ -72,7 +73,11 @@ for (var w = 0; w < data.entries.length; w++) {
   var $ulSelectorAll = document.querySelectorAll('ul');
   for (var x = 0; x < $ulSelectorAll.length; x++) {
     if ($ulSelectorAll[x].getAttribute('data-city-id') === data.entries[w].cityName) {
-      $ulSelectorAll[x].prepend(newReportEntry(data.entries[w]));
+      if (!data.entries[w].photoUrlValue) {
+        $ulSelectorAll[x].prepend(newReportEntryNoImg(data.entries[w]));
+      } else {
+        $ulSelectorAll[x].prepend(newReportEntry(data.entries[w]));
+      }
       $ulSelectorAll[x].addEventListener('click', e => {
         const target = e.target;
         if (target.matches('a')) {
