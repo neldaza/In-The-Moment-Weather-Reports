@@ -4,7 +4,8 @@ var deleteReport = require('./modules/delete-report');
 var handleViewNavigation = require('./modules/handle-view-navigation');
 var mainDataViewForLoop = require('./modules/main-data-view-for-loop');
 var reportsPageRenderForLoop = require('./modules/reports-page-render-for-loop');
-var newReportEntry = require('./modules/new-report-entry');
+var newReportEntry = require('./modules/new-report-entry-with-img');
+
 var { userSearch } = require('./modules/user-search');
 var submitFunction = require('./modules/submit-function');
 var { showDeleteModal, hideDeleteModal } = require('./modules/show-delete-modal');
