@@ -5,12 +5,15 @@ var deleteReport = require('./modules/delete-report');
 var handleViewNavigation = require('./modules/handle-view-navigation');
 var mainDataViewForLoop = require('./modules/main-data-view-for-loop');
 var reportsPageRenderForLoop = require('./modules/reports-page-render-for-loop');
-var newReportEntry = require('./modules/new-report-entry');
+var newReportEntry = require('./modules/new-report-entry-with-img');
+var newReportEntryNoImg = require('./modules/new-report-entry-no-img');
+
 var { userSearch } = require('./modules/user-search');
 var submitFunction = require('./modules/submit-function');
 var { showDeleteModal, hideDeleteModal } = require('./modules/show-delete-modal');
 var invalidTextHide = require('./modules/invalid-text-hide');
 var { reshuffleDataCities } = require('./modules/reshuffle-data-cities');
+var { showImageInput, hideImageInput } = require('./modules/toggle-image-input');
 
 var $searchForm = document.querySelector('.search-form');
 var $form = document.querySelector('.entry-form-submit');
@@ -26,6 +29,8 @@ var $headerH2 = document.querySelector('.header-h2-a');
 var $firstCityUl = document.querySelector('.first-city-ul');
 var $secondCityUl = document.querySelector('.second-city-ul');
 var $searchBar = document.querySelector('.search-input');
+var $yesImageUrlRadio = document.querySelector('.yes-url-radio');
+var $noImageUrlRadio = document.querySelector('.no-url-radio');
 
 $photoUrl.addEventListener('input', srcUpdate);
 $form.addEventListener('submit', submitFunction);
@@ -37,6 +42,8 @@ $deleteReportYes.addEventListener('click', deleteReport);
 $goBackButton.addEventListener('click', handleViewNavigation);
 $noButton.addEventListener('click', hideDeleteModal);
 $headerH2.addEventListener('click', handleViewNavigation);
+$yesImageUrlRadio.addEventListener('click', showImageInput);
+$noImageUrlRadio.addEventListener('click', hideImageInput);
 $searchBar.onkeydown = invalidTextHide;
 
 if (data.entries.length === 0) {
@@ -67,7 +74,11 @@ for (var w = 0; w < data.entries.length; w++) {
   var $ulSelectorAll = document.querySelectorAll('ul');
   for (var x = 0; x < $ulSelectorAll.length; x++) {
     if ($ulSelectorAll[x].getAttribute('data-city-id') === data.entries[w].cityName) {
-      $ulSelectorAll[x].prepend(newReportEntry(data.entries[w]));
+      if (!data.entries[w].photoUrlValue) {
+        $ulSelectorAll[x].prepend(newReportEntryNoImg(data.entries[w]));
+      } else {
+        $ulSelectorAll[x].prepend(newReportEntry(data.entries[w]));
+      }
       $ulSelectorAll[x].addEventListener('click', e => {
         const target = e.target;
         if (target.matches('a')) {
@@ -90,7 +101,7 @@ for (var b = 0; b < $liSelectorAll.length; b++) {
   });
 }
 
-},{"./modules/delete-report":2,"./modules/handle-view-navigation":3,"./modules/invalid-text-hide":4,"./modules/main-data-view-for-loop":5,"./modules/new-report-entry":7,"./modules/reports-page-render-for-loop":8,"./modules/reshuffle-data-cities":10,"./modules/show-delete-modal":11,"./modules/src-update":12,"./modules/submit-function":13,"./modules/user-search":15}],2:[function(require,module,exports){
+},{"./modules/delete-report":2,"./modules/handle-view-navigation":3,"./modules/invalid-text-hide":4,"./modules/main-data-view-for-loop":5,"./modules/new-report-entry-no-img":7,"./modules/new-report-entry-with-img":8,"./modules/reports-page-render-for-loop":9,"./modules/reshuffle-data-cities":11,"./modules/show-delete-modal":12,"./modules/src-update":13,"./modules/submit-function":14,"./modules/toggle-image-input":16,"./modules/user-search":17}],2:[function(require,module,exports){
 /* eslint-disable no-undef */
 var switchView = require('./switch-view');
 var { reshuffleDataCities, removeAllChildNodes } = require('./reshuffle-data-cities');
@@ -139,34 +150,36 @@ function deleteReport(event) {
   }
 
   var $cityNameHolderSelectorAll = document.querySelectorAll('.reports-city-name-holder');
-  for (var n1 = 0; n1 < $cityNameHolderSelectorAll.length; n1++) {
-    if ($cityNameHolderSelectorAll[n1].getAttribute('data-view') === deletedCity[0].cityName) {
-      var $dataViewDivSelectorAll = document.querySelectorAll('.data-view-div');
-      for (x1 = 0; x1 < $dataViewDivSelectorAll.length; x1++) {
-        if ($dataViewDivSelectorAll[x1].getAttribute('data') === 'new-main-data-view' &&
+  if (deletedCity[0]) {
+    for (var n1 = 0; n1 < $cityNameHolderSelectorAll.length; n1++) {
+      if ($cityNameHolderSelectorAll[n1].getAttribute('data-view') === deletedCity[0].cityName) {
+        var $dataViewDivSelectorAll = document.querySelectorAll('.data-view-div');
+        for (x1 = 0; x1 < $dataViewDivSelectorAll.length; x1++) {
+          if ($dataViewDivSelectorAll[x1].getAttribute('data') === 'new-main-data-view' &&
         $dataViewDivSelectorAll[x1].getAttribute('data-view') === deletedCity[0].cityName) {
-          var $main = document.querySelector('.main');
-          $main.removeChild($divSelectorAll[x1]);
+            var $main = document.querySelector('.main');
+            $main.removeChild($divSelectorAll[x1]);
+          }
         }
-      }
-      removeAllChildNodes($firstCityUl);
-      removeAllChildNodes($secondCityUl);
-      var setCities = new Set(presentCities);
-      var final = Array.from(setCities);
-      reshuffleDataCities(final);
-      data.cities = final;
-      for (d = 0; d < data.cities.length; d++) {
-        if (data.cities[d].cityCount === 1) {
-          $firstCityUl.append(reportsPageRenderForLoop(data.cities[d]));
-        } else if (data.cities[d].cityCount % 2 === 0) {
-          $secondCityUl.append(reportsPageRenderForLoop(data.cities[d]));
-        } else {
-          $firstCityUl.append(reportsPageRenderForLoop(data.cities[d]));
+        removeAllChildNodes($firstCityUl);
+        removeAllChildNodes($secondCityUl);
+        var setCities = new Set(presentCities);
+        var final = Array.from(setCities);
+        reshuffleDataCities(final);
+        data.cities = final;
+        for (d = 0; d < data.cities.length; d++) {
+          if (data.cities[d].cityCount === 1) {
+            $firstCityUl.append(reportsPageRenderForLoop(data.cities[d]));
+          } else if (data.cities[d].cityCount % 2 === 0) {
+            $secondCityUl.append(reportsPageRenderForLoop(data.cities[d]));
+          } else {
+            $firstCityUl.append(reportsPageRenderForLoop(data.cities[d]));
+          }
+          switchView('reports-page');
+          data.editing = null;
         }
-        switchView('reports-page');
-        data.editing = null;
+        return;
       }
-      return;
     }
   }
 
@@ -176,7 +189,7 @@ function deleteReport(event) {
 
 module.exports = deleteReport;
 
-},{"./reports-page-render-for-loop":8,"./reshuffle-data-cities":10,"./switch-view":14}],3:[function(require,module,exports){
+},{"./reports-page-render-for-loop":9,"./reshuffle-data-cities":11,"./switch-view":15}],3:[function(require,module,exports){
 var switchView = require('./switch-view');
 
 var $form = document.querySelector('.entry-form-submit');
@@ -195,7 +208,7 @@ function handleViewNavigation(event) {
 
 module.exports = handleViewNavigation;
 
-},{"./switch-view":14}],4:[function(require,module,exports){
+},{"./switch-view":15}],4:[function(require,module,exports){
 var $invalidCity = document.querySelector('.invalid-city');
 var $invalidNetwork = document.querySelector('.invalid-network');
 
@@ -276,6 +289,96 @@ function newMainDataView() {
 module.exports = newMainDataView;
 
 },{}],7:[function(require,module,exports){
+var { showDeleteModal } = require('./show-delete-modal');
+
+function newReportEntryNoImg(entry) {
+
+  var mainRowLi = document.createElement('li');
+  var secondColumnHalfDiv = document.createElement('div');
+  var timeDateTitleDiv = document.createElement('div');
+  var listTitleDiv = document.createElement('div');
+  var titleH2 = document.createElement('h2');
+  var listTimeDateDiv = document.createElement('div');
+  var dateH3 = document.createElement('h3');
+  var timeH3 = document.createElement('h3');
+  var descriptionRowDiv = document.createElement('div');
+  var listDescriptionP = document.createElement('p');
+  var wasWeatherRowDiv = document.createElement('div');
+  var wasWeatherDiv = document.createElement('div');
+  var wasWeatherH4 = document.createElement('h4');
+  var wasWeatherPDiv = document.createElement('div');
+  var wasWeatherP = document.createElement('p');
+  var titleH2TextContent = document.createTextNode(entry.photoTitleValue);
+  var dateH3TextContent = document.createTextNode(entry.date);
+  var timeh3TextContent = document.createTextNode(entry.time);
+  var listDescriptionPTextContent = document.createTextNode(entry.commentsValue);
+  var wasWeatherH4TextContent = document.createTextNode('Was the official weather report accurate for this day?');
+  var wasWeatherPTextContent = document.createTextNode(entry.radioChecked);
+  var deleteReportRowDiv = document.createElement('div');
+  var firstColumnHalfDeleteRow = document.createElement('div');
+  var secondColumnHalfDeleteRow = document.createElement('div');
+  var deleteRowTextA = document.createElement('a');
+  var deleteRowTextContent = document.createTextNode('Delete This Report');
+
+  mainRowLi.setAttribute('class', 'entry-li row flex-wrap-wrapped width-100p justify-content-center');
+  mainRowLi.setAttribute('data-entry-id', entry.entryId);
+  mainRowLi.setAttribute('data-city-id', entry.cityName);
+  secondColumnHalfDiv.setAttribute('class', 'no-image-entry column');
+  timeDateTitleDiv.setAttribute('class', 'list-time-date-and-title row align-items-center');
+  listTitleDiv.setAttribute('class', 'list-title column-75');
+  titleH2.setAttribute('class', 'margin-block-unset');
+  titleH2.appendChild(titleH2TextContent);
+  listTimeDateDiv.setAttribute('class', 'list-time-and-date column-25');
+  dateH3.setAttribute('class', 'margin-block-unset');
+  dateH3.appendChild(dateH3TextContent);
+  timeH3.setAttribute('class', 'margin-block-unset');
+  timeH3.appendChild(timeh3TextContent);
+  descriptionRowDiv.setAttribute('class', 'row');
+  listDescriptionP.setAttribute('class', 'list-description column-full margin-block-unset overflow');
+  listDescriptionP.appendChild(listDescriptionPTextContent);
+  wasWeatherRowDiv.setAttribute('class', 'was-weather row');
+  wasWeatherDiv.setAttribute('class', 'column-75 flex align-items-center');
+  wasWeatherH4.setAttribute('class', 'was-weather-h4');
+  wasWeatherH4.appendChild(wasWeatherH4TextContent);
+  wasWeatherPDiv.setAttribute('class', 'column-25 flex align-items-center justify-content-center');
+  wasWeatherP.setAttribute('class', 'was-weather-p');
+  wasWeatherP.appendChild(wasWeatherPTextContent);
+  deleteReportRowDiv.setAttribute('class', 'delete-report row border-bottom-white width-100p');
+  firstColumnHalfDeleteRow.setAttribute('class', 'column-half');
+  secondColumnHalfDeleteRow.setAttribute('class', 'column-half text-align-right');
+  deleteRowTextA.setAttribute('class', 'delete-report-text margin-block-unset');
+  mainRowLi.addEventListener('click', e => {
+    const target = e.target;
+    if (target.matches('.delete-report-text')) {
+      showDeleteModal(e);
+    }
+  });
+
+  deleteRowTextA.appendChild(deleteRowTextContent);
+
+  listTitleDiv.append(titleH2);
+  listTimeDateDiv.append(timeH3, dateH3);
+  timeDateTitleDiv.append(listTitleDiv, listTimeDateDiv);
+
+  descriptionRowDiv.append(listDescriptionP);
+
+  wasWeatherDiv.append(wasWeatherH4);
+  wasWeatherPDiv.append(wasWeatherP);
+  wasWeatherRowDiv.append(wasWeatherDiv, wasWeatherPDiv);
+
+  secondColumnHalfDeleteRow.append(deleteRowTextA);
+  deleteReportRowDiv.append(firstColumnHalfDeleteRow, secondColumnHalfDeleteRow);
+
+  secondColumnHalfDiv.append(timeDateTitleDiv, descriptionRowDiv, wasWeatherRowDiv, deleteReportRowDiv);
+
+  mainRowLi.append(secondColumnHalfDiv);
+
+  return mainRowLi;
+}
+
+module.exports = newReportEntryNoImg;
+
+},{"./show-delete-modal":12}],8:[function(require,module,exports){
 var { showDeleteModal } = require('./show-delete-modal');
 
 function newReportEntry(entry) {
@@ -372,7 +475,7 @@ function newReportEntry(entry) {
 
 module.exports = newReportEntry;
 
-},{"./show-delete-modal":11}],8:[function(require,module,exports){
+},{"./show-delete-modal":12}],9:[function(require,module,exports){
 /* eslint-disable no-undef */
 var handleViewNavigation = require('./handle-view-navigation');
 
@@ -403,7 +506,7 @@ function reportsPageRenderForLoop(city) {
 
 module.exports = reportsPageRenderForLoop;
 
-},{"./handle-view-navigation":3}],9:[function(require,module,exports){
+},{"./handle-view-navigation":3}],10:[function(require,module,exports){
 /* eslint-disable no-undef */
 var handleViewNavigation = require('./handle-view-navigation');
 
@@ -440,7 +543,7 @@ function reportsPageRender() {
 
 module.exports = reportsPageRender;
 
-},{"./handle-view-navigation":3}],10:[function(require,module,exports){
+},{"./handle-view-navigation":3}],11:[function(require,module,exports){
 /* eslint-disable no-undef */
 
 function reshuffleDataCities(citiesArray) {
@@ -459,7 +562,7 @@ function removeAllChildNodes(parent) {
 
 module.exports = { reshuffleDataCities, removeAllChildNodes };
 
-},{}],11:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 /* eslint-disable no-undef */
 const $deleteModal = document.querySelector('.whole-delete-modal');
 
@@ -478,7 +581,7 @@ function hideDeleteModal(event) {
 
 module.exports = { showDeleteModal, hideDeleteModal };
 
-},{}],12:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 var $formPlaceholderImg = document.querySelector('.placeholder-img');
 var $photoUrl = document.querySelector('.photo-url');
 
@@ -489,11 +592,12 @@ function srcUpdate(event) {
 
 module.exports = srcUpdate;
 
-},{}],13:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 /* eslint-disable no-undef */
 
 var reportsPageRender = require('./reports-page-render');
-var newReportEntry = require('./new-report-entry');
+var newReportEntry = require('./new-report-entry-with-img');
+var newReportEntryNoImg = require('./new-report-entry-no-img');
 var newMainDataView = require('./new-main-data-view');
 var switchView = require('./switch-view');
 var { showDeleteModal } = require('./show-delete-modal');
@@ -529,7 +633,11 @@ function submitFunction(event) {
     for (var c = 0; c < $ulSelectorAll.length; c++) {
       if ($ulSelectorAll[c].getAttribute('data-city-id') === submissionObject.cityName) {
         submissionObject.entryId = 1;
-        $ulSelectorAll[c].append(newReportEntry(submissionObject));
+        if (!submissionObject.photoUrlValue) {
+          $ulSelectorAll[c].append(newReportEntryNoImg(submissionObject));
+        } else {
+          $ulSelectorAll[c].append(newReportEntry(submissionObject));
+        }
         $ulSelectorAll[c].addEventListener('click', e => {
           const target = e.target;
           if (target.matches('a')) {
@@ -552,7 +660,11 @@ function submitFunction(event) {
       const $ulSelectorAll = document.querySelectorAll('ul');
       for (var d = 0; d < $ulSelectorAll.length; d++) {
         if ($ulSelectorAll[d].getAttribute('data-city-id') === submissionObject.cityName) {
-          $ulSelectorAll[d].append(newReportEntry(submissionObject));
+          if (!submissionObject.photoUrlValue) {
+            $ulSelectorAll[d].append(newReportEntryNoImg(submissionObject));
+          } else {
+            $ulSelectorAll[d].append(newReportEntry(submissionObject));
+          }
         }
       }
       data.nextEntryId++;
@@ -577,7 +689,11 @@ function submitFunction(event) {
   const $ulSelectorAll = document.querySelectorAll('ul');
   for (var f = 0; f < $ulSelectorAll.length; f++) {
     if ($ulSelectorAll[f].getAttribute('data-city-id') === submissionObject.cityName) {
-      $ulSelectorAll[f].append(newReportEntry(submissionObject));
+      if (!submissionObject.photoUrlValue) {
+        $ulSelectorAll[f].append(newReportEntryNoImg(submissionObject));
+      } else {
+        $ulSelectorAll[f].append(newReportEntry(submissionObject));
+      }
     }
   }
   data.nextCityCount++;
@@ -589,7 +705,7 @@ function submitFunction(event) {
 
 module.exports = submitFunction;
 
-},{"./new-main-data-view":6,"./new-report-entry":7,"./reports-page-render":9,"./reshuffle-data-cities":10,"./show-delete-modal":11,"./switch-view":14}],14:[function(require,module,exports){
+},{"./new-main-data-view":6,"./new-report-entry-no-img":7,"./new-report-entry-with-img":8,"./reports-page-render":10,"./reshuffle-data-cities":11,"./show-delete-modal":12,"./switch-view":15}],15:[function(require,module,exports){
 function switchView(viewName) {
   var $viewSelectorAll = document.querySelectorAll('.view');
   for (var i = 0; i < $viewSelectorAll.length; i++) {
@@ -602,7 +718,29 @@ function switchView(viewName) {
 }
 module.exports = switchView;
 
-},{}],15:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
+var $imageInput = document.querySelector('.image-url-holder');
+var $placeholderImage = document.querySelector('.placeholder-img');
+
+function showImageInput(event) {
+  if ($imageInput.className === 'image-url-holder width-80p margin-auto hidden' &&
+    $placeholderImage.className === 'placeholder-img hidden') {
+    $imageInput.className = 'image-url-holder width-80p margin-auto view';
+    $placeholderImage.className = 'placeholder-img view';
+  }
+}
+
+function hideImageInput(event) {
+  if ($imageInput.className === 'image-url-holder width-80p margin-auto view' &&
+    $placeholderImage.className === 'placeholder-img view') {
+    $imageInput.className = 'image-url-holder width-80p margin-auto hidden';
+    $placeholderImage.className = 'placeholder-img hidden';
+  }
+}
+
+module.exports = { showImageInput, hideImageInput };
+
+},{}],17:[function(require,module,exports){
 /* eslint-disable no-undef */
 var switchView = require('./switch-view');
 
@@ -687,4 +825,4 @@ function userSearch(event) {
 
 module.exports = { userSearch };
 
-},{"./switch-view":14}]},{},[1]);
+},{"./switch-view":15}]},{},[1]);

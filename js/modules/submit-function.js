@@ -1,7 +1,8 @@
 /* eslint-disable no-undef */
 
 var reportsPageRender = require('./reports-page-render');
-var newReportEntry = require('./new-report-entry');
+var newReportEntry = require('./new-report-entry-with-img');
+var newReportEntryNoImg = require('./new-report-entry-no-img');
 var newMainDataView = require('./new-main-data-view');
 var switchView = require('./switch-view');
 var { showDeleteModal } = require('./show-delete-modal');
@@ -37,7 +38,11 @@ function submitFunction(event) {
     for (var c = 0; c < $ulSelectorAll.length; c++) {
       if ($ulSelectorAll[c].getAttribute('data-city-id') === submissionObject.cityName) {
         submissionObject.entryId = 1;
-        $ulSelectorAll[c].append(newReportEntry(submissionObject));
+        if (!submissionObject.photoUrlValue) {
+          $ulSelectorAll[c].append(newReportEntryNoImg(submissionObject));
+        } else {
+          $ulSelectorAll[c].append(newReportEntry(submissionObject));
+        }
         $ulSelectorAll[c].addEventListener('click', e => {
           const target = e.target;
           if (target.matches('a')) {
@@ -60,7 +65,11 @@ function submitFunction(event) {
       const $ulSelectorAll = document.querySelectorAll('ul');
       for (var d = 0; d < $ulSelectorAll.length; d++) {
         if ($ulSelectorAll[d].getAttribute('data-city-id') === submissionObject.cityName) {
-          $ulSelectorAll[d].append(newReportEntry(submissionObject));
+          if (!submissionObject.photoUrlValue) {
+            $ulSelectorAll[d].append(newReportEntryNoImg(submissionObject));
+          } else {
+            $ulSelectorAll[d].append(newReportEntry(submissionObject));
+          }
         }
       }
       data.nextEntryId++;
@@ -85,7 +94,11 @@ function submitFunction(event) {
   const $ulSelectorAll = document.querySelectorAll('ul');
   for (var f = 0; f < $ulSelectorAll.length; f++) {
     if ($ulSelectorAll[f].getAttribute('data-city-id') === submissionObject.cityName) {
-      $ulSelectorAll[f].append(newReportEntry(submissionObject));
+      if (!submissionObject.photoUrlValue) {
+        $ulSelectorAll[f].append(newReportEntryNoImg(submissionObject));
+      } else {
+        $ulSelectorAll[f].append(newReportEntry(submissionObject));
+      }
     }
   }
   data.nextCityCount++;

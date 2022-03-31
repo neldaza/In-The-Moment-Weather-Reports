@@ -2,6 +2,10 @@
   display: none !important;
 }
 
+.visibility-hidden {
+  visibility: hidden !important;
+}
+
 .container {
   max-width: 575px;
   margin: 0 auto;
@@ -14,6 +18,10 @@
 
 .width-60p {
   width: 60%;
+}
+
+.width-inherit {
+  width: inherit;
 }
 
 .row {
@@ -99,6 +107,10 @@
 
 .column-85 {
   width: 85%;
+}
+
+.width-80p {
+  width: 80%;
 }
 
 .margin-block-unset {
@@ -195,6 +207,27 @@
   left: -2rem;
 }
 
+.no-url-holder {
+  right: -0.5rem;
+}
+
+.no-image-entry {
+  width: 100%;
+}
+
+.add-image-url-p {
+  font-size: 12pt;
+}
+
+.optional-image-holder {
+  margin-top: 0.75rem;
+  margin-bottom: 0.25rem;
+}
+
+.form-save {
+  width: 25%;
+}
+
 @media only screen and (max-device-width: 767px)
   and (orientation: landscape) {
   .container {
@@ -225,6 +258,14 @@
     padding: 0 0.75rem;
   }
 
+  .padding-0 {
+    padding: 0;
+  }
+
+  .padding-left-unset {
+    padding-left: unset;
+  }
+
   .column-half {
     width: 50%;
   }
@@ -252,14 +293,7 @@
     margin-top: 3rem;
   }
 
-  .save-button-holder {
-    width: 61%;
-    margin: 0 auto;
-    padding: unset;
-  }
-
   .form-inputs-holder {
-    width: 80%;
     margin: 0 auto;
     justify-content: center;
   }
@@ -282,16 +316,32 @@
   .search-form-and-invalid {
     display: block;
   }
+
+  .no-image-entry {
+    width: 50%;
+  }
+
+  .add-image-url-p {
+    font-size: 10pt;
+  }
+
+  .save-button-holder {
+    justify-content: right;
+    width: inherit;
+  }
+
+  .form-save {
+    width: 20%;
+  }
+
+  .form-submit-holder {
+    width: 80%;
+  }
 }
 
 @media only screen and (min-width: 1280px) {
   .container {
     max-width: 900px;
-  }
-
-  .column-full,
-  .column-half {
-    padding: 0 0.75rem;
   }
 
   .column-half {
@@ -358,12 +408,6 @@
     padding: 0;
   }
 
-  .form-inputs-holder {
-    width: 100%;
-    margin: unset;
-    margin-top: 3rem;
-  }
-
   .entry-form-submit {
     transform: none;
     margin-top: 5rem;
@@ -371,11 +415,19 @@
 
   .form-save {
     margin: 0;
-    width: 10%;
+    width: 20%;
   }
 
-  .save-button-holder {
-    width: 100%;
-    margin: unset;
+  .picture-and-title {
+    margin-bottom: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: center;
+  }
+
+  .optional-image-holder {
+    margin-top: 0.75rem;
+    margin-bottom: 0.75rem;
   }
 }
