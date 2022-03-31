@@ -7,7 +7,9 @@ function showImageInput(event) {
     $placeholderImage.className === 'placeholder-img hidden') {
     $imageInput.className = 'image-url-holder width-80p margin-auto view';
     $placeholderImage.className = 'placeholder-img view';
-    $formInputsHolder.className = 'form-inputs-holder-image';
+    if (window.innerWidth >= 1280) {
+      $formInputsHolder.className = 'form-inputs-holder-image';
+    }
   }
 }
 
