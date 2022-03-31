@@ -321,7 +321,7 @@ function newReportEntryNoImg(entry) {
   mainRowLi.setAttribute('class', 'entry-li row flex-wrap-wrapped width-100p justify-content-center');
   mainRowLi.setAttribute('data-entry-id', entry.entryId);
   mainRowLi.setAttribute('data-city-id', entry.cityName);
-  secondColumnHalfDiv.setAttribute('class', 'column width-50');
+  secondColumnHalfDiv.setAttribute('class', 'no-image-entry column');
   timeDateTitleDiv.setAttribute('class', 'list-time-date-and-title row align-items-center');
   listTitleDiv.setAttribute('class', 'list-title column-75');
   titleH2.setAttribute('class', 'margin-block-unset');
@@ -718,7 +718,7 @@ function showImageInput(event) {
     $placeholderImage.className === 'placeholder-img hidden') {
     $imageInput.className = 'image-url-holder width-80p margin-auto view';
     $placeholderImage.className = 'placeholder-img view';
-    $formInputsHolder.className = 'form-inputs-holder';
+    $formInputsHolder.className = 'form-inputs-holder-image';
   }
 }
 
@@ -727,6 +727,8 @@ function hideImageInput(event) {
     $placeholderImage.className === 'placeholder-img view') {
     $imageInput.className = 'image-url-holder width-80p margin-auto hidden';
     $placeholderImage.className = 'placeholder-img hidden';
+    $formInputsHolder.className = 'form-inputs-holder';
+
   }
 }
 

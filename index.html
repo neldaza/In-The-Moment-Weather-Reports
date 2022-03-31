@@ -136,22 +136,24 @@
           <div class="form-inputs-holder">
             <div class="picture-and-title column-half text-align-center">
               <img src="images/placeholder-image-square.jpg" alt="placeholder-image" class="placeholder-img hidden">
-              <div class="width-80p margin-auto">
-                <h3 class="titles margin-block-unset text-align-left titles-80p">Report Title</h3>
-                <input type="text" class="text photo-title" name="photoTitle" id="photoTitle" required>
-              </div>
-              <div class="optional-image-holder row width-80p margin-auto">
-                <div class="column-half flex justify-content-left align-items-center">
-                  <h3 class="add-image-url-p margin-block-unset">Add Image URL?</h3>
+              <div class="title-and-image-url-inputs width-100p">
+                <div class="width-80p margin-auto">
+                  <h3 class="titles margin-block-unset text-align-left titles-80p">Report Title</h3>
+                  <input type="text" class="text photo-title" name="photoTitle" id="photoTitle" required>
                 </div>
-                <div class="column-half flex">
-                  <div class="column-half flex justify-content-center align-items-center">
-                    <input class="yes-url-radio" type="radio" name="url-choice" value="Yes">
-                    <p class="radio-font margin-block-unset">Yes</p>
+                <div class="optional-image-holder row width-80p margin-auto">
+                  <div class="column-half padding-left-unset flex justify-content-left align-items-center">
+                    <h3 class="add-image-url-p margin-block-unset">Add Image URL?</h3>
                   </div>
-                  <div class="no-url-holder position-relative column-half flex justify-content-center align-items-center">
-                    <input class="no-url-radio" type="radio" name="url-choice" value="No" checked>
-                    <p class="radio-font margin-block-unset">No</p>
+                  <div class="column-half flex">
+                    <div class="column-half flex justify-content-center align-items-center">
+                      <input class="yes-url-radio" type="radio" name="url-choice" value="Yes">
+                      <p class="radio-font margin-block-unset">Yes</p>
+                    </div>
+                    <div class="no-url-holder position-relative column-half flex justify-content-center align-items-center">
+                      <input class="no-url-radio" type="radio" name="url-choice" value="No" checked>
+                      <p class="radio-font margin-block-unset">No</p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -180,8 +182,10 @@
               <textarea class="comments" name="comments" id="comments" type="text" required></textarea>
             </div>
           </div>
-          <div class="column-full text-align-right save-button-holder">
-            <button class="form-save button" type="submit">SAVE</button>
+          <div class="save-button-holder row">
+            <div class="column-half text-align-right">
+              <button class="form-save button" type="submit">SAVE</button>
+            </div>
           </div>
         </form>
       </div>
