@@ -65,7 +65,11 @@ function submitFunction(event) {
       const $ulSelectorAll = document.querySelectorAll('ul');
       for (var d = 0; d < $ulSelectorAll.length; d++) {
         if ($ulSelectorAll[d].getAttribute('data-city-id') === submissionObject.cityName) {
-          $ulSelectorAll[d].append(newReportEntry(submissionObject));
+          if (!submissionObject.photoUrlValue) {
+            $ulSelectorAll[d].append(newReportEntryNoImg(submissionObject));
+          } else {
+            $ulSelectorAll[d].append(newReportEntry(submissionObject));
+          }
         }
       }
       data.nextEntryId++;
@@ -90,7 +94,11 @@ function submitFunction(event) {
   const $ulSelectorAll = document.querySelectorAll('ul');
   for (var f = 0; f < $ulSelectorAll.length; f++) {
     if ($ulSelectorAll[f].getAttribute('data-city-id') === submissionObject.cityName) {
-      $ulSelectorAll[f].append(newReportEntry(submissionObject));
+      if (!submissionObject.photoUrlValue) {
+        $ulSelectorAll[f].append(newReportEntryNoImg(submissionObject));
+      } else {
+        $ulSelectorAll[f].append(newReportEntry(submissionObject));
+      }
     }
   }
   data.nextCityCount++;

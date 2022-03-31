@@ -150,34 +150,36 @@ function deleteReport(event) {
   }
 
   var $cityNameHolderSelectorAll = document.querySelectorAll('.reports-city-name-holder');
-  for (var n1 = 0; n1 < $cityNameHolderSelectorAll.length; n1++) {
-    if ($cityNameHolderSelectorAll[n1].getAttribute('data-view') === deletedCity[0].cityName) {
-      var $dataViewDivSelectorAll = document.querySelectorAll('.data-view-div');
-      for (x1 = 0; x1 < $dataViewDivSelectorAll.length; x1++) {
-        if ($dataViewDivSelectorAll[x1].getAttribute('data') === 'new-main-data-view' &&
+  if (deletedCity[0]) {
+    for (var n1 = 0; n1 < $cityNameHolderSelectorAll.length; n1++) {
+      if ($cityNameHolderSelectorAll[n1].getAttribute('data-view') === deletedCity[0].cityName) {
+        var $dataViewDivSelectorAll = document.querySelectorAll('.data-view-div');
+        for (x1 = 0; x1 < $dataViewDivSelectorAll.length; x1++) {
+          if ($dataViewDivSelectorAll[x1].getAttribute('data') === 'new-main-data-view' &&
         $dataViewDivSelectorAll[x1].getAttribute('data-view') === deletedCity[0].cityName) {
-          var $main = document.querySelector('.main');
-          $main.removeChild($divSelectorAll[x1]);
+            var $main = document.querySelector('.main');
+            $main.removeChild($divSelectorAll[x1]);
+          }
         }
-      }
-      removeAllChildNodes($firstCityUl);
-      removeAllChildNodes($secondCityUl);
-      var setCities = new Set(presentCities);
-      var final = Array.from(setCities);
-      reshuffleDataCities(final);
-      data.cities = final;
-      for (d = 0; d < data.cities.length; d++) {
-        if (data.cities[d].cityCount === 1) {
-          $firstCityUl.append(reportsPageRenderForLoop(data.cities[d]));
-        } else if (data.cities[d].cityCount % 2 === 0) {
-          $secondCityUl.append(reportsPageRenderForLoop(data.cities[d]));
-        } else {
-          $firstCityUl.append(reportsPageRenderForLoop(data.cities[d]));
+        removeAllChildNodes($firstCityUl);
+        removeAllChildNodes($secondCityUl);
+        var setCities = new Set(presentCities);
+        var final = Array.from(setCities);
+        reshuffleDataCities(final);
+        data.cities = final;
+        for (d = 0; d < data.cities.length; d++) {
+          if (data.cities[d].cityCount === 1) {
+            $firstCityUl.append(reportsPageRenderForLoop(data.cities[d]));
+          } else if (data.cities[d].cityCount % 2 === 0) {
+            $secondCityUl.append(reportsPageRenderForLoop(data.cities[d]));
+          } else {
+            $firstCityUl.append(reportsPageRenderForLoop(data.cities[d]));
+          }
+          switchView('reports-page');
+          data.editing = null;
         }
-        switchView('reports-page');
-        data.editing = null;
+        return;
       }
-      return;
     }
   }
 
@@ -658,7 +660,11 @@ function submitFunction(event) {
       const $ulSelectorAll = document.querySelectorAll('ul');
       for (var d = 0; d < $ulSelectorAll.length; d++) {
         if ($ulSelectorAll[d].getAttribute('data-city-id') === submissionObject.cityName) {
-          $ulSelectorAll[d].append(newReportEntry(submissionObject));
+          if (!submissionObject.photoUrlValue) {
+            $ulSelectorAll[d].append(newReportEntryNoImg(submissionObject));
+          } else {
+            $ulSelectorAll[d].append(newReportEntry(submissionObject));
+          }
         }
       }
       data.nextEntryId++;
@@ -683,7 +689,11 @@ function submitFunction(event) {
   const $ulSelectorAll = document.querySelectorAll('ul');
   for (var f = 0; f < $ulSelectorAll.length; f++) {
     if ($ulSelectorAll[f].getAttribute('data-city-id') === submissionObject.cityName) {
-      $ulSelectorAll[f].append(newReportEntry(submissionObject));
+      if (!submissionObject.photoUrlValue) {
+        $ulSelectorAll[f].append(newReportEntryNoImg(submissionObject));
+      } else {
+        $ulSelectorAll[f].append(newReportEntry(submissionObject));
+      }
     }
   }
   data.nextCityCount++;
@@ -711,9 +721,6 @@ module.exports = switchView;
 },{}],16:[function(require,module,exports){
 var $imageInput = document.querySelector('.image-url-holder');
 var $placeholderImage = document.querySelector('.placeholder-img');
-var $formInputsHolder = document.querySelector('.form-inputs-holder');
-var $formSubmitHolder = document.querySelector('.form-submit-holder');
-var $saveButtonHolder = document.querySelector('.save-button-holder');
 
 function showImageInput(event) {
   if ($imageInput.className === 'image-url-holder width-80p margin-auto hidden' &&
@@ -728,9 +735,6 @@ function hideImageInput(event) {
     $placeholderImage.className === 'placeholder-img view') {
     $imageInput.className = 'image-url-holder width-80p margin-auto hidden';
     $placeholderImage.className = 'placeholder-img hidden';
-    $formInputsHolder.className = 'form-inputs-holder width-inherit';
-    $formSubmitHolder.className = 'form-submit-holder column-half text-align-right margin-auto';
-    $saveButtonHolder.className = 'save-button-holder row width-inherit';
   }
 }
 
