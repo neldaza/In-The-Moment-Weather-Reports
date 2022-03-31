@@ -9,11 +9,6 @@ function showImageInput(event) {
     $placeholderImage.className === 'placeholder-img hidden') {
     $imageInput.className = 'image-url-holder width-80p margin-auto view';
     $placeholderImage.className = 'placeholder-img view';
-    // if (window.innerWidth >= 1280) {
-    //   $formInputsHolder.className = 'form-inputs-holder-image width-inherit';
-    //   $formSubmitHolder.className = 'form-submit-holder-1280 column-half text-align-right margin-auto';
-    //   $saveButtonHolder.className = 'save-button-holder-1280 row width-inherit';
-    // }
   }
 }
 
