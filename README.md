@@ -28,16 +28,16 @@ Try the application live at https://neldaza.github.io/In-The-Moment-Weather-Repo
 - User can create a personal weather report for the current weather in a searched city 
 - User can view all personal weather reports 
 - User can delete a report 
+- User photo submissions are optional
 
 ## Preview 
+![Screen Recording 2022-04-04 at 3 39 11 PM](https://user-images.githubusercontent.com/88061673/161619903-3ca75f9f-1fae-4bf1-a31b-a4769f94748a.gif)
 
-![Screen Recording 2022-02-03 at 10 38 09 PM](https://user-images.githubusercontent.com/88061673/152468940-50842a6f-c498-4d45-afc6-941f0cb49878.gif)
-![Screen Recording 2022-02-03 at 10 43 50 PM](https://user-images.githubusercontent.com/88061673/152469036-daf25569-3646-4a14-bcef-e64fdd69de82.gif)
+![Screen Recording 2022-04-04 at 3 48 05 PM](https://user-images.githubusercontent.com/88061673/161620985-1cab08cf-b2d3-462f-976c-37cc0fd61c55.gif)
+
 
 
 ## Future Stretch Features
-
-- User photo submission optional
 - User can create an account 
 - User can look at other users' reports
 - User can view a live feed of other user's reports
