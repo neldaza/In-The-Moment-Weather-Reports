@@ -51,7 +51,7 @@ Try the application live at https://neldaza.github.io/In-The-Moment-Weather-Repo
 
 ### Instructions 
 
-1.  Clone the repository
+1.  Clone the repo
 
     ```shell
     git clone https://github.com/neldaza/In-The-Moment-Weather-Reports
